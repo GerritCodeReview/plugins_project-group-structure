@@ -30,11 +30,8 @@ import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.project.ProjectState;
 
-import org.apache.http.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 public class ProjectCreationValidatorTest extends PluginDaemonTest {
 
@@ -47,14 +44,14 @@ public class ProjectCreationValidatorTest extends PluginDaemonTest {
   }
 
   @Test
-  public void shouldAllowAnyUsersToCreateUnderAllProjects() throws IOException {
+  public void shouldAllowAnyUsersToCreateUnderAllProjects() throws Exception {
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
-    assertThat(adminSession.put("/projects/" + name("someProject"), in)
-        .getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
+    adminRestSession.put("/projects/" + name("someProject"), in)
+        .assertCreated();
 
-    assertThat(userSession.put("/projects/" + name("someOtherProject"), in)
-        .getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
+    userRestSession.put("/projects/" + name("someOtherProject"), in)
+        .assertCreated();
   }
 
   @Test
@@ -63,13 +60,12 @@ public class ProjectCreationValidatorTest extends PluginDaemonTest {
     String parent = name("parentProject");
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
-    assertThat(userSession.put("/projects/" + parent, in).getStatusCode())
-        .isEqualTo(HttpStatus.SC_CREATED);
+    userRestSession.put("/projects/" + parent, in).assertCreated();
 
     // Creation is rejected when root project name contains slashes
     RestResponse r =
-        userSession.put("/projects/" + Url.encode("a/parentProject"), in);
-    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+        userRestSession.put("/projects/" + Url.encode("a/parentProject"), in);
+    r.assertConflict();
     assertThat(r.getEntityContent())
         .contains("Root project name cannot contains slashes");
   }
@@ -81,34 +77,32 @@ public class ProjectCreationValidatorTest extends PluginDaemonTest {
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
     String parent = name("parentProject");
-    assertThat(userSession.put("/projects/" + parent, in).getStatusCode())
-        .isEqualTo(HttpStatus.SC_CREATED);
+    userRestSession.put("/projects/" + parent, in).assertCreated();
 
     // Creation is rejected when project name does not start with parent
     in = new ProjectInput();
     in.parent = parent;
-    RestResponse r = userSession.put("/projects/childProject", in);
-    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    RestResponse r = userRestSession.put("/projects/childProject", in);
+    r.assertConflict();
     assertThat(r.getEntityContent())
         .contains("Project name must start with parent project name");
 
     // Creation is OK when project name starts with parent
-    assertThat(
-        userSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
-            .getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
+    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
+        .assertCreated();
 
     // Creation is rejected when project name does not start with nested parent
     String nestedParent = parent + "/childProject";
     in.parent = nestedParent;
-    r = userSession.put("/projects/grandchild", in);
-    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    r = userRestSession.put("/projects/grandchild", in);
+    r.assertConflict();
     assertThat(r.getEntityContent())
         .contains("Project name must start with parent project name");
 
     // Creation is OK when project name starts with nested parent
-    assertThat(userSession
+    userRestSession
         .put("/projects/" + Url.encode(nestedParent + "/grandchild"), in)
-        .getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
+        .assertCreated();
   }
 
   @Test
@@ -120,41 +114,36 @@ public class ProjectCreationValidatorTest extends PluginDaemonTest {
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
     in.owners = Lists.newArrayList(ownerGroup);
-    assertThat(adminSession.put("/projects/" + parent, in).getStatusCode())
-        .isEqualTo(HttpStatus.SC_CREATED);
+    adminRestSession.put("/projects/" + parent, in).assertCreated();
 
     // Creation is rejected when user is not owner of parent
     in = new ProjectInput();
     in.parent = parent;
-    RestResponse r = userSession
+    RestResponse r = userRestSession
         .put("/projects/" + Url.encode(parent + "/childProject"), in);
-    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    r.assertConflict();
     assertThat(r.getEntityContent())
         .contains("You must be owner of the parent project");
 
     // Creation is OK when user is owner of parent
     g.addMembers(user.username);
-    assertThat(
-        userSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
-            .getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
+    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
+        .assertCreated();
   }
 
   @Test
-  public void shouldAllowAdminsToByPassAnyRule() throws IOException {
+  public void shouldAllowAdminsToByPassAnyRule() throws Exception {
     // Root project with a slash
     String parent = name("orgA/parentProject");
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
-    assertThat(
-        adminSession.put("/projects/" + Url.encode(parent), in).getStatusCode())
-            .isEqualTo(HttpStatus.SC_CREATED);
+    adminRestSession.put("/projects/" + Url.encode(parent), in).assertCreated();
 
     // Child project without name of parent as prefix
     in = new ProjectInput();
     in.parent = parent;
-    assertThat(
-        adminSession.put("/projects/" + Url.encode("orgA/childProject"), in)
-            .getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
+    adminRestSession.put("/projects/" + Url.encode("orgA/childProject"), in)
+        .assertCreated();
   }
 
   @Test
@@ -163,8 +152,7 @@ public class ProjectCreationValidatorTest extends PluginDaemonTest {
     String rootProject = name("rootProject");
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
-    assertThat(userSession.put("/projects/" + rootProject, in).getStatusCode())
-        .isEqualTo(HttpStatus.SC_CREATED);
+    userRestSession.put("/projects/" + rootProject, in).assertCreated();
     ProjectState projectState =
         projectCache.get(new Project.NameKey(rootProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
@@ -175,8 +163,7 @@ public class ProjectCreationValidatorTest extends PluginDaemonTest {
     rootProject = name("rootProject2");
     String existingGroupName = rootProject + "-admins";
     gApi.groups().create(existingGroupName);
-    assertThat(userSession.put("/projects/" + rootProject, in).getStatusCode())
-        .isEqualTo(HttpStatus.SC_CREATED);
+    userRestSession.put("/projects/" + rootProject, in).assertCreated();
     projectState = projectCache.get(new Project.NameKey(rootProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
     String expectedOwnerGroup = existingGroupName + "-"
@@ -188,8 +175,8 @@ public class ProjectCreationValidatorTest extends PluginDaemonTest {
 
   @Test
   public void shouldBlockRootCodeProject() throws Exception {
-    RestResponse r = userSession.put("/projects/" + Url.encode("project1"));
-    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode("project1"));
+    r.assertConflict();
     assertThat(r.getEntityContent())
         .contains("Regular projects are not allowed as root");
   }

@@ -37,6 +37,8 @@ import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+
 @Singleton
 public class ProjectCreationValidator
     implements ProjectCreationValidationListener {
@@ -147,7 +149,7 @@ public class ProjectCreationValidator
             .apply(TopLevelResource.INSTANCE, new GroupInput());
       }
       return AccountGroup.UUID.parse(groupInfo.id);
-    } catch (RestApiException | OrmException e) {
+    } catch (RestApiException | OrmException | IOException e ) {
       log.error("Failed to create project " + name + ": " + e.getMessage(), e);
       throw new ValidationException(AN_ERROR_OCCURRED_MSG);
     }
