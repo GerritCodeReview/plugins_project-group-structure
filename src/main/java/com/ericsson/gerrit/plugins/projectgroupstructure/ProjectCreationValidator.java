@@ -46,13 +46,15 @@ public class ProjectCreationValidator
   private static final String AN_ERROR_OCCURRED_MSG =
       "An error occurred while creating project, please contact Gerrit support";
 
+  private static final String SEE_DOCUMENTATION_MSG =
+      "\n\nSee documentation for more info: %s";
+
   private static final String MUST_BE_OWNER_TO_CREATE_PROJECT_MSG =
       "You must be owner of the parent project \"%s\" to create a nested project."
-          + "\n\nSee documentation for more info: %s";
+          + SEE_DOCUMENTATION_MSG;
 
   private static final String ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG =
-      "Root project name cannot contains slashes."
-          + "\n\nSee documentation for more info: %s";
+      "Root project name cannot contains slashes." + SEE_DOCUMENTATION_MSG;
 
   private static final String REGULAR_PROJECT_NOT_ALLOWED_AS_ROOT_MSG =
       "Regular projects are not allowed as root.\n\n"
@@ -62,11 +64,11 @@ public class ProjectCreationValidator
           + "inherits rights from your root project.\n\n" + "Example:\n"
           + "\"someOrganization\"->parent project\n"
           + "\"someOrganization/someProject\"->regular project."
-          + "\n\nSee documentation for more info: %s";
+          + SEE_DOCUMENTATION_MSG;
 
   private static final String PROJECT_MUST_START_WITH_PARENT_NAME_MSG =
       "Project name must start with parent project name, e.g. %s."
-          + "\n\nSee documentation for more info: %s";
+          + SEE_DOCUMENTATION_MSG;
 
   private final CreateGroup.Factory createGroupFactory;
   private final String documentationUrl;
