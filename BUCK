@@ -1,11 +1,18 @@
 include_defs('//bucklets/gerrit_plugin.bucklet')
 include_defs('//bucklets/java_sources.bucklet')
+include_defs('//bucklets/maven_jar.bucklet')
 
 SOURCES = glob(['src/main/java/**/*.java'])
 RESOURCES = glob(['src/main/resources/**/*'])
 
 TEST_DEPS = GERRIT_TESTS + GERRIT_PLUGIN_API + [
   ':project-group-structure__plugin',
+  # bazlets include those 3 bouncycastle jars in plugin API so this is temporary
+  # until this plugin is built with bazel.
+  # see https://gerrit-review.googlesource.com/#/c/102670/ for more info.
+  ':bouncycastle_bcprov',
+  ':bouncycastle_bcpg',
+  ':bouncycastle_bcpkix',
 ]
 
 gerrit_plugin(
@@ -40,3 +47,22 @@ java_library(
   deps = TEST_DEPS,
 )
 
+BC_VERS = '1.56'
+
+maven_jar(
+  name = 'bouncycastle_bcprov',
+  id = 'org.bouncycastle:bcprov-jdk15on:' + BC_VERS,
+  sha1 = 'a153c6f9744a3e9dd6feab5e210e1c9861362ec7',
+)
+
+maven_jar(
+  name = 'bouncycastle_bcpg',
+  id = 'org.bouncycastle:bcpg-jdk15on:' + BC_VERS,
+  sha1 = '9c3f2e7072c8cc1152079b5c25291a9f462631f1',
+)
+
+maven_jar(
+  name = 'bouncycastle_bcpkix',
+  id = 'org.bouncycastle:bcpkix-jdk15on:' + BC_VERS,
+  sha1 = '4648af70268b6fdb24674fb1fd7c1fcc73db1231',
+)

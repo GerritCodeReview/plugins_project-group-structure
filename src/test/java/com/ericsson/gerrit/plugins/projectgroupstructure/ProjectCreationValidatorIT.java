@@ -20,8 +20,9 @@ import static com.google.gerrit.server.group.SystemGroupBackend.REGISTERED_USERS
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
-import com.google.gerrit.acceptance.PluginDaemonTest;
+import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.RestResponse;
+import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.extensions.api.groups.GroupApi;
 import com.google.gerrit.extensions.api.projects.ProjectInput;
@@ -33,10 +34,15 @@ import com.google.gerrit.server.project.ProjectState;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ProjectCreationValidatorTest extends PluginDaemonTest {
+@TestPlugin(
+    name = "project-group-structure",
+    sysModule = "com.ericsson.gerrit.plugins.projectgroupstructure.Module"
+)
+public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
   @Before
   public void setUp() throws Exception {
+    super.setUp();
     // These access rights are mandatory configuration for this plugin as
     // documented in config.md
     allowGlobalCapabilities(REGISTERED_USERS, GlobalCapability.CREATE_GROUP);
