@@ -15,8 +15,11 @@
 package com.ericsson.gerrit.plugins.projectgroupstructure;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Strings;
 import com.google.common.hash.Hashing;
+import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.extensions.annotations.PluginCanonicalWebUrl;
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.api.groups.GroupInput;
 import com.google.gerrit.extensions.common.GroupInfo;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
@@ -24,9 +27,13 @@ import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.extensions.restapi.TopLevelResource;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.server.CurrentUser;
+import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.config.AllProjectsNameProvider;
+import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.group.CreateGroup;
 import com.google.gerrit.server.project.CreateProjectArgs;
+import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.validators.ProjectCreationValidationListener;
 import com.google.gerrit.server.validators.ValidationException;
@@ -36,6 +43,9 @@ import com.google.inject.Singleton;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 @Singleton
 public class ProjectCreationValidator
@@ -68,18 +78,29 @@ public class ProjectCreationValidator
       "Project name must start with parent project name, e.g. %s."
           + "\n\nSee documentation for more info: %s";
 
+  /* package */ static final String DELEGATE_PROJECT_CREATION_TO =
+      "delegateProjectCreationTo";
+
   private final CreateGroup.Factory createGroupFactory;
   private final String documentationUrl;
   private final AllProjectsNameProvider allProjectsName;
+  private final PluginConfigFactory cfg;
+  private final String pluginName;
+  private final GroupBackend groupBackend;
 
   @Inject
   public ProjectCreationValidator(CreateGroup.Factory createGroupFactory,
       @PluginCanonicalWebUrl String url,
-      AllProjectsNameProvider allProjectsName) {
+      AllProjectsNameProvider allProjectsName,
+      PluginConfigFactory cfg,
+      @PluginName String pluginName,
+      GroupBackend groupBackend) {
     this.createGroupFactory = createGroupFactory;
     this.documentationUrl = url + "Documentation/index.html";
     this.allProjectsName = allProjectsName;
-
+    this.cfg = cfg;
+    this.pluginName = pluginName;
+    this.groupBackend = groupBackend;
   }
 
   @Override
@@ -118,7 +139,7 @@ public class ProjectCreationValidator
 
     validateProjectNamePrefix(name, parent);
 
-    if (!parentCtrl.isOwner()) {
+    if (!parentCtrl.isOwner() && !isInDelegatingGroup(parentCtrl)) {
       log.debug("rejecting creation of {}: user is not owner of {}", name,
           parent.getName());
       throw new ValidationException(
@@ -126,6 +147,50 @@ public class ProjectCreationValidator
               documentationUrl));
     }
     log.debug("allowing creation of project {}", name);
+  }
+
+  private boolean isInDelegatingGroup(ProjectControl parentCtrl) {
+    try {
+      String delegateProjectCreationTo = cfg
+          .getFromProjectConfigWithInheritance(
+              parentCtrl.getProject().getNameKey(), pluginName)
+          .getString(DELEGATE_PROJECT_CREATION_TO, null);
+      log.debug("delegateProjectCreationTo: {}", delegateProjectCreationTo);
+      if (Strings.isNullOrEmpty(delegateProjectCreationTo)) {
+        return false;
+      }
+      if (delegateProjectCreationTo.startsWith("Group[")
+          && delegateProjectCreationTo.contains("/")) {
+        return isMember(parentCtrl.getUser(),
+            GroupReference.fromString(delegateProjectCreationTo).getUUID());
+      }
+      log.info(
+          "malformed group reference (delegateProjectCreationTo): {} in project {}",
+          delegateProjectCreationTo,
+          parentCtrl.getProject().getNameKey().get());
+      return false;
+    } catch (NoSuchProjectException | UnsupportedEncodingException e) {
+      log.error("isInDelegatingGroup with error ({}): {}", e.getClass().getName(),
+          e.getMessage());
+      return false;
+    }
+  }
+
+  private boolean isMember(CurrentUser user, AccountGroup.UUID uuid)
+      throws UnsupportedEncodingException {
+    // TODO check if this decoding necessary
+    // it is when we use gerrit api
+    // TODO support transitive inclusion, GroupBackend does not for the moment.
+    // GroupApi supports it only when internal group is under consideration.
+    AccountGroup.UUID decodedUuid =
+        new AccountGroup.UUID(URLDecoder.decode(uuid.get(), "UTF-8"));
+    if (groupBackend.handles(decodedUuid)) {
+      return groupBackend.membershipsOf(user.asIdentifiedUser())
+          .contains(decodedUuid);
+    } else {
+      log.warn("No group backend handles this group: {}", uuid.get());
+      return false;
+    }
   }
 
   private AccountGroup.UUID createGroup(String name)

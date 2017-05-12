@@ -28,6 +28,7 @@ import com.google.gerrit.extensions.api.projects.ProjectInput;
 import com.google.gerrit.extensions.restapi.Url;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.server.git.ProjectConfig;
 import com.google.gerrit.server.project.ProjectState;
 
 import org.apache.http.HttpStatus;
@@ -192,5 +193,246 @@ public class ProjectCreationValidatorTest extends PluginDaemonTest {
     assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
     assertThat(r.getEntityContent())
         .contains("Regular projects are not allowed as root");
+  }
+
+  @Test
+  public void shouldNotBlockCreationToNonOwnersOfParentProjectButUserIsInDelegatingGroup()
+      throws Exception {
+    String ownerGroup = name("groupA");
+    gApi.groups().create(ownerGroup);
+
+    String parent = name("parentProject");
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    in.owners = Lists.newArrayList(ownerGroup);
+    assertThat(adminSession.put("/projects/" + parent, in).getStatusCode())
+        .isEqualTo(HttpStatus.SC_CREATED);
+
+    in = new ProjectInput();
+    in.parent = parent;
+    RestResponse r = userSession
+        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    assertThat(r.getEntityContent())
+        .contains("You must be owner of the parent project");
+
+    // the user is in the delegating group
+    String delegatingGroup = name("groupB");
+    GroupApi dGroup = gApi.groups().create(delegatingGroup);
+    dGroup.addMembers(user.username);
+    // the group is in the project.config
+    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
+    String gId = gApi.groups().id(delegatingGroup).get().id;
+    // TODO projected pluginName
+    cfg.getPluginConfig("project-group-structure").setString(
+        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+        "Group[" + delegatingGroup + " / " + gId + "]");
+    saveProjectConfig(parentNameKey, cfg);
+    assertThat(
+        userSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
+            .getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
+  }
+
+  @Test
+  public void shouldBlockCreationToNonOwnersOfParentProjectIfGroupRefIsNotUsed()
+      throws Exception {
+    String ownerGroup = name("groupA");
+    gApi.groups().create(ownerGroup);
+
+    String parent = name("parentProject");
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    in.owners = Lists.newArrayList(ownerGroup);
+    assertThat(adminSession.put("/projects/" + parent, in).getStatusCode())
+        .isEqualTo(HttpStatus.SC_CREATED);
+
+    in = new ProjectInput();
+    in.parent = parent;
+    RestResponse r = userSession
+        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    assertThat(r.getEntityContent())
+        .contains("You must be owner of the parent project");
+
+    // the user is in the delegating group
+    String delegatingGroup = name("groupB");
+    GroupApi dGroup = gApi.groups().create(delegatingGroup);
+    dGroup.addMembers(user.username);
+    // the group is in the project.config
+    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
+    // TODO projected pluginName
+    cfg.getPluginConfig("project-group-structure").setString(
+        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+        delegatingGroup);
+    saveProjectConfig(parentNameKey, cfg);
+    assertThat(
+        userSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
+            .getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+  }
+
+  @Test
+  public void shouldNotBlockCreationToNonOwnersOfParentProjectButUserIsInDelegatingGroupNested()
+      throws Exception {
+    String ownerGroup = name("groupA");
+    gApi.groups().create(ownerGroup);
+
+    String parent = name("parentProject");
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    in.owners = Lists.newArrayList(ownerGroup);
+    assertThat(adminSession.put("/projects/" + parent, in).getStatusCode())
+        .isEqualTo(HttpStatus.SC_CREATED);
+
+    in = new ProjectInput();
+    in.parent = parent;
+    RestResponse r = userSession
+        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    assertThat(r.getEntityContent())
+        .contains("You must be owner of the parent project");
+
+    // the user is in the nested delegating group
+    String delegatingGroup = name("groupB");
+    GroupApi dGroup = gApi.groups().create(delegatingGroup);
+
+    String nestedGroup = name("groupC");
+    GroupApi nGroup = gApi.groups().create(nestedGroup);
+    nGroup.addMembers(user.username);
+
+    dGroup.addGroups(nestedGroup);
+    // the group is in the project.config
+    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
+    String gId = gApi.groups().id(delegatingGroup).get().id;
+    // TODO projected pluginName
+    cfg.getPluginConfig("project-group-structure").setString(
+        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+        "Group[" + delegatingGroup + " / " + gId + "]");
+    saveProjectConfig(parentNameKey, cfg);
+    assertThat(
+        userSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
+            .getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
+  }
+
+  @Test
+  public void shouldBlockCreationToNonOwnersOfParentProjectAndUserIsNotInDelegatingGroup()
+      throws Exception {
+    String ownerGroup = name("groupA");
+    gApi.groups().create(ownerGroup);
+
+    String parent = name("parentProject");
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    in.owners = Lists.newArrayList(ownerGroup);
+    assertThat(adminSession.put("/projects/" + parent, in).getStatusCode())
+        .isEqualTo(HttpStatus.SC_CREATED);
+
+    in = new ProjectInput();
+    in.parent = parent;
+    RestResponse r = userSession
+        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    assertThat(r.getEntityContent())
+        .contains("You must be owner of the parent project");
+
+    // the user is in the delegating group
+    String delegatingGroup = name("groupB");
+    gApi.groups().create(delegatingGroup);
+    // The user is not added to the delegated group
+    // the group is in the project.config
+    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
+    String gId = gApi.groups().id(delegatingGroup).get().id;
+    // TODO projected pluginName
+    cfg.getPluginConfig("project-group-structure").setString(
+        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+        "Group[" + delegatingGroup + " / " + gId + "]");
+    saveProjectConfig(parentNameKey, cfg);
+    assertThat(
+        userSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
+            .getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+  }
+
+  @Test
+  public void shouldBlockCreationToNonOwnersOfParentProjectAndTheDelegatingGroupDoesNotExist()
+      throws Exception {
+    String ownerGroup = name("groupA");
+    gApi.groups().create(ownerGroup);
+
+    String parent = name("parentProject");
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    in.owners = Lists.newArrayList(ownerGroup);
+    assertThat(adminSession.put("/projects/" + parent, in).getStatusCode())
+        .isEqualTo(HttpStatus.SC_CREATED);
+
+    in = new ProjectInput();
+    in.parent = parent;
+    RestResponse r = userSession
+        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    assertThat(r.getEntityContent())
+        .contains("You must be owner of the parent project");
+
+    // The delegating group is not created
+    String delegatingGroup = name("groupB");
+    // the group is in the project.config
+    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
+    String gId = "fake-gId";
+    // TODO projected pluginName
+    cfg.getPluginConfig("project-group-structure").setString(
+        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+        "Group[" + delegatingGroup + " / " + gId + "]");
+    saveProjectConfig(parentNameKey, cfg);
+    assertThat(
+        userSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
+            .getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+  }
+
+  @Test
+  public void shouldNotBlockCreationIfDelegatingGroupIsRenamed()
+      throws Exception {
+    String ownerGroup = name("groupA");
+    gApi.groups().create(ownerGroup);
+
+    String parent = name("parentProject");
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    in.owners = Lists.newArrayList(ownerGroup);
+    assertThat(adminSession.put("/projects/" + parent, in).getStatusCode())
+        .isEqualTo(HttpStatus.SC_CREATED);
+
+    in = new ProjectInput();
+    in.parent = parent;
+    RestResponse r = userSession
+        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    assertThat(r.getStatusCode()).isEqualTo(HttpStatus.SC_CONFLICT);
+    assertThat(r.getEntityContent())
+        .contains("You must be owner of the parent project");
+
+    // the user is in the delegating group
+    String delegatingGroup = name("groupB");
+    GroupApi dGroup = gApi.groups().create(delegatingGroup);
+    dGroup.addMembers(user.username);
+    // the group is in the project.config
+    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
+
+    String gId = gApi.groups().id(delegatingGroup).get().id;
+    // TODO projected pluginName
+    cfg.getPluginConfig("project-group-structure").setString(
+        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+        "Group[" + delegatingGroup + " / " + gId + "]");
+    saveProjectConfig(parentNameKey, cfg);
+
+    String newDelegatingGroup = name("groupC");
+    gApi.groups().id(delegatingGroup).name(newDelegatingGroup);
+
+    assertThat(
+        userSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
+            .getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
   }
 }
