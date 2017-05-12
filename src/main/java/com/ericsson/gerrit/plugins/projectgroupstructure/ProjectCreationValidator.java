@@ -16,7 +16,9 @@ package com.ericsson.gerrit.plugins.projectgroupstructure;
 
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
+import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.extensions.annotations.PluginCanonicalWebUrl;
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.api.groups.GroupInput;
 import com.google.gerrit.extensions.common.GroupInfo;
 import com.google.gerrit.extensions.restapi.AuthException;
@@ -25,13 +27,16 @@ import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.extensions.restapi.TopLevelResource;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.server.config.AllProjectsNameProvider;
 import com.google.gerrit.server.CurrentUser;
+import com.google.gerrit.server.account.GroupMembership;
+import com.google.gerrit.server.config.AllProjectsNameProvider;
+import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.group.CreateGroup;
 import com.google.gerrit.server.permissions.GlobalPermission;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.project.CreateProjectArgs;
+import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.validators.ProjectCreationValidationListener;
 import com.google.gerrit.server.validators.ValidationException;
@@ -78,23 +83,32 @@ public class ProjectCreationValidator
       "Project name must start with parent project name, e.g. %s."
           + SEE_DOCUMENTATION_MSG;
 
+  /* package */ static final String DELEGATE_PROJECT_CREATION_TO =
+      "delegateProjectCreationTo";
+
   private final CreateGroup.Factory createGroupFactory;
   private final String documentationUrl;
   private final AllProjectsNameProvider allProjectsName;
   private final Provider<CurrentUser> self;
   private final PermissionBackend permissionBackend;
+  private final PluginConfigFactory cfg;
+  private final String pluginName;
 
   @Inject
   public ProjectCreationValidator(CreateGroup.Factory createGroupFactory,
       @PluginCanonicalWebUrl String url,
       AllProjectsNameProvider allProjectsName,
       Provider<CurrentUser> self,
-      PermissionBackend permissionBackend) {
+      PermissionBackend permissionBackend,
+      PluginConfigFactory cfg,
+      @PluginName String pluginName) {
     this.createGroupFactory = createGroupFactory;
     this.documentationUrl = url + "Documentation/index.html";
     this.allProjectsName = allProjectsName;
     this.self = self;
     this.permissionBackend = permissionBackend;
+    this.cfg = cfg;
+    this.pluginName = pluginName;
   }
 
   @Override
@@ -180,7 +194,8 @@ public class ProjectCreationValidator
           String.format(PROJECT_MUST_START_WITH_PARENT_NAME_MSG, prefix + name,
               documentationUrl));
     }
-    if (!parentCtrl.isOwner()) {
+
+    if (!parentCtrl.isOwner() && !isInDelegatingGroup(parentCtrl)) {
       log.debug("rejecting creation of {}: user is not owner of {}", name,
           parent.getName());
       throw new ValidationException(
@@ -188,5 +203,25 @@ public class ProjectCreationValidator
               documentationUrl));
     }
     log.debug("allowing creation of project {}", name);
+  }
+
+  private boolean isInDelegatingGroup(ProjectControl parentCtrl) {
+    try {
+      GroupReference delegateProjectCreationTo = cfg
+          .getFromProjectConfigWithInheritance(
+              parentCtrl.getProject().getNameKey(), pluginName)
+          .getGroupReference(DELEGATE_PROJECT_CREATION_TO);
+      if (delegateProjectCreationTo == null) {
+        return false;
+      }
+      log.debug("delegateProjectCreationTo: {}", delegateProjectCreationTo);
+      GroupMembership effectiveGroups =
+          parentCtrl.getUser().getEffectiveGroups();
+      return effectiveGroups.contains(delegateProjectCreationTo.getUUID());
+    } catch (NoSuchProjectException e) {
+      log.error("isInDelegatingGroup with error ({}): {}",
+          e.getClass().getName(), e.getMessage());
+      return false;
+    }
   }
 }
