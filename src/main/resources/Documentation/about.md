@@ -15,3 +15,24 @@ structure. They can do it by creating projects that inherits rights from their
 root project and the project names must start with root project name, e.g.
 `some-organization/some-project`.
 
+Delegating group
+----------------
+If it is requested to create projects under a parent project by non-owner users,
+we can specify a delegating
+[group reference](@URL@Documentation/dev-plugins.html#configuring-groups)
+in _project.config_ of the parent project.
+
+```
+[plugin "project-group-structure"]
+	delegateProjectCreationTo = Group[group_name / group_uuid]
+```
+
+The UUID of a group can be found on "General" tab of the group's page.
+
+If creating-project is delegated to built-in groups, e.g. "Registered Users"
+group, then the value is as following:
+
+```
+[plugin "project-group-structure"]
+	delegateProjectCreationTo = Group[Registered Users / global:Registered-Users]
+```
