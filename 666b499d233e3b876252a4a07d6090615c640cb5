@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74e40143_e4112223",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-05-17T00:32:29Z",
+      "side": 1,
+      "message": "name this \"groupReference or \"groupRef\"?",
+      "range": {
+        "startLine": 163,
+        "startChar": 23,
+        "endLine": 163,
+        "endChar": 36
+      },
+      "revId": "666b499d233e3b876252a4a07d6090615c640cb5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9e0db7d_4071bbf2",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-05-17T00:32:29Z",
+      "side": 1,
+      "message": "you can remove this if you apply comment below",
+      "range": {
+        "startLine": 165,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 60
+      },
+      "revId": "666b499d233e3b876252a4a07d6090615c640cb5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d12e6bc7_8fb6c6c2",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-05-17T00:32:29Z",
+      "side": 1,
+      "message": "I would use the uuid instead of the name:\n\nreturn isMember(parentCtrl.getUser().getUserName(), groupRef.getUUID());",
+      "range": {
+        "startLine": 167,
+        "startChar": 12,
+        "endLine": 167,
+        "endChar": 37
+      },
+      "revId": "666b499d233e3b876252a4a07d6090615c640cb5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd070793_e97ed0b5",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-05-17T00:32:29Z",
+      "side": 1,
+      "message": "AccountGroup.UUID groupUUID",
+      "range": {
+        "startLine": 181,
+        "startChar": 44,
+        "endLine": 181,
+        "endChar": 76
+      },
+      "revId": "666b499d233e3b876252a4a07d6090615c640cb5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d0957f4_79f3c228",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-05-17T00:32:29Z",
+      "side": 1,
+      "message": "groupUUID",
+      "range": {
+        "startLine": 184,
+        "startChar": 30,
+        "endLine": 184,
+        "endChar": 55
+      },
+      "revId": "666b499d233e3b876252a4a07d6090615c640cb5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54c2b40e_f2d93956",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-05-17T00:32:29Z",
+      "side": 1,
+      "message": "all the user facing documentation is in about.md which is the page linked in the error messages, maybe we should move this there as well?",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 3
+      },
+      "revId": "666b499d233e3b876252a4a07d6090615c640cb5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
