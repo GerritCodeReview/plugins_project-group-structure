@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "277a7321_1bcbf0f7",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1029057
+      },
+      "writtenOn": "2017-05-17T20:22:25Z",
+      "side": 1,
+      "message": "com.google.gerrit.extensions.restapi.MethodNotAllowedException",
+      "range": {
+        "startLine": 37,
+        "startChar": 29,
+        "endLine": 37,
+        "endChar": 78
+      },
+      "revId": "39215b39ad8e7cd158edd24ebf5bc3681d53c00c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
