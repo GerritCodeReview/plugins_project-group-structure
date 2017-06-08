@@ -31,8 +31,10 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.project.ProjectState;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class ProjectCreationValidatorTest extends PluginDaemonTest {
 
   @Before

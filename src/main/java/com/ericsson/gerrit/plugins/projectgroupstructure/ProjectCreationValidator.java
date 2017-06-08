@@ -48,13 +48,15 @@ public class ProjectCreationValidator
   private static final String AN_ERROR_OCCURRED_MSG =
       "An error occurred while creating project, please contact Gerrit support";
 
+  private static final String SEE_DOCUMENTATION_MSG =
+      "\n\nSee documentation for more info: %s";
+
   private static final String MUST_BE_OWNER_TO_CREATE_PROJECT_MSG =
       "You must be owner of the parent project \"%s\" to create a nested project."
-          + "\n\nSee documentation for more info: %s";
+          + SEE_DOCUMENTATION_MSG;
 
   private static final String ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG =
-      "Root project name cannot contains slashes."
-          + "\n\nSee documentation for more info: %s";
+      "Root project name cannot contains slashes." + SEE_DOCUMENTATION_MSG;
 
   private static final String REGULAR_PROJECT_NOT_ALLOWED_AS_ROOT_MSG =
       "Regular projects are not allowed as root.\n\n"
@@ -64,11 +66,11 @@ public class ProjectCreationValidator
           + "inherits rights from your root project.\n\n" + "Example:\n"
           + "\"someOrganization\"->parent project\n"
           + "\"someOrganization/someProject\"->regular project."
-          + "\n\nSee documentation for more info: %s";
+          + SEE_DOCUMENTATION_MSG;
 
   private static final String PROJECT_MUST_START_WITH_PARENT_NAME_MSG =
       "Project name must start with parent project name, e.g. %s."
-          + "\n\nSee documentation for more info: %s";
+          + SEE_DOCUMENTATION_MSG;
 
   private final CreateGroup.Factory createGroupFactory;
   private final String documentationUrl;
@@ -99,35 +101,13 @@ public class ProjectCreationValidator
       return;
     }
 
-    Project parent = parentCtrl.getProject();
-
-    if (allProjectsName.get().equals(parent.getNameKey())) {
-      if (name.contains("/")) {
-        log.debug("rejecting creation of {}: name contains slashes", name);
-        throw new ValidationException(String.format(
-            ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG, documentationUrl));
-      }
-      if (!args.permissionsOnly) {
-        log.debug("rejecting creation of {}: missing permissions only option",
-            name);
-        throw new ValidationException(String
-            .format(REGULAR_PROJECT_NOT_ALLOWED_AS_ROOT_MSG, documentationUrl));
-      }
+    if (allProjectsName.get().equals(parentCtrl.getProject().getNameKey())) {
+      validateRootProject(name, args.permissionsOnly);
       args.ownerIds.add(createGroup(name + "-admins"));
-      log.debug("allowing creation of root project {}", name);
       return;
     }
 
-    validateProjectNamePrefix(name, parent);
-
-    if (!parentCtrl.isOwner()) {
-      log.debug("rejecting creation of {}: user is not owner of {}", name,
-          parent.getName());
-      throw new ValidationException(
-          String.format(MUST_BE_OWNER_TO_CREATE_PROJECT_MSG, parent.getName(),
-              documentationUrl));
-    }
-    log.debug("allowing creation of project {}", name);
+    validateProject(name, parentCtrl);
   }
 
   private AccountGroup.UUID createGroup(String name)
@@ -155,9 +135,27 @@ public class ProjectCreationValidator
     }
   }
 
-  private void validateProjectNamePrefix(String name, Project parent)
+  private void validateRootProject(String name, boolean permissionOnly)
+      throws ValidationException {
+    log.debug("validating root project name {}", name);
+    if (name.contains("/")) {
+      log.debug("rejecting creation of {}: name contains slashes", name);
+      throw new ValidationException(String
+          .format(ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG, documentationUrl));
+    }
+    if (!permissionOnly) {
+      log.debug("rejecting creation of {}: missing permissions only option",
+          name);
+      throw new ValidationException(String
+          .format(REGULAR_PROJECT_NOT_ALLOWED_AS_ROOT_MSG, documentationUrl));
+    }
+    log.debug("allowing creation of root project {}", name);
+  }
+
+  private void validateProject(String name, ProjectControl parentCtrl)
       throws ValidationException {
     log.debug("validating name prefix of {}", name);
+    Project parent = parentCtrl.getProject();
     String prefix = parent.getName() + "/";
     if (!name.startsWith(prefix)) {
       log.debug("rejecting creation of {}: name is not starting with {}", name,
@@ -166,5 +164,13 @@ public class ProjectCreationValidator
           String.format(PROJECT_MUST_START_WITH_PARENT_NAME_MSG, prefix + name,
               documentationUrl));
     }
+    if (!parentCtrl.isOwner()) {
+      log.debug("rejecting creation of {}: user is not owner of {}", name,
+          parent.getName());
+      throw new ValidationException(
+          String.format(MUST_BE_OWNER_TO_CREATE_PROJECT_MSG, parent.getName(),
+              documentationUrl));
+    }
+    log.debug("allowing creation of project {}", name);
   }
 }
