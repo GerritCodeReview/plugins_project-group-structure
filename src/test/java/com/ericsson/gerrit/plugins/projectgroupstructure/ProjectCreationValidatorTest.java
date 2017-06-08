@@ -32,10 +32,12 @@ import com.google.gerrit.server.project.ProjectState;
 
 import org.apache.http.HttpStatus;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
 
+@Ignore
 public class ProjectCreationValidatorTest extends PluginDaemonTest {
 
   @Before
