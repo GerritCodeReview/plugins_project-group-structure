@@ -19,19 +19,25 @@ import com.google.common.hash.Hashing;
 import com.google.gerrit.extensions.annotations.PluginCanonicalWebUrl;
 import com.google.gerrit.extensions.api.groups.GroupInput;
 import com.google.gerrit.extensions.common.GroupInfo;
+import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.extensions.restapi.TopLevelResource;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.AllProjectsNameProvider;
+import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.group.CreateGroup;
+import com.google.gerrit.server.permissions.GlobalPermission;
+import com.google.gerrit.server.permissions.PermissionBackend;
+import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.project.CreateProjectArgs;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.validators.ProjectCreationValidationListener;
 import com.google.gerrit.server.validators.ValidationException;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 import org.slf4j.Logger;
@@ -75,15 +81,20 @@ public class ProjectCreationValidator
   private final CreateGroup.Factory createGroupFactory;
   private final String documentationUrl;
   private final AllProjectsNameProvider allProjectsName;
+  private final Provider<CurrentUser> self;
+  private final PermissionBackend permissionBackend;
 
   @Inject
   public ProjectCreationValidator(CreateGroup.Factory createGroupFactory,
       @PluginCanonicalWebUrl String url,
-      AllProjectsNameProvider allProjectsName) {
+      AllProjectsNameProvider allProjectsName,
+      Provider<CurrentUser> self,
+      PermissionBackend permissionBackend) {
     this.createGroupFactory = createGroupFactory;
     this.documentationUrl = url + "Documentation/index.html";
     this.allProjectsName = allProjectsName;
-
+    this.self = self;
+    this.permissionBackend = permissionBackend;
   }
 
   @Override
@@ -92,13 +103,18 @@ public class ProjectCreationValidator
     String name = args.getProjectName();
     log.debug("validating creation of {}", name);
     ProjectControl parentCtrl = args.newParent;
-    if (parentCtrl.getUser().getCapabilities().canAdministrateServer()) {
+
+    try {
+      permissionBackend.user(self).check(GlobalPermission.ADMINISTRATE_SERVER);
+
       // Admins can bypass any rules to support creating projects that doesn't
       // comply with the new naming rules. New projects structures have to
       // comply but we need to be able to add new project to an existing non
       // compliant structure.
       log.debug("admin is creating project, bypassing all rules");
       return;
+    } catch (AuthException | PermissionBackendException e) {
+      // continuing
     }
 
     if (allProjectsName.get().equals(parentCtrl.getProject().getNameKey())) {
