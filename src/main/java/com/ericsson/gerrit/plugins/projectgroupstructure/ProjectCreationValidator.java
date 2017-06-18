@@ -26,6 +26,9 @@ import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.AllProjectsNameProvider;
 import com.google.gerrit.server.group.CreateGroup;
+import com.google.gerrit.server.permissions.GlobalPermission;
+import com.google.gerrit.server.permissions.PermissionBackend;
+import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.project.CreateProjectArgs;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.validators.ProjectCreationValidationListener;
@@ -75,24 +78,26 @@ public class ProjectCreationValidator
   private final CreateGroup.Factory createGroupFactory;
   private final String documentationUrl;
   private final AllProjectsNameProvider allProjectsName;
+  private final PermissionBackend permissionBackend;
 
   @Inject
   public ProjectCreationValidator(CreateGroup.Factory createGroupFactory,
       @PluginCanonicalWebUrl String url,
-      AllProjectsNameProvider allProjectsName) {
+      AllProjectsNameProvider allProjectsName,
+      PermissionBackend permissionBackend) {
     this.createGroupFactory = createGroupFactory;
     this.documentationUrl = url + "Documentation/index.html";
     this.allProjectsName = allProjectsName;
-
+    this.permissionBackend = permissionBackend;
   }
 
   @Override
   public void validateNewProject(CreateProjectArgs args)
-      throws ValidationException {
+      throws PermissionBackendException, ValidationException {
     String name = args.getProjectName();
     log.debug("validating creation of {}", name);
     ProjectControl parentCtrl = args.newParent;
-    if (parentCtrl.getUser().getCapabilities().canAdministrateServer()) {
+    if (permissionBackend.user(parentCtrl.getUser()).check(GlobalPermission.ADMINISTRATE_SERVER)) {
       // Admins can bypass any rules to support creating projects that doesn't
       // comply with the new naming rules. New projects structures have to
       // comply but we need to be able to add new project to an existing non
