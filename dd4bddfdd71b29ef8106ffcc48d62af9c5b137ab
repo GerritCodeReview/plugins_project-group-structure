@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9910d92f_f49faa5d",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-06-21T19:13:34Z",
+      "side": 1,
+      "message": "need to be updated to the way to reference group (group group_name + mapping in groups file)",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 59
+      },
+      "revId": "dd4bddfdd71b29ef8106ffcc48d62af9c5b137ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
