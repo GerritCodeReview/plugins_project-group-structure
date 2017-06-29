@@ -25,12 +25,14 @@ The value of `delegateProjectCreationTo` must be set to a
 [group reference](@URL@Documentation/dev-plugins.html#configuring-groups).
 
 `project.config` file
+
 ```
 [plugin "@PLUGIN@"]
 delegateProjectCreationTo = group group_name
 ```
 
 `groups` file
+
 ```
 group_uuid		group_name
 ```
@@ -41,12 +43,14 @@ If creating-project is delegated to built-in groups, e.g. "Registered Users"
 group, then the value is as following:
 
 `project.config` file
+
 ```
 [plugin "@PLUGIN@"]
 delegateProjectCreationTo = group Registered Users
 ```
 
 `groups` file
+
 ```
 global:Registered-Users		Registered Users
 ```
@@ -63,12 +67,14 @@ For example, to delegate project creation under `orgA` root project to
 - Type `orgA` as the filter then click on `orgA` project
 - Click `Edit Config` button
 - Add the following then click `Save` -> `Close`:
+
 	```
 	[plugin "@PLUGIN@"]
 	delegateProjectCreationTo = orgA-project-creators
 	```
 - Click `Add...` button then type and open `groups` file
 - Add the following then click `Save` -> `Close`:
+
 	```
 	3d2bef3b667a577f2dd5232e0848c526efd11b1f	orgA-project-creators
 	```
