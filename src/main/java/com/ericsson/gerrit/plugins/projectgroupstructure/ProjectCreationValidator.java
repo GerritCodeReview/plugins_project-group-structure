@@ -116,11 +116,15 @@ public class ProjectCreationValidator
 
     if (allProjectsName.get().equals(parentCtrl.getProject().getNameKey())) {
       validateRootProject(name, args.permissionsOnly);
-      args.ownerIds.add(createGroup(name + "-admins"));
-      return;
+    } else {
+      validateProject(name, parentCtrl);
     }
 
-    validateProject(name, parentCtrl);
+    // If we reached that point, it means we allow project creation. Make the
+    // user an owner if not already by inheritance.
+    if (!parentCtrl.isOwner()) {
+      args.ownerIds.add(createGroup(name + "-admins"));
+    }
   }
 
   private AccountGroup.UUID createGroup(String name)

@@ -228,6 +228,53 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
   }
 
   @Test
+  public void shouldMakeUserOwnerIfNotAlreadyOwnerByInheritance()
+      throws Exception {
+    String parent = name("parentProject");
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    adminRestSession.put("/projects/" + parent, in).assertCreated();
+
+    String delegatingGroup = name("someGroup");
+    GroupApi dGroup = gApi.groups().create(delegatingGroup);
+    dGroup.addMembers(user.username);
+    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
+    String gId = gApi.groups().id(delegatingGroup).get().id;
+    cfg.getPluginConfig(PLUGIN_NAME).setGroupReference(
+        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+        new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
+    saveProjectConfig(parentNameKey, cfg);
+
+    // normal case, when <project-name>-admins group does not exist
+    in = new ProjectInput();
+    in.parent = parent;
+    String childProject = parent + "/childProject";
+    userRestSession.put("/projects/" + Url.encode(childProject), in)
+        .assertCreated();
+    ProjectState projectState =
+        projectCache.get(new Project.NameKey(childProject));
+    assertThat(projectState.getOwners().size()).isEqualTo(1);
+    assertThat(projectState.getOwners()).contains(
+        groupCache.get(new AccountGroup.NameKey(childProject + "-admins"))
+            .getGroupUUID());
+
+    // case when <project-name>-admins group already exists
+    String childProject2 = parent + "/childProject2";
+    String existingGroupName = childProject2 + "-admins";
+    gApi.groups().create(existingGroupName);
+    userRestSession.put("/projects/" + Url.encode(childProject2), in)
+        .assertCreated();
+    projectState = projectCache.get(new Project.NameKey(childProject2));
+    assertThat(projectState.getOwners().size()).isEqualTo(1);
+    String expectedOwnerGroup = existingGroupName + "-"
+        + Hashing.sha1().hashString(existingGroupName, Charsets.UTF_8)
+            .toString().substring(0, 7);
+    assertThat(projectState.getOwners()).contains(groupCache
+        .get(new AccountGroup.NameKey(expectedOwnerGroup)).getGroupUUID());
+  }
+
+  @Test
   public void shouldBlockCreationIfGroupRefIsNotUsed() throws Exception {
     String ownerGroup = name("groupA");
     gApi.groups().create(ownerGroup);
