@@ -77,8 +77,11 @@ public class ProjectCreationValidator
       "Project name must start with parent project name, e.g. %s."
           + SEE_DOCUMENTATION_MSG;
 
-  /* package */ static final String DELEGATE_PROJECT_CREATION_TO =
+  static final String DELEGATE_PROJECT_CREATION_TO =
       "delegateProjectCreationTo";
+
+  static final String DISABLE_GRANTING_PROJECT_OWNERSHIP =
+      "disableGrantingProjectOwnership";
 
   private final CreateGroup.Factory createGroupFactory;
   private final String documentationUrl;
@@ -122,8 +125,22 @@ public class ProjectCreationValidator
 
     // If we reached that point, it means we allow project creation. Make the
     // user an owner if not already by inheritance.
-    if (!parentCtrl.isOwner()) {
+    if (!parentCtrl.isOwner() && !configDisableGrantingOwnership(parentCtrl)) {
       args.ownerIds.add(createGroup(name + "-admins"));
+    }
+  }
+
+  private boolean configDisableGrantingOwnership(ProjectControl parentCtrl)
+      throws ValidationException {
+    try {
+      return cfg
+          .getFromProjectConfigWithInheritance(
+              parentCtrl.getProject().getNameKey(), pluginName)
+          .getBoolean(DISABLE_GRANTING_PROJECT_OWNERSHIP, false);
+    } catch (NoSuchProjectException e) {
+      log.error("Failed to check project config for "
+          + parentCtrl.getProject().getName() + ": " + e.getMessage(), e);
+      throw new ValidationException(AN_ERROR_OCCURRED_MSG);
     }
   }
 

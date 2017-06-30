@@ -80,3 +80,14 @@ For example, to delegate project creation under `orgA` root project to
 	```
 - Click `Publish` button, review, vote and submit the change to apply new
 configuration
+
+Ownership of a project created by delegated user is given automatically to that
+user by adding him to a group named `<root-project-name>-admins`. It is
+possible to disable granting the ownership by configuring
+`disableGrantingProjectOwnership` in the `project.config` of
+`refs/meta/config` branch of the parent project:
+
+```
+[plugin "@PLUGIN@"]
+disableGrantingProjectOwnership = true
+```
