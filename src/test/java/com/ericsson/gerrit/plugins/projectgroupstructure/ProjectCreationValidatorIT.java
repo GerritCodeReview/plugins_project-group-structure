@@ -275,6 +275,37 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
   }
 
   @Test
+  public void shouldNotMakeUserOwnerIfNotAlreadyOwnerByInheritanceAndGrantingIsDisabled()
+      throws Exception {
+    String parent = name("parentProject");
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    adminRestSession.put("/projects/" + parent, in).assertCreated();
+
+    String delegatingGroup = name("someGroup");
+    GroupApi dGroup = gApi.groups().create(delegatingGroup);
+    dGroup.addMembers(user.username);
+    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
+    String gId = gApi.groups().id(delegatingGroup).get().id;
+    cfg.getPluginConfig(PLUGIN_NAME).setGroupReference(
+        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+        new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
+    cfg.getPluginConfig(PLUGIN_NAME).setBoolean(
+        ProjectCreationValidator.DISABLE_GRANTING_PROJECT_OWNERSHIP, true);
+    saveProjectConfig(parentNameKey, cfg);
+
+    in = new ProjectInput();
+    in.parent = parent;
+    String childProject = parent + "/childProject";
+    userRestSession.put("/projects/" + Url.encode(childProject), in)
+        .assertCreated();
+    ProjectState projectState =
+        projectCache.get(new Project.NameKey(childProject));
+    assertThat(projectState.getOwners().size()).isEqualTo(0);
+  }
+
+  @Test
   public void shouldBlockCreationIfGroupRefIsNotUsed() throws Exception {
     String ownerGroup = name("groupA");
     gApi.groups().create(ownerGroup);
