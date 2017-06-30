@@ -45,6 +45,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -159,7 +160,7 @@ public class ProjectCreationValidator
             .apply(TopLevelResource.INSTANCE, new GroupInput());
       }
       return AccountGroup.UUID.parse(groupInfo.id);
-    } catch (RestApiException | OrmException | IOException e ) {
+    } catch (RestApiException | OrmException | IOException | ConfigInvalidException e ) {
       log.error("Failed to create project " + name + ": " + e.getMessage(), e);
       throw new ValidationException(AN_ERROR_OCCURRED_MSG);
     }
