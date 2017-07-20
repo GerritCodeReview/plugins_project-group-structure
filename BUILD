@@ -15,6 +15,7 @@ gerrit_plugin(
         "Gerrit-Module: com.ericsson.gerrit.plugins.projectgroupstructure.Module",
         "Implementation-Title: project-group-structure plugin",
         "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/project-group-structure",
+        "Implementation-Vendor: Ericsson",
     ],
 )
 
