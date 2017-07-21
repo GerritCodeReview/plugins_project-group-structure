@@ -9,13 +9,13 @@ load(
 gerrit_plugin(
     name = "project-group-structure",
     srcs = glob(["src/main/java/**/*.java"]),
-    resources = glob(["src/main/resources/**/*"]),
     manifest_entries = [
         "Gerrit-PluginName: project-group-structure",
         "Gerrit-Module: com.ericsson.gerrit.plugins.projectgroupstructure.Module",
         "Implementation-Title: project-group-structure plugin",
         "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/project-group-structure",
     ],
+    resources = glob(["src/main/resources/**/*"]),
 )
 
 junit_tests(
