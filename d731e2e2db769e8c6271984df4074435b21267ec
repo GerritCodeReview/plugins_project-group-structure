@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ef55a6e_a9c0d063",
+        "filename": "BUILD",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-07-24T04:35:23Z",
+      "side": 1,
+      "message": "nit: missing blank line?",
+      "revId": "d731e2e2db769e8c6271984df4074435b21267ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
