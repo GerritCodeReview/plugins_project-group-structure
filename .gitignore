@@ -1,9 +1,6 @@
-/.buckd
-/.buckversion
 /.classpath
+/.primary_build_tool
 /.project
 /.settings/
-/.watchmanconfig
-/buck-out
-/bucklets
+/bazel-*
 /eclipse-out/
