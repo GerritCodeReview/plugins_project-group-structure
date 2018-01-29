@@ -60,6 +60,9 @@ public class ProjectCreationValidator
       "You must be owner of the parent project \"%s\" to create a nested project."
           + SEE_DOCUMENTATION_MSG;
 
+  private static final String PROJECT_CANNOT_CONTAINS_SPACES_MSG =
+      "Project name cannot contains spaces." + SEE_DOCUMENTATION_MSG;
+
   private static final String ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG =
       "Root project name cannot contains slashes." + SEE_DOCUMENTATION_MSG;
 
@@ -107,6 +110,11 @@ public class ProjectCreationValidator
       throws ValidationException {
     String name = args.getProjectName();
     log.debug("validating creation of {}", name);
+    if (name.contains(" ")) {
+      throw new ValidationException(
+          String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
+    }
+
     ProjectControl parentCtrl = args.newParent;
     if (parentCtrl.getUser().getCapabilities().canAdministrateServer()) {
       // Admins can bypass any rules to support creating projects that doesn't
