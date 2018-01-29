@@ -154,7 +154,7 @@ public class ProjectCreationValidator
       } catch (ResourceConflictException e) {
         // name already exists, make sure it is unique by adding a abbreviated
         // sha1
-        String nameWithSha1 = name + "-" + Hashing.sha1()
+        String nameWithSha1 = name + "-" + Hashing.sha256()
             .hashString(name, Charsets.UTF_8).toString().substring(0, 7);
         log.info(
             "Failed to create group name {} because of a conflict: {}, trying to create {} instead",

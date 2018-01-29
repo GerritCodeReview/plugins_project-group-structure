@@ -178,7 +178,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     projectState = projectCache.get(new Project.NameKey(rootProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
     String expectedOwnerGroup = existingGroupName + "-"
-        + Hashing.sha1().hashString(existingGroupName, Charsets.UTF_8)
+        + Hashing.sha256().hashString(existingGroupName, Charsets.UTF_8)
             .toString().substring(0, 7);
     assertThat(projectState.getOwners()).contains(groupCache
         .get(new AccountGroup.NameKey(expectedOwnerGroup)).getGroupUUID());
@@ -268,7 +268,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     projectState = projectCache.get(new Project.NameKey(childProject2));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
     String expectedOwnerGroup = existingGroupName + "-"
-        + Hashing.sha1().hashString(existingGroupName, Charsets.UTF_8)
+        + Hashing.sha256().hashString(existingGroupName, Charsets.UTF_8)
             .toString().substring(0, 7);
     assertThat(projectState.getOwners()).contains(groupCache
         .get(new AccountGroup.NameKey(expectedOwnerGroup)).getGroupUUID());
