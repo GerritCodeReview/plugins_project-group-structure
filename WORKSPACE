@@ -1,4 +1,5 @@
 workspace(name = "project_group_structure")
+
 load("//:bazlets.bzl", "load_bazlets")
 
 load_bazlets(
