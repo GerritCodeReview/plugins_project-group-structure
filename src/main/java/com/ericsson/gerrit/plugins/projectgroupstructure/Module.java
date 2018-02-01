@@ -18,7 +18,6 @@ import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.validators.ProjectCreationValidationListener;
 import com.google.inject.AbstractModule;
 
-
 class Module extends AbstractModule {
   @Override
   protected void configure() {
