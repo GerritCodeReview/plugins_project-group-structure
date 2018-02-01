@@ -1,4 +1,5 @@
 workspace(name = "project_group_structure")
+
 load("//:bazlets.bzl", "load_bazlets")
 
 load_bazlets(
@@ -17,8 +18,8 @@ load_bazlets(
 
 # Release Plugin API
 load(
-   "@com_googlesource_gerrit_bazlets//:gerrit_api.bzl",
-   "gerrit_api",
+    "@com_googlesource_gerrit_bazlets//:gerrit_api.bzl",
+    "gerrit_api",
 )
 
 # Load release Plugin API
