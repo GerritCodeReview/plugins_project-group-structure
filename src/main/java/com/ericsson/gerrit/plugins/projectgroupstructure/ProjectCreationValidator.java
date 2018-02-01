@@ -90,6 +90,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   private final PermissionBackend permissionBackend;
   private final PluginConfigFactory cfg;
   private final String pluginName;
+  private final ProjectControl.GenericFactory projectControlFactory;
 
   @Inject
   public ProjectCreationValidator(
@@ -99,7 +100,8 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       Provider<CurrentUser> self,
       PermissionBackend permissionBackend,
       PluginConfigFactory cfg,
-      @PluginName String pluginName) {
+      @PluginName String pluginName,
+      ProjectControl.GenericFactory projectControlFactory) {
     this.createGroupFactory = createGroupFactory;
     this.documentationUrl = url + "Documentation/index.html";
     this.allProjectsName = allProjectsName;
@@ -107,13 +109,27 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     this.permissionBackend = permissionBackend;
     this.cfg = cfg;
     this.pluginName = pluginName;
+    this.projectControlFactory = projectControlFactory;
   }
 
   @Override
   public void validateNewProject(CreateProjectArgs args) throws ValidationException {
     String name = args.getProjectName();
     log.debug("validating creation of {}", name);
-    ProjectControl parentCtrl = args.newParent;
+    ProjectControl parentCtrl;
+    try {
+      parentCtrl = projectControlFactory.controlFor(args.newParent, self.get());
+    } catch (NoSuchProjectException | IOException e) {
+      log.error(
+          "Failed to create project "
+              + name
+              + "; Cannot retrieve info about parent project "
+              + args.newParent.get()
+              + ": "
+              + e.getMessage(),
+          e);
+      throw new ValidationException(AN_ERROR_OCCURRED_MSG);
+    }
 
     try {
       permissionBackend.user(self).check(GlobalPermission.ADMINISTRATE_SERVER);
