@@ -32,13 +32,12 @@ import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.ProjectConfig;
 import com.google.gerrit.server.project.ProjectState;
-
 import org.junit.Before;
 import org.junit.Test;
 
 @TestPlugin(
-    name = "project-group-structure",
-    sysModule = "com.ericsson.gerrit.plugins.projectgroupstructure.Module"
+  name = "project-group-structure",
+  sysModule = "com.ericsson.gerrit.plugins.projectgroupstructure.Module"
 )
 public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
@@ -58,11 +57,9 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
   public void shouldAllowAnyUsersToCreateUnderAllProjects() throws Exception {
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
-    adminRestSession.put("/projects/" + name("someProject"), in)
-        .assertCreated();
+    adminRestSession.put("/projects/" + name("someProject"), in).assertCreated();
 
-    userRestSession.put("/projects/" + name("someOtherProject"), in)
-        .assertCreated();
+    userRestSession.put("/projects/" + name("someOtherProject"), in).assertCreated();
   }
 
   @Test
@@ -74,16 +71,13 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     userRestSession.put("/projects/" + parent, in).assertCreated();
 
     // Creation is rejected when root project name contains slashes
-    RestResponse r =
-        userRestSession.put("/projects/" + Url.encode("a/parentProject"), in);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode("a/parentProject"), in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("Root project name cannot contains slashes");
+    assertThat(r.getEntityContent()).contains("Root project name cannot contains slashes");
   }
 
   @Test
-  public void shouldBlockProjectWithParentNotPartOfProjectName()
-      throws Exception {
+  public void shouldBlockProjectWithParentNotPartOfProjectName() throws Exception {
     // Root project is OK without parent part of the name
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
@@ -95,20 +89,17 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     in.parent = parent;
     RestResponse r = userRestSession.put("/projects/childProject", in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("Project name must start with parent project name");
+    assertThat(r.getEntityContent()).contains("Project name must start with parent project name");
 
     // Creation is OK when project name starts with parent
-    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
-        .assertCreated();
+    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertCreated();
 
     // Creation is rejected when project name does not start with nested parent
     String nestedParent = parent + "/childProject";
     in.parent = nestedParent;
     r = userRestSession.put("/projects/grandchild", in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("Project name must start with parent project name");
+    assertThat(r.getEntityContent()).contains("Project name must start with parent project name");
 
     // Creation is OK when project name starts with nested parent
     userRestSession
@@ -130,16 +121,13 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     // Creation is rejected when user is not owner of parent
     in = new ProjectInput();
     in.parent = parent;
-    RestResponse r = userRestSession
-        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("You must be owner of the parent project");
+    assertThat(r.getEntityContent()).contains("You must be owner of the parent project");
 
     // Creation is OK when user is owner of parent
     g.addMembers(user.username);
-    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
-        .assertCreated();
+    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertCreated();
   }
 
   @Test
@@ -153,8 +141,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     // Child project without name of parent as prefix
     in = new ProjectInput();
     in.parent = parent;
-    adminRestSession.put("/projects/" + Url.encode("orgA/childProject"), in)
-        .assertCreated();
+    adminRestSession.put("/projects/" + Url.encode("orgA/childProject"), in).assertCreated();
   }
 
   @Test
@@ -164,11 +151,10 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
     userRestSession.put("/projects/" + rootProject, in).assertCreated();
-    ProjectState projectState =
-        projectCache.get(new Project.NameKey(rootProject));
+    ProjectState projectState = projectCache.get(new Project.NameKey(rootProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
-    assertThat(projectState.getOwners()).contains(groupCache
-        .get(new AccountGroup.NameKey(rootProject + "-admins")).getGroupUUID());
+    assertThat(projectState.getOwners())
+        .contains(groupCache.get(new AccountGroup.NameKey(rootProject + "-admins")).getGroupUUID());
 
     // case when <project-name>-admins group already exists
     rootProject = name("rootProject2");
@@ -177,19 +163,22 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     userRestSession.put("/projects/" + rootProject, in).assertCreated();
     projectState = projectCache.get(new Project.NameKey(rootProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
-    String expectedOwnerGroup = existingGroupName + "-"
-        + Hashing.sha1().hashString(existingGroupName, Charsets.UTF_8)
-            .toString().substring(0, 7);
-    assertThat(projectState.getOwners()).contains(groupCache
-        .get(new AccountGroup.NameKey(expectedOwnerGroup)).getGroupUUID());
+    String expectedOwnerGroup =
+        existingGroupName
+            + "-"
+            + Hashing.sha1()
+                .hashString(existingGroupName, Charsets.UTF_8)
+                .toString()
+                .substring(0, 7);
+    assertThat(projectState.getOwners())
+        .contains(groupCache.get(new AccountGroup.NameKey(expectedOwnerGroup)).getGroupUUID());
   }
 
   @Test
   public void shouldBlockRootCodeProject() throws Exception {
     RestResponse r = userRestSession.put("/projects/" + Url.encode("project1"));
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("Regular projects are not allowed as root");
+    assertThat(r.getEntityContent()).contains("Regular projects are not allowed as root");
   }
 
   @Test
@@ -205,11 +194,9 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     in = new ProjectInput();
     in.parent = parent;
-    RestResponse r = userRestSession
-        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("You must be owner of the parent project");
+    assertThat(r.getEntityContent()).contains("You must be owner of the parent project");
 
     // the user is in the delegating group
     String delegatingGroup = name("groupB");
@@ -228,8 +215,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  public void shouldMakeUserOwnerIfNotAlreadyOwnerByInheritance()
-      throws Exception {
+  public void shouldMakeUserOwnerIfNotAlreadyOwnerByInheritance() throws Exception {
     String parent = name("parentProject");
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
@@ -241,37 +227,39 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     Project.NameKey parentNameKey = new Project.NameKey(parent);
     ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
     String gId = gApi.groups().id(delegatingGroup).get().id;
-    cfg.getPluginConfig(PLUGIN_NAME).setGroupReference(
-        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-        new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
+    cfg.getPluginConfig(PLUGIN_NAME)
+        .setGroupReference(
+            ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+            new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
     saveProjectConfig(parentNameKey, cfg);
 
     // normal case, when <project-name>-admins group does not exist
     in = new ProjectInput();
     in.parent = parent;
     String childProject = parent + "/childProject";
-    userRestSession.put("/projects/" + Url.encode(childProject), in)
-        .assertCreated();
-    ProjectState projectState =
-        projectCache.get(new Project.NameKey(childProject));
+    userRestSession.put("/projects/" + Url.encode(childProject), in).assertCreated();
+    ProjectState projectState = projectCache.get(new Project.NameKey(childProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
-    assertThat(projectState.getOwners()).contains(
-        groupCache.get(new AccountGroup.NameKey(childProject + "-admins"))
-            .getGroupUUID());
+    assertThat(projectState.getOwners())
+        .contains(
+            groupCache.get(new AccountGroup.NameKey(childProject + "-admins")).getGroupUUID());
 
     // case when <project-name>-admins group already exists
     String childProject2 = parent + "/childProject2";
     String existingGroupName = childProject2 + "-admins";
     gApi.groups().create(existingGroupName);
-    userRestSession.put("/projects/" + Url.encode(childProject2), in)
-        .assertCreated();
+    userRestSession.put("/projects/" + Url.encode(childProject2), in).assertCreated();
     projectState = projectCache.get(new Project.NameKey(childProject2));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
-    String expectedOwnerGroup = existingGroupName + "-"
-        + Hashing.sha1().hashString(existingGroupName, Charsets.UTF_8)
-            .toString().substring(0, 7);
-    assertThat(projectState.getOwners()).contains(groupCache
-        .get(new AccountGroup.NameKey(expectedOwnerGroup)).getGroupUUID());
+    String expectedOwnerGroup =
+        existingGroupName
+            + "-"
+            + Hashing.sha1()
+                .hashString(existingGroupName, Charsets.UTF_8)
+                .toString()
+                .substring(0, 7);
+    assertThat(projectState.getOwners())
+        .contains(groupCache.get(new AccountGroup.NameKey(expectedOwnerGroup)).getGroupUUID());
   }
 
   @Test
@@ -288,20 +276,19 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     Project.NameKey parentNameKey = new Project.NameKey(parent);
     ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
     String gId = gApi.groups().id(delegatingGroup).get().id;
-    cfg.getPluginConfig(PLUGIN_NAME).setGroupReference(
-        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-        new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
-    cfg.getPluginConfig(PLUGIN_NAME).setBoolean(
-        ProjectCreationValidator.DISABLE_GRANTING_PROJECT_OWNERSHIP, true);
+    cfg.getPluginConfig(PLUGIN_NAME)
+        .setGroupReference(
+            ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+            new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
+    cfg.getPluginConfig(PLUGIN_NAME)
+        .setBoolean(ProjectCreationValidator.DISABLE_GRANTING_PROJECT_OWNERSHIP, true);
     saveProjectConfig(parentNameKey, cfg);
 
     in = new ProjectInput();
     in.parent = parent;
     String childProject = parent + "/childProject";
-    userRestSession.put("/projects/" + Url.encode(childProject), in)
-        .assertCreated();
-    ProjectState projectState =
-        projectCache.get(new Project.NameKey(childProject));
+    userRestSession.put("/projects/" + Url.encode(childProject), in).assertCreated();
+    ProjectState projectState = projectCache.get(new Project.NameKey(childProject));
     assertThat(projectState.getOwners().size()).isEqualTo(0);
   }
 
@@ -318,11 +305,9 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     in = new ProjectInput();
     in.parent = parent;
-    RestResponse r = userRestSession
-        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("You must be owner of the parent project");
+    assertThat(r.getEntityContent()).contains("You must be owner of the parent project");
 
     // the user is in the delegating group
     String delegatingGroup = name("groupB");
@@ -350,11 +335,9 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     in = new ProjectInput();
     in.parent = parent;
-    RestResponse r = userRestSession
-        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("You must be owner of the parent project");
+    assertThat(r.getEntityContent()).contains("You must be owner of the parent project");
 
     // the user is in the nested delegating group
     String delegatingGroup = name("groupB");
@@ -390,11 +373,9 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     in = new ProjectInput();
     in.parent = parent;
-    RestResponse r = userRestSession
-        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("You must be owner of the parent project");
+    assertThat(r.getEntityContent()).contains("You must be owner of the parent project");
 
     // the user is in the delegating group
     String delegatingGroup = name("groupB");
@@ -404,12 +385,12 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     Project.NameKey parentNameKey = new Project.NameKey(parent);
     ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
     String gId = gApi.groups().id(delegatingGroup).get().id;
-    cfg.getPluginConfig(PLUGIN_NAME).setGroupReference(
-        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-        new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
+    cfg.getPluginConfig(PLUGIN_NAME)
+        .setGroupReference(
+            ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+            new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
     saveProjectConfig(parentNameKey, cfg);
-    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
-        .assertConflict();
+    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertConflict();
   }
 
   @Test
@@ -425,11 +406,9 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     in = new ProjectInput();
     in.parent = parent;
-    RestResponse r = userRestSession
-        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("You must be owner of the parent project");
+    assertThat(r.getEntityContent()).contains("You must be owner of the parent project");
 
     // The delegating group is not created
     String delegatingGroup = name("groupB");
@@ -437,16 +416,16 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     Project.NameKey parentNameKey = new Project.NameKey(parent);
     ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
     String gId = "fake-gId";
-    cfg.getPluginConfig(PLUGIN_NAME).setGroupReference(
-        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-        new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
+    cfg.getPluginConfig(PLUGIN_NAME)
+        .setGroupReference(
+            ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+            new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
     saveProjectConfig(parentNameKey, cfg);
     userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertConflict();
   }
 
   @Test
-  public void shouldNotBlockCreationIfDelegatingGroupIsRenamed()
-      throws Exception {
+  public void shouldNotBlockCreationIfDelegatingGroupIsRenamed() throws Exception {
     String ownerGroup = name("groupA");
     gApi.groups().create(ownerGroup);
 
@@ -458,11 +437,9 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     in = new ProjectInput();
     in.parent = parent;
-    RestResponse r = userRestSession
-        .put("/projects/" + Url.encode(parent + "/childProject"), in);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in);
     r.assertConflict();
-    assertThat(r.getEntityContent())
-        .contains("You must be owner of the parent project");
+    assertThat(r.getEntityContent()).contains("You must be owner of the parent project");
 
     // the user is in the delegating group
     String delegatingGroup = name("groupB");
@@ -473,15 +450,15 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     ProjectConfig cfg = projectCache.checkedGet(parentNameKey).getConfig();
 
     String gId = gApi.groups().id(delegatingGroup).get().id;
-    cfg.getPluginConfig("project-group-structure").setGroupReference(
-        ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-        new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
+    cfg.getPluginConfig("project-group-structure")
+        .setGroupReference(
+            ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+            new GroupReference(AccountGroup.UUID.parse(gId), delegatingGroup));
     saveProjectConfig(parentNameKey, cfg);
 
     String newDelegatingGroup = name("groupC");
     gApi.groups().id(delegatingGroup).name(newDelegatingGroup);
 
-    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in)
-        .assertCreated();
+    userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertCreated();
   }
 }
