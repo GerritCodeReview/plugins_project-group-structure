@@ -154,7 +154,8 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     ProjectState projectState = projectCache.get(new Project.NameKey(rootProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
     assertThat(projectState.getOwners())
-        .contains(groupCache.get(new AccountGroup.NameKey(rootProject + "-admins")).getGroupUUID());
+        .contains(
+            groupCache.get(new AccountGroup.NameKey(rootProject + "-admins")).get().getGroupUUID());
 
     // case when <project-name>-admins group already exists
     rootProject = name("rootProject2");
@@ -171,7 +172,8 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
                 .toString()
                 .substring(0, 7);
     assertThat(projectState.getOwners())
-        .contains(groupCache.get(new AccountGroup.NameKey(expectedOwnerGroup)).getGroupUUID());
+        .contains(
+            groupCache.get(new AccountGroup.NameKey(expectedOwnerGroup)).get().getGroupUUID());
   }
 
   @Test
@@ -242,7 +244,10 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     assertThat(projectState.getOwners().size()).isEqualTo(1);
     assertThat(projectState.getOwners())
         .contains(
-            groupCache.get(new AccountGroup.NameKey(childProject + "-admins")).getGroupUUID());
+            groupCache
+                .get(new AccountGroup.NameKey(childProject + "-admins"))
+                .get()
+                .getGroupUUID());
 
     // case when <project-name>-admins group already exists
     String childProject2 = parent + "/childProject2";
@@ -259,7 +264,8 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
                 .toString()
                 .substring(0, 7);
     assertThat(projectState.getOwners())
-        .contains(groupCache.get(new AccountGroup.NameKey(expectedOwnerGroup)).getGroupUUID());
+        .contains(
+            groupCache.get(new AccountGroup.NameKey(expectedOwnerGroup)).get().getGroupUUID());
   }
 
   @Test
