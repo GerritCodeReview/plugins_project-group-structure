@@ -54,6 +54,15 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
   }
 
   @Test
+  public void shouldProjectWithASpaceInTheirName() throws Exception {
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    RestResponse r = userRestSession.put("/projects/" + Url.encode("project with space"), in);
+    r.assertConflict();
+    assertThat(r.getEntityContent()).contains("Project name cannot contains spaces");
+  }
+
+  @Test
   public void shouldAllowAnyUsersToCreateUnderAllProjects() throws Exception {
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
@@ -167,7 +176,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     String expectedOwnerGroup =
         existingGroupName
             + "-"
-            + Hashing.sha1()
+            + Hashing.sha256()
                 .hashString(existingGroupName, Charsets.UTF_8)
                 .toString()
                 .substring(0, 7);
@@ -259,7 +268,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     String expectedOwnerGroup =
         existingGroupName
             + "-"
-            + Hashing.sha1()
+            + Hashing.sha256()
                 .hashString(existingGroupName, Charsets.UTF_8)
                 .toString()
                 .substring(0, 7);
