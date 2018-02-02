@@ -1,5 +1,7 @@
 This plugin enforce a project group structure and restrict project creation
-within this structure to project group owners only.
+within this structure to project group owners only. Besides the rules the plugin
+enforce for the project group structure, it also enforce other naming
+rules like project name cannot contain spaces.
 
 To start creating a project group structure, simply create a root project, i.e.
 a project which inherits rights from `All-Projects`. The root project name

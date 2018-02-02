@@ -62,6 +62,9 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       "You must be owner of the parent project \"%s\" to create a nested project."
           + SEE_DOCUMENTATION_MSG;
 
+  private static final String PROJECT_CANNOT_CONTAINS_SPACES_MSG =
+      "Project name cannot contains spaces." + SEE_DOCUMENTATION_MSG;
+
   private static final String ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG =
       "Root project name cannot contains slashes." + SEE_DOCUMENTATION_MSG;
 
@@ -116,6 +119,11 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   public void validateNewProject(CreateProjectArgs args) throws ValidationException {
     String name = args.getProjectName();
     log.debug("validating creation of {}", name);
+    if (name.contains(" ")) {
+      throw new ValidationException(
+          String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
+    }
+
     ProjectControl parentCtrl;
     try {
       parentCtrl = projectControlFactory.controlFor(args.newParent, self.get());
@@ -182,7 +190,9 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
         // name already exists, make sure it is unique by adding a abbreviated
         // sha1
         String nameWithSha1 =
-            name + "-" + Hashing.sha1().hashString(name, Charsets.UTF_8).toString().substring(0, 7);
+            name
+                + "-"
+                + Hashing.sha256().hashString(name, Charsets.UTF_8).toString().substring(0, 7);
         log.info(
             "Failed to create group name {} because of a conflict: {}, trying to create {} instead",
             name,
