@@ -14,6 +14,7 @@
 
 package com.ericsson.gerrit.plugins.projectgroupstructure;
 
+import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.validators.ProjectCreationValidationListener;
 import com.google.inject.AbstractModule;
@@ -23,5 +24,7 @@ class Module extends AbstractModule {
   protected void configure() {
     DynamicSet.bind(binder(), ProjectCreationValidationListener.class)
         .to(ProjectCreationValidator.class);
+    DynamicSet.bind(binder(), NewProjectCreatedListener.class)
+        .to(DefaultAccessRights.class);
   }
 }
