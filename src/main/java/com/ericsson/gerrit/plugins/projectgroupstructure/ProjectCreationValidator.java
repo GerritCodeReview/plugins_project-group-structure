@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
 public class ProjectCreationValidator implements ProjectCreationValidationListener {
   private static final Logger log = LoggerFactory.getLogger(ProjectCreationValidator.class);
 
-  private static final String AN_ERROR_OCCURRED_MSG =
+  protected static final String AN_ERROR_OCCURRED_MSG =
       "An error occurred while creating project, please contact Gerrit support";
 
   private static final String SEE_DOCUMENTATION_MSG = "\n\nSee documentation for more info: %s";
