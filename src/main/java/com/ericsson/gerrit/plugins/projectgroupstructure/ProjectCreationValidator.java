@@ -31,13 +31,13 @@ import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.account.GroupMembership;
 import com.google.gerrit.server.config.AllProjectsNameProvider;
 import com.google.gerrit.server.config.PluginConfigFactory;
-import com.google.gerrit.server.group.CreateGroup;
 import com.google.gerrit.server.permissions.GlobalPermission;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.project.CreateProjectArgs;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectControl;
+import com.google.gerrit.server.restapi.group.CreateGroup;
 import com.google.gerrit.server.validators.ProjectCreationValidationListener;
 import com.google.gerrit.server.validators.ValidationException;
 import com.google.gwtorm.server.OrmException;
@@ -163,16 +163,16 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     }
   }
 
-  private boolean configDisableGrantingOwnership(ProjectControl parentCtrl)
+  private boolean configDisableGrantingOwnership(ProjectState parentState)
       throws ValidationException {
+    Project.NameKey projectName = parentState.getNameKey();
     try {
-      return cfg.getFromProjectConfigWithInheritance(
-              parentCtrl.getProject().getNameKey(), pluginName)
+      return cfg.getFromProjectConfigWithInheritance(projectName, pluginName)
           .getBoolean(DISABLE_GRANTING_PROJECT_OWNERSHIP, false);
     } catch (NoSuchProjectException e) {
       log.error(
           "Failed to check project config for "
-              + parentCtrl.getProject().getName()
+              + projectName
               + ": "
               + e.getMessage(),
           e);
