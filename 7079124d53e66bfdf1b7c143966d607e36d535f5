@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98104aa1_09bc578f",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2018-03-22T23:16:52Z",
+      "side": 1,
+      "message": "What about using the built-in formatter:\n\n  log.error(\n            \"Invalid rule in {}{}{}: {}\",\n            ProjectConfig.ACCESS,\n            (refName !\u003d null ? \".\" + refName : \"\"),\n            value,\n            notRule.getMessage());\n\nHaven\u0027t tested this but should work",
+      "range": {
+        "startLine": 167,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 40
+      },
+      "revId": "7079124d53e66bfdf1b7c143966d607e36d535f5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
