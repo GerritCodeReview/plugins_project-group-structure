@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "109a470f_286a84e0",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2018-03-22T23:30:45Z",
+      "side": 1,
+      "message": "Optional: extract to method to avoid nested \u0027for\u0027 or use streams (untested but should work):\n\n    Arrays.stream(\n            defaultAccessRightsConfig.getStringList(\n                ProjectConfig.ACCESS, refName, \"exclusiveGroupPermissions\"))\n        .flatMap(s -\u003e Arrays.stream(s.split(\"[, \\t]{1,}\")))\n        .filter(Permission::isPermission)\n        .forEach(n -\u003e as.getPermission(n, true).setExclusiveGroup(true));",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 9
+      },
+      "revId": "7079124d53e66bfdf1b7c143966d607e36d535f5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "98104aa1_09bc578f",
         "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
         "patchSetId": 9
