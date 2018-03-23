@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c0a3a5c4_e6f1ab63",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2018-03-23T12:52:09Z",
+      "side": 1,
+      "message": "Nevermind, according to Effective Java, streams that change state are a code smell.",
+      "parentUuid": "109a470f_286a84e0",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 9
+      },
+      "revId": "7079124d53e66bfdf1b7c143966d607e36d535f5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "98104aa1_09bc578f",
         "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
         "patchSetId": 9
