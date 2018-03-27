@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d52e00b_8a8a81d1",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2018-03-27T01:38:49Z",
+      "side": 1,
+      "message": "Oups, really sorry, I forgot this but we don\u0027t need parentheses here",
+      "range": {
+        "startLine": 170,
+        "startChar": 12,
+        "endLine": 170,
+        "endChar": 13
+      },
+      "revId": "1642316f6805e7956ebe9e5452352d2849b08d10",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
