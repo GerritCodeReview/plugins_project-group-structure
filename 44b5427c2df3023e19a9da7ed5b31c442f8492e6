@@ -22,6 +22,30 @@
       "revId": "44b5427c2df3023e19a9da7ed5b31c442f8492e6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cefc8720_c59704ff",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-05-09T13:12:22Z",
+      "side": 1,
+      "message": "This is the latest revison of master which also included the sonar.py script.\n\nAnother way to doing the merge up would be to do a change before on master to update to latest bazlets revision which inclue sonar.py and then do the merger up. Do you prefer that way?",
+      "parentUuid": "b0c2c7be_d860df8a",
+      "range": {
+        "startLine": 6,
+        "startChar": 14,
+        "endLine": 6,
+        "endChar": 54
+      },
+      "revId": "44b5427c2df3023e19a9da7ed5b31c442f8492e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
