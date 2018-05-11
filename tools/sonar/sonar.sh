@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (C) 2018 The Android Open Source Project
+# Copyright (C) 2018 Ericsson
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,4 +12,5 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 `bazel query @com_googlesource_gerrit_bazlets//tools/sonar:sonar --output location | sed s/BUILD:.*//`sonar.py
