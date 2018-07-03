@@ -36,9 +36,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 @TestPlugin(
-  name = "project-group-structure",
-  sysModule = "com.ericsson.gerrit.plugins.projectgroupstructure.Module"
-)
+    name = "project-group-structure",
+    sysModule = "com.ericsson.gerrit.plugins.projectgroupstructure.Module")
 public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
   private static final String PLUGIN_NAME = "project-group-structure";
