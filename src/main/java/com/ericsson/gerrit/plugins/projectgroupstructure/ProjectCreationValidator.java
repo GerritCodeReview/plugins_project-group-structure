@@ -139,10 +139,9 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
           .getBoolean(DISABLE_GRANTING_PROJECT_OWNERSHIP, false);
     } catch (NoSuchProjectException e) {
       log.error(
-          "Failed to check project config for "
-              + parentCtrl.getProject().getName()
-              + ": "
-              + e.getMessage(),
+          "Failed to check project config for {}: {}",
+          parentCtrl.getProject().getName(),
+          e.getMessage(),
           e);
       throw new ValidationException(AN_ERROR_OCCURRED_MSG);
     }
@@ -173,7 +172,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       }
       return AccountGroup.UUID.parse(groupInfo.id);
     } catch (RestApiException | OrmException | IOException e) {
-      log.error("Failed to create project " + name + ": " + e.getMessage(), e);
+      log.error("Failed to create project {}: {}", name, e.getMessage(), e);
       throw new ValidationException(AN_ERROR_OCCURRED_MSG);
     }
   }

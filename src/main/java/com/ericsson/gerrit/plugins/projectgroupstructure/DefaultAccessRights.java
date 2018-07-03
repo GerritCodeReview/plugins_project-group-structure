@@ -146,7 +146,7 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
     try {
       RefPattern.validateRegExp(refPattern);
     } catch (InvalidNameException e) {
-      log.error("Invalid ref name: " + e.getMessage());
+      log.error("Invalid ref name: {}", e.getMessage());
       return false;
     }
     return true;
