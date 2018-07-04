@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fbce957_3d2d9248",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-07-04T14:06:11Z",
+      "side": 1,
+      "message": "This method is not only getting the groupInfo, it is creating the group.\n\nThe name of the method does not really represent that.",
+      "range": {
+        "startLine": 160,
+        "startChar": 20,
+        "endLine": 160,
+        "endChar": 32
+      },
+      "revId": "ea443f29d7694b71797ed3e4e161f325c78a2252",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
