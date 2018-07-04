@@ -149,13 +149,12 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
   private AccountGroup.UUID createGroup(String name) throws ValidationException {
     try {
-      GroupInfo groupInfo = null;
+      GroupInfo groupInfo;
       try {
         groupInfo =
             createGroupFactory.create(name).apply(TopLevelResource.INSTANCE, new GroupInput());
       } catch (ResourceConflictException e) {
-        // name already exists, make sure it is unique by adding a abbreviated
-        // sha1
+        // name already exists, make sure it is unique by adding a abbreviated sha1
         String nameWithSha1 =
             name
                 + "-"
