@@ -33,6 +33,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.regex.Pattern;
 import org.eclipse.jgit.errors.ConfigInvalidException;
@@ -112,29 +113,34 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
     for (String refName : defaultAccessRightsConfig.getSubsections(ProjectConfig.ACCESS)) {
       if (RefConfigSection.isValid(refName) && isValidRegex(refName)) {
         AccessSection as = config.getAccessSection(refName, true);
-        for (String varName :
-            defaultAccessRightsConfig.getStringList(
-                ProjectConfig.ACCESS, refName, "exclusiveGroupPermissions")) {
-          for (String n : varName.split("[, \t]{1,}")) {
-            if (Permission.isPermission(n)) {
-              as.getPermission(n, true).setExclusiveGroup(true);
-            }
-          }
-        }
-        String ownerGroupName = getOwerGroupName(project);
-        for (String value : defaultAccessRightsConfig.getNames(ProjectConfig.ACCESS, refName)) {
-          if (Permission.isPermission(value)) {
-            Permission perm = as.getPermission(value, true);
-            setPermissionRules(ownerGroupName, perm, refName, value);
-          } else {
-            log.error("Invalid permission {}", value);
-          }
-        }
+        getPermissions(refName, as);
+        setPermissions(refName, as, getOwnerGroupName(project));
       }
     }
   }
 
-  private String getOwerGroupName(ProjectState project) {
+  private void getPermissions(String refName, AccessSection as) {
+    for (String varName :
+        defaultAccessRightsConfig.getStringList(
+            ProjectConfig.ACCESS, refName, "exclusiveGroupPermissions")) {
+      Arrays.stream(varName.split("[, \t]{1,}"))
+          .filter(Permission::isPermission)
+          .forEach(n -> as.getPermission(n, true).setExclusiveGroup(true));
+    }
+  }
+
+  private void setPermissions(String refName, AccessSection as, String ownerGroupName) {
+    for (String value : defaultAccessRightsConfig.getNames(ProjectConfig.ACCESS, refName)) {
+      if (Permission.isPermission(value)) {
+        Permission perm = as.getPermission(value, true);
+        setPermissionRules(ownerGroupName, perm, refName, value);
+      } else {
+        log.error("Invalid permission {}", value);
+      }
+    }
+  }
+
+  private String getOwnerGroupName(ProjectState project) {
     Set<AccountGroup.UUID> owners = project.getAllOwners();
     if (!owners.isEmpty()) {
       return groupCache.get(owners.iterator().next()).getName();

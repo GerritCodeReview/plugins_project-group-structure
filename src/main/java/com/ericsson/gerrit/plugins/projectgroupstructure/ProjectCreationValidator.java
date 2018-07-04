@@ -149,32 +149,34 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
   private AccountGroup.UUID createGroup(String name) throws ValidationException {
     try {
-      GroupInfo groupInfo = null;
-      try {
-        groupInfo =
-            createGroupFactory.create(name).apply(TopLevelResource.INSTANCE, new GroupInput());
-      } catch (ResourceConflictException e) {
-        // name already exists, make sure it is unique by adding a abbreviated
-        // sha1
-        String nameWithSha1 =
-            name
-                + "-"
-                + Hashing.sha256().hashString(name, Charsets.UTF_8).toString().substring(0, 7);
-        log.info(
-            "Failed to create group name {} because of a conflict: {}, trying to create {} instead",
-            name,
-            e.getMessage(),
-            nameWithSha1);
-        groupInfo =
-            createGroupFactory
-                .create(nameWithSha1)
-                .apply(TopLevelResource.INSTANCE, new GroupInput());
-      }
+      GroupInfo groupInfo = getGroupInfo(name);
       return AccountGroup.UUID.parse(groupInfo.id);
     } catch (RestApiException | OrmException | IOException e) {
       log.error("Failed to create project {}: {}", name, e.getMessage(), e);
       throw new ValidationException(AN_ERROR_OCCURRED_MSG);
     }
+  }
+
+  private GroupInfo getGroupInfo(String name) throws RestApiException, OrmException, IOException {
+    GroupInfo groupInfo;
+    try {
+      groupInfo =
+          createGroupFactory.create(name).apply(TopLevelResource.INSTANCE, new GroupInput());
+    } catch (ResourceConflictException e) {
+      // name already exists, make sure it is unique by adding a abbreviated sha1
+      String nameWithSha1 =
+          name + "-" + Hashing.sha256().hashString(name, Charsets.UTF_8).toString().substring(0, 7);
+      log.info(
+          "Failed to create group name {} because of a conflict: {}, trying to create {} instead",
+          name,
+          e.getMessage(),
+          nameWithSha1);
+      groupInfo =
+          createGroupFactory
+              .create(nameWithSha1)
+              .apply(TopLevelResource.INSTANCE, new GroupInput());
+    }
+    return groupInfo;
   }
 
   private void validateRootProject(String name, boolean permissionOnly) throws ValidationException {
