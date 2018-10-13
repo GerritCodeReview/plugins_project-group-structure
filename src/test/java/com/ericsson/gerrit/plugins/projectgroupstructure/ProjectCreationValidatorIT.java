@@ -1,4 +1,4 @@
-// Copyright (C) 2016 Ericsson
+// Copyright (C) 2016 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,9 +36,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 @TestPlugin(
-  name = "project-group-structure",
-  sysModule = "com.ericsson.gerrit.plugins.projectgroupstructure.Module"
-)
+    name = "project-group-structure",
+    sysModule = "com.ericsson.gerrit.plugins.projectgroupstructure.Module")
 public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
   private static final String PLUGIN_NAME = "project-group-structure";
