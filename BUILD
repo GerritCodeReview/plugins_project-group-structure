@@ -20,7 +20,7 @@ gerrit_plugin(
 )
 
 junit_tests(
-    name = "project_group_structure_tests",
+    name = "project-group-structure_tests",
     srcs = glob(["src/test/java/**/*.java"]),
     tags = ["project-group-structure"],
     deps = [
