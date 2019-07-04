@@ -19,33 +19,28 @@ import com.google.common.hash.Hashing;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.extensions.annotations.PluginCanonicalWebUrl;
 import com.google.gerrit.extensions.annotations.PluginName;
-import com.google.gerrit.extensions.api.groups.GroupInput;
+import com.google.gerrit.extensions.api.groups.Groups;
 import com.google.gerrit.extensions.common.GroupInfo;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.extensions.restapi.RestApiException;
-import com.google.gerrit.extensions.restapi.TopLevelResource;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.account.GroupMembership;
 import com.google.gerrit.server.config.AllProjectsNameProvider;
 import com.google.gerrit.server.config.PluginConfigFactory;
-import com.google.gerrit.server.group.CreateGroup;
 import com.google.gerrit.server.permissions.GlobalPermission;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
+import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.CreateProjectArgs;
 import com.google.gerrit.server.project.NoSuchProjectException;
-import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.validators.ProjectCreationValidationListener;
 import com.google.gerrit.server.validators.ValidationException;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import java.io.IOException;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,25 +81,23 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
   static final String DISABLE_GRANTING_PROJECT_OWNERSHIP = "disableGrantingProjectOwnership";
 
-  private final CreateGroup.Factory createGroupFactory;
+  private final Groups createGroupFactory;
   private final String documentationUrl;
   private final AllProjectsNameProvider allProjectsName;
   private final Provider<CurrentUser> self;
   private final PermissionBackend permissionBackend;
   private final PluginConfigFactory cfg;
   private final String pluginName;
-  private final ProjectControl.GenericFactory projectControlFactory;
 
   @Inject
   public ProjectCreationValidator(
-      CreateGroup.Factory createGroupFactory,
+      Groups createGroupFactory,
       @PluginCanonicalWebUrl String url,
       AllProjectsNameProvider allProjectsName,
       Provider<CurrentUser> self,
       PermissionBackend permissionBackend,
       PluginConfigFactory cfg,
-      @PluginName String pluginName,
-      ProjectControl.GenericFactory projectControlFactory) {
+      @PluginName String pluginName) {
     this.createGroupFactory = createGroupFactory;
     this.documentationUrl = url + "Documentation/index.html";
     this.allProjectsName = allProjectsName;
@@ -112,7 +105,6 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     this.permissionBackend = permissionBackend;
     this.cfg = cfg;
     this.pluginName = pluginName;
-    this.projectControlFactory = projectControlFactory;
   }
 
   @Override
@@ -124,21 +116,10 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
           String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
     }
 
-    ProjectControl parentCtrl;
-    try {
-      parentCtrl = projectControlFactory.controlFor(args.newParent, self.get());
-    } catch (NoSuchProjectException | IOException e) {
-      log.error(
-          "Failed to create project {}; Cannot retrieve info about parent project {}: {}",
-          name,
-          args.newParent.get(),
-          e.getMessage(),
-          e);
-      throw new ValidationException(AN_ERROR_OCCURRED_MSG);
-    }
+    Project.NameKey parentCtrl = args.newParent;
 
     try {
-      permissionBackend.user(self).check(GlobalPermission.ADMINISTRATE_SERVER);
+      permissionBackend.user(self.get()).check(GlobalPermission.ADMINISTRATE_SERVER);
 
       // Admins can bypass any rules to support creating projects that doesn't
       // comply with the new naming rules. New projects structures have to
@@ -150,7 +131,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       // continuing
     }
 
-    if (allProjectsName.get().equals(parentCtrl.getProject().getNameKey())) {
+    if (allProjectsName.get().equals(parentCtrl)) {
       validateRootProject(name, args.permissionsOnly);
     } else {
       validateProject(name, parentCtrl);
@@ -158,23 +139,31 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
     // If we reached that point, it means we allow project creation. Make the
     // user an owner if not already by inheritance.
-    if (!parentCtrl.isOwner() && !configDisableGrantingOwnership(parentCtrl)) {
+    if (!isOwner(parentCtrl) && !configDisableGrantingOwnership(parentCtrl)) {
       args.ownerIds.add(createGroup(name + "-admins"));
     }
   }
 
-  private boolean configDisableGrantingOwnership(ProjectControl parentCtrl)
+  private boolean isOwner(Project.NameKey project) {
+    try {
+      permissionBackend.user(self.get()).project(project).check(ProjectPermission.WRITE_CONFIG);
+    } catch (AuthException | PermissionBackendException noWriter) {
+      try {
+        permissionBackend.user(self.get()).check(GlobalPermission.ADMINISTRATE_SERVER);
+      } catch (AuthException | PermissionBackendException noAdmin) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private boolean configDisableGrantingOwnership(Project.NameKey parentCtrl)
       throws ValidationException {
     try {
-      return cfg.getFromProjectConfigWithInheritance(
-              parentCtrl.getProject().getNameKey(), pluginName)
+      return cfg.getFromProjectConfigWithInheritance(parentCtrl, pluginName)
           .getBoolean(DISABLE_GRANTING_PROJECT_OWNERSHIP, false);
     } catch (NoSuchProjectException e) {
-      log.error(
-          "Failed to check project config for {}: {}",
-          parentCtrl.getProject().getName(),
-          e.getMessage(),
-          e);
+      log.error("Failed to check project config for {}: {}", parentCtrl.get(), e.getMessage(), e);
       throw new ValidationException(AN_ERROR_OCCURRED_MSG);
     }
   }
@@ -183,8 +172,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     try {
       GroupInfo groupInfo = null;
       try {
-        groupInfo =
-            createGroupFactory.create(name).apply(TopLevelResource.INSTANCE, new GroupInput());
+        groupInfo = createGroupFactory.create(name).get();
       } catch (ResourceConflictException e) {
         // name already exists, make sure it is unique by adding a abbreviated
         // sha1
@@ -197,13 +185,10 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
             name,
             e.getMessage(),
             nameWithSha1);
-        groupInfo =
-            createGroupFactory
-                .create(nameWithSha1)
-                .apply(TopLevelResource.INSTANCE, new GroupInput());
+        groupInfo = createGroupFactory.create(nameWithSha1).get();
       }
       return AccountGroup.UUID.parse(groupInfo.id);
-    } catch (RestApiException | OrmException | IOException | ConfigInvalidException e) {
+    } catch (RestApiException e) {
       log.error("Failed to create project {}: {}", name, e.getMessage(), e);
       throw new ValidationException(AN_ERROR_OCCURRED_MSG);
     }
@@ -224,33 +209,32 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     log.debug("allowing creation of root project {}", name);
   }
 
-  private void validateProject(String name, ProjectControl parentCtrl) throws ValidationException {
+  private void validateProject(String name, Project.NameKey parentCtrl) throws ValidationException {
     log.debug("validating name prefix of {}", name);
-    Project parent = parentCtrl.getProject();
-    String prefix = parent.getName() + "/";
+    String prefix = parentCtrl.get() + "/";
     if (!name.startsWith(prefix)) {
       log.debug("rejecting creation of {}: name is not starting with {}", name, prefix);
       throw new ValidationException(
           String.format(PROJECT_MUST_START_WITH_PARENT_NAME_MSG, prefix + name, documentationUrl));
     }
-    if (!parentCtrl.isOwner() && !isInDelegatingGroup(parentCtrl)) {
-      log.debug("rejecting creation of {}: user is not owner of {}", name, parent.getName());
+    if (!isOwner(parentCtrl) && !isInDelegatingGroup(parentCtrl)) {
+      log.debug("rejecting creation of {}: user is not owner of {}", name, parentCtrl.get());
       throw new ValidationException(
-          String.format(MUST_BE_OWNER_TO_CREATE_PROJECT_MSG, parent.getName(), documentationUrl));
+          String.format(MUST_BE_OWNER_TO_CREATE_PROJECT_MSG, parentCtrl.get(), documentationUrl));
     }
     log.debug("allowing creation of project {}", name);
   }
 
-  private boolean isInDelegatingGroup(ProjectControl parentCtrl) {
+  private boolean isInDelegatingGroup(Project.NameKey parentCtrl) {
     try {
       GroupReference delegateProjectCreationTo =
-          cfg.getFromProjectConfigWithInheritance(parentCtrl.getProject().getNameKey(), pluginName)
+          cfg.getFromProjectConfigWithInheritance(parentCtrl, pluginName)
               .getGroupReference(DELEGATE_PROJECT_CREATION_TO);
       if (delegateProjectCreationTo == null) {
         return false;
       }
       log.debug("delegateProjectCreationTo: {}", delegateProjectCreationTo);
-      GroupMembership effectiveGroups = parentCtrl.getUser().getEffectiveGroups();
+      GroupMembership effectiveGroups = self.get().getEffectiveGroups();
       return effectiveGroups.contains(delegateProjectCreationTo.getUUID());
     } catch (NoSuchProjectException e) {
       log.error("isInDelegatingGroup with error ({}): {}", e.getClass().getName(), e.getMessage());
