@@ -116,7 +116,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
           String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
     }
 
-    Project.NameKey parentCtrl = args.newParent;
+    Project.NameKey newParent = args.newParent;
 
     try {
       permissionBackend.user(self.get()).check(GlobalPermission.ADMINISTRATE_SERVER);
@@ -131,15 +131,15 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       // continuing
     }
 
-    if (allProjectsName.get().equals(parentCtrl)) {
+    if (allProjectsName.get().equals(newParent)) {
       validateRootProject(name, args.permissionsOnly);
     } else {
-      validateProject(name, parentCtrl);
+      validateProject(name, newParent);
     }
 
     // If we reached that point, it means we allow project creation. Make the
     // user an owner if not already by inheritance.
-    if (!isOwner(parentCtrl) && !configDisableGrantingOwnership(parentCtrl)) {
+    if (!isOwner(newParent) && !configDisableGrantingOwnership(newParent)) {
       args.ownerIds.add(createGroup(name + "-admins"));
     }
   }
