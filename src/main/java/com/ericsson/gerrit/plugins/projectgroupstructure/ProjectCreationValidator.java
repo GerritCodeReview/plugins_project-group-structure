@@ -82,7 +82,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
   static final String DISABLE_GRANTING_PROJECT_OWNERSHIP = "disableGrantingProjectOwnership";
 
-  private final Groups createGroupFactory;
+  private final Groups groups;
   private final String documentationUrl;
   private final AllProjectsNameProvider allProjectsName;
   private final Provider<CurrentUser> self;
@@ -92,14 +92,14 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
   @Inject
   public ProjectCreationValidator(
-      Groups createGroupFactory,
+      Groups groups,
       @PluginCanonicalWebUrl String url,
       AllProjectsNameProvider allProjectsName,
       Provider<CurrentUser> self,
       PermissionBackend permissionBackend,
       PluginConfigFactory cfg,
       @PluginName String pluginName) {
-    this.createGroupFactory = createGroupFactory;
+    this.groups = groups;
     this.documentationUrl = url + "Documentation/index.html";
     this.allProjectsName = allProjectsName;
     this.self = self;
@@ -173,7 +173,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     try {
       GroupInfo groupInfo = null;
       try {
-        groupInfo = createGroupFactory.create(name).get();
+        groupInfo = groups.create(name).get();
       } catch (ResourceConflictException e) {
         // name already exists, make sure it is unique by adding a abbreviated
         // sha1
@@ -186,7 +186,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
             name,
             e.getMessage(),
             nameWithSha1);
-        groupInfo = createGroupFactory.create(nameWithSha1).get();
+        groupInfo = groups.create(nameWithSha1).get();
       }
       return AccountGroup.UUID.parse(groupInfo.id);
     } catch (RestApiException e) {
