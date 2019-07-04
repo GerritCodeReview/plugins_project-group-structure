@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5428dcc5_7bc97b25",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-04T23:21:04Z",
+      "side": 1,
+      "message": "Don\u0027t explicitly import this; instead only import Project (the previous line) and then consistently explicitly refer to Project.NameKey in the code below.",
+      "revId": "e7344bcdb6ef95e69444084116bc0a46dc7bbed5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1229ae7_ca930744",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-04T23:21:04Z",
+      "side": 1,
+      "message": "Project.NameKey",
+      "range": {
+        "startLine": 148,
+        "startChar": 26,
+        "endLine": 148,
+        "endChar": 33
+      },
+      "revId": "e7344bcdb6ef95e69444084116bc0a46dc7bbed5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6359613_6f4e8e3f",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-04T23:21:04Z",
+      "side": 1,
+      "message": "Should this be in try-with-resource?",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 21
+      },
+      "revId": "e7344bcdb6ef95e69444084116bc0a46dc7bbed5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
