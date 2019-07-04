@@ -26,7 +26,7 @@ import com.google.gerrit.extensions.api.projects.ProjectInput;
 import com.google.gerrit.extensions.restapi.Url;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.server.git.ProjectConfig;
+import com.google.gerrit.server.project.ProjectConfig;
 import com.google.gerrit.server.project.ProjectState;
 import java.nio.file.Files;
 import org.junit.Before;
@@ -39,7 +39,7 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
 
   @Override
   @Before
-  public void setUp() throws Exception {
+  public void setUpTestPlugin() throws Exception {
     String defaultAccessRights =
         "[access \"refs/*\"]\n"
             + "  read = group ${owner}\n"
@@ -57,7 +57,7 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
             + "[access \"refs/invalidregex/${username(((((\"]\n";
     Files.write(
         tempDataDir.newFile(ProjectConfig.PROJECT_CONFIG).toPath(), defaultAccessRights.getBytes());
-    super.setUp();
+    super.setUpTestPlugin();
     // These access rights are mandatory configuration for this plugin as
     // documented in config.md
     allowGlobalCapabilities(REGISTERED_USERS, GlobalCapability.CREATE_GROUP);
