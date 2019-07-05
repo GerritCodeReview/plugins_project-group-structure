@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "598d85e7_a614f114",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-07-05T19:29:20Z",
+      "side": 1,
+      "message": "I decided to move the eclipse fixes part to the stable-2.15 branch, to get them there first, then upstream (here, as the new base for this change).\n\nSince both stable branches are identical before adding this change, the review shows this change as due for rebasing. But I truly based this change on the merge of stable-2.15 headed with I88398055. That base would have shown as a regular merge commit if the latter series would have been merged prior.",
+      "revId": "bc59d7720bbfa7ea14c45f07c2b754d5a4bfe0d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
