@@ -16,6 +16,24 @@
       "revId": "bc59d7720bbfa7ea14c45f07c2b754d5a4bfe0d7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c62dd1e_7ecfefed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-07-05T20:02:47Z",
+      "side": 1,
+      "message": "\u003e Since both stable branches are identical before adding this change, the review shows this change as due for rebasing. But I truly based this change on the merge of stable-2.15 headed with I88398055. That base would have shown as a regular merge commit if the latter series would have been merged prior.\n\nNo, because the latter commits were additions so didn\u0027t require a merge commit to merge them in.",
+      "parentUuid": "598d85e7_a614f114",
+      "revId": "bc59d7720bbfa7ea14c45f07c2b754d5a4bfe0d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
