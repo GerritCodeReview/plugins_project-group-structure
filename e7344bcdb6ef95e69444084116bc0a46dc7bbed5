@@ -156,6 +156,30 @@
       "revId": "e7344bcdb6ef95e69444084116bc0a46dc7bbed5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8005c22f_30be6f4b",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-07-05T18:26:25Z",
+      "side": 1,
+      "message": "\u003e Yes, done. Thanks for -catching- this ;)\n\nRepeated reply again; odd.",
+      "parentUuid": "79206257_f394c9ed",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 21
+      },
+      "revId": "e7344bcdb6ef95e69444084116bc0a46dc7bbed5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
