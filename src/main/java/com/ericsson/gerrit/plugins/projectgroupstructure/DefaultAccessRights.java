@@ -17,8 +17,7 @@ package com.ericsson.gerrit.plugins.projectgroupstructure;
 import com.google.gerrit.common.data.AccessSection;
 import com.google.gerrit.common.data.Permission;
 import com.google.gerrit.common.data.PermissionRule;
-import com.google.gerrit.common.data.RefConfigSection;
-import com.google.gerrit.common.errors.InvalidNameException;
+import com.google.gerrit.exceptions.InvalidNameException;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.reviewdb.client.AccountGroup;
@@ -60,10 +59,12 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
   private final GroupCache groupCache;
   private final ProjectCache projectCache;
   private final MetaDataUpdate.User metaDataUpdateFactory;
+  private final ProjectConfig.Factory projectConfigFactory;
   private final FileBasedConfig defaultAccessRightsConfig;
 
   @Inject
   public DefaultAccessRights(
+      ProjectConfig.Factory projectConfigFactory,
       MetaDataUpdate.User metaDataUpdateFactory,
       ProjectCache projectCache,
       GroupCache groupCache,
@@ -71,6 +72,7 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
     this.groupCache = groupCache;
     this.projectCache = projectCache;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
+    this.projectConfigFactory = projectConfigFactory;
     defaultAccessRightsConfig =
         new FileBasedConfig(dataDir.resolve(ProjectConfig.PROJECT_CONFIG).toFile(), FS.DETECTED);
     try {
@@ -102,7 +104,7 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
     }
 
     try (MetaDataUpdate md = metaDataUpdateFactory.create(project.getProject().getNameKey())) {
-      ProjectConfig config = ProjectConfig.read(md);
+      ProjectConfig config = projectConfigFactory.read(md);
       setAccessRights(config, project);
       md.setMessage("Set default access rights\n");
       config.commit(md);
@@ -113,7 +115,7 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
 
   private void setAccessRights(ProjectConfig config, ProjectState project) {
     for (String refName : defaultAccessRightsConfig.getSubsections(ProjectConfig.ACCESS)) {
-      if (RefConfigSection.isValid(refName) && isValidRegex(refName)) {
+      if (AccessSection.isValidRefSectionName(refName) && isValidRegex(refName)) {
         AccessSection as = config.getAccessSection(refName, true);
         getPermissions(refName, as);
         setPermissions(refName, as, getOwnerGroupName(project));
