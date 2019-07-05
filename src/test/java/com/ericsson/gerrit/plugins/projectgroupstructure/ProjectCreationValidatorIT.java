@@ -134,7 +134,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     assertThat(r.getEntityContent()).contains("You must be owner of the parent project");
 
     // Creation is OK when user is owner of parent
-    g.addMembers(user.username);
+    g.addMembers(user.username());
     userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertCreated();
   }
 
@@ -211,7 +211,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     // the user is in the delegating group
     String delegatingGroup = name("groupB");
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
-    dGroup.addMembers(user.username);
+    dGroup.addMembers(user.username());
     // the group is in the project.config
     Project.NameKey parentNameKey = new Project.NameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
@@ -235,7 +235,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     String delegatingGroup = name("someGroup");
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
-    dGroup.addMembers(user.username);
+    dGroup.addMembers(user.username());
     Project.NameKey parentNameKey = new Project.NameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
@@ -290,7 +290,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     String delegatingGroup = name("someGroup");
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
-    dGroup.addMembers(user.username);
+    dGroup.addMembers(user.username());
     Project.NameKey parentNameKey = new Project.NameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
@@ -332,7 +332,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     // the user is in the delegating group
     String delegatingGroup = name("groupB");
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
-    dGroup.addMembers(user.username);
+    dGroup.addMembers(user.username());
     // the group is in the project.config
     Project.NameKey parentNameKey = new Project.NameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
@@ -367,7 +367,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     String nestedGroup = name("groupC");
     GroupApi nGroup = gApi.groups().create(nestedGroup);
-    nGroup.addMembers(user.username);
+    nGroup.addMembers(user.username());
 
     dGroup.addGroups(nestedGroup);
     // the group is in the project.config
@@ -472,7 +472,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     // the user is in the delegating group
     String delegatingGroup = name("groupB");
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
-    dGroup.addMembers(user.username);
+    dGroup.addMembers(user.username());
     // the group is in the project.config
     Project.NameKey parentNameKey = new Project.NameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
