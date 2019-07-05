@@ -1,6 +1,9 @@
+# `LC_COLLATE=C sort`
+/.apt_generated/
 /.classpath
 /.primary_build_tool
 /.project
 /.settings/
 /bazel-*
+/bin/
 /eclipse-out/
