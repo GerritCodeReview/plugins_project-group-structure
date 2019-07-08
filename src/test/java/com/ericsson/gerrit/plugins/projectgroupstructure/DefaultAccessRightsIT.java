@@ -15,10 +15,12 @@
 package com.ericsson.gerrit.plugins.projectgroupstructure;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.gerrit.acceptance.testsuite.project.TestProjectUpdate.allowCapability;
 import static com.google.gerrit.server.group.SystemGroupBackend.REGISTERED_USERS;
 
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestPlugin;
+import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.common.data.AccessSection;
 import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.common.data.Permission;
@@ -28,6 +30,7 @@ import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.project.ProjectConfig;
 import com.google.gerrit.server.project.ProjectState;
+import com.google.inject.Inject;
 import java.nio.file.Files;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +39,8 @@ import org.junit.Test;
     name = "project-group-structure",
     sysModule = "com.ericsson.gerrit.plugins.projectgroupstructure.Module")
 public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
+
+  @Inject private ProjectOperations projectOperations;
 
   @Override
   @Before
@@ -60,8 +65,16 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
     super.setUpTestPlugin();
     // These access rights are mandatory configuration for this plugin as
     // documented in config.md
-    allowGlobalCapabilities(REGISTERED_USERS, GlobalCapability.CREATE_GROUP);
-    allowGlobalCapabilities(REGISTERED_USERS, GlobalCapability.CREATE_PROJECT);
+    projectOperations
+        .project(allProjects)
+        .forUpdate()
+        .add(allowCapability(GlobalCapability.CREATE_GROUP).group(REGISTERED_USERS))
+        .update();
+    projectOperations
+        .project(allProjects)
+        .forUpdate()
+        .add(allowCapability(GlobalCapability.CREATE_PROJECT).group(REGISTERED_USERS))
+        .update();
   }
 
   @Test
@@ -71,7 +84,7 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
     String projectName = name("someProject");
     userRestSession.put("/projects/" + projectName, in).assertCreated();
 
-    ProjectState projectState = projectCache.get(new Project.NameKey(projectName));
+    ProjectState projectState = projectCache.get(Project.nameKey(projectName));
     AccountGroup.UUID ownerUUID = projectState.getOwners().iterator().next();
     ProjectConfig projectConfig = projectState.getConfig();
 
@@ -126,11 +139,7 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
     adminRestSession.put("/projects/" + Url.encode(projectName), in).assertCreated();
 
     assertThat(
-            projectCache
-                .get(new Project.NameKey(projectName))
-                .getConfig()
-                .getAccessSections()
-                .size())
+            projectCache.get(Project.nameKey(projectName)).getConfig().getAccessSections().size())
         .isEqualTo(0);
   }
 }

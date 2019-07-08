@@ -191,7 +191,7 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
         // we need to check if group exist if if it does, get its
         // uuid.
         Optional<InternalGroup> group =
-            groupCache.get(new AccountGroup.NameKey(rule.getGroup().getName()));
+            groupCache.get(AccountGroup.nameKey(rule.getGroup().getName()));
 
         if (!group.isPresent()) {
           log.error("Group {} not found", rule.getGroup().getName());

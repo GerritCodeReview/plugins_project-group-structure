@@ -15,6 +15,7 @@
 package com.ericsson.gerrit.plugins.projectgroupstructure;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.gerrit.acceptance.testsuite.project.TestProjectUpdate.allowCapability;
 import static com.google.gerrit.server.group.SystemGroupBackend.REGISTERED_USERS;
 
 import com.google.common.base.Charsets;
@@ -23,6 +24,7 @@ import com.google.common.hash.Hashing;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.RestResponse;
 import com.google.gerrit.acceptance.TestPlugin;
+import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.extensions.api.groups.GroupApi;
@@ -32,6 +34,7 @@ import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.project.ProjectConfig;
 import com.google.gerrit.server.project.ProjectState;
+import com.google.inject.Inject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,6 +42,8 @@ import org.junit.Test;
     name = "project-group-structure",
     sysModule = "com.ericsson.gerrit.plugins.projectgroupstructure.Module")
 public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
+
+  @Inject private ProjectOperations projectOperations;
 
   private static final String PLUGIN_NAME = "project-group-structure";
 
@@ -48,8 +53,16 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     super.setUpTestPlugin();
     // These access rights are mandatory configuration for this plugin as
     // documented in config.md
-    allowGlobalCapabilities(REGISTERED_USERS, GlobalCapability.CREATE_GROUP);
-    allowGlobalCapabilities(REGISTERED_USERS, GlobalCapability.CREATE_PROJECT);
+    projectOperations
+        .project(allProjects)
+        .forUpdate()
+        .add(allowCapability(GlobalCapability.CREATE_GROUP).group(REGISTERED_USERS))
+        .update();
+    projectOperations
+        .project(allProjects)
+        .forUpdate()
+        .add(allowCapability(GlobalCapability.CREATE_PROJECT).group(REGISTERED_USERS))
+        .update();
   }
 
   @Test
@@ -159,18 +172,18 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
     userRestSession.put("/projects/" + rootProject, in).assertCreated();
-    ProjectState projectState = projectCache.get(new Project.NameKey(rootProject));
+    ProjectState projectState = projectCache.get(Project.nameKey(rootProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
     assertThat(projectState.getOwners())
         .contains(
-            groupCache.get(new AccountGroup.NameKey(rootProject + "-admins")).get().getGroupUUID());
+            groupCache.get(AccountGroup.nameKey(rootProject + "-admins")).get().getGroupUUID());
 
     // case when <project-name>-admins group already exists
     rootProject = name("rootProject2");
     String existingGroupName = rootProject + "-admins";
     gApi.groups().create(existingGroupName);
     userRestSession.put("/projects/" + rootProject, in).assertCreated();
-    projectState = projectCache.get(new Project.NameKey(rootProject));
+    projectState = projectCache.get(Project.nameKey(rootProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
     String expectedOwnerGroup =
         existingGroupName
@@ -180,8 +193,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
                 .toString()
                 .substring(0, 7);
     assertThat(projectState.getOwners())
-        .contains(
-            groupCache.get(new AccountGroup.NameKey(expectedOwnerGroup)).get().getGroupUUID());
+        .contains(groupCache.get(AccountGroup.nameKey(expectedOwnerGroup)).get().getGroupUUID());
   }
 
   @Test
@@ -213,7 +225,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
     dGroup.addMembers(user.username());
     // the group is in the project.config
-    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    Project.NameKey parentNameKey = Project.nameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
@@ -236,7 +248,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     String delegatingGroup = name("someGroup");
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
     dGroup.addMembers(user.username());
-    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    Project.NameKey parentNameKey = Project.nameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
@@ -252,21 +264,18 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     in.parent = parent;
     String childProject = parent + "/childProject";
     userRestSession.put("/projects/" + Url.encode(childProject), in).assertCreated();
-    ProjectState projectState = projectCache.get(new Project.NameKey(childProject));
+    ProjectState projectState = projectCache.get(Project.nameKey(childProject));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
     assertThat(projectState.getOwners())
         .contains(
-            groupCache
-                .get(new AccountGroup.NameKey(childProject + "-admins"))
-                .get()
-                .getGroupUUID());
+            groupCache.get(AccountGroup.nameKey(childProject + "-admins")).get().getGroupUUID());
 
     // case when <project-name>-admins group already exists
     String childProject2 = parent + "/childProject2";
     String existingGroupName = childProject2 + "-admins";
     gApi.groups().create(existingGroupName);
     userRestSession.put("/projects/" + Url.encode(childProject2), in).assertCreated();
-    projectState = projectCache.get(new Project.NameKey(childProject2));
+    projectState = projectCache.get(Project.nameKey(childProject2));
     assertThat(projectState.getOwners().size()).isEqualTo(1);
     String expectedOwnerGroup =
         existingGroupName
@@ -276,8 +285,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
                 .toString()
                 .substring(0, 7);
     assertThat(projectState.getOwners())
-        .contains(
-            groupCache.get(new AccountGroup.NameKey(expectedOwnerGroup)).get().getGroupUUID());
+        .contains(groupCache.get(AccountGroup.nameKey(expectedOwnerGroup)).get().getGroupUUID());
   }
 
   @Test
@@ -291,7 +299,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     String delegatingGroup = name("someGroup");
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
     dGroup.addMembers(user.username());
-    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    Project.NameKey parentNameKey = Project.nameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
@@ -308,7 +316,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     in.parent = parent;
     String childProject = parent + "/childProject";
     userRestSession.put("/projects/" + Url.encode(childProject), in).assertCreated();
-    ProjectState projectState = projectCache.get(new Project.NameKey(childProject));
+    ProjectState projectState = projectCache.get(Project.nameKey(childProject));
     assertThat(projectState.getOwners().size()).isEqualTo(0);
   }
 
@@ -334,7 +342,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
     dGroup.addMembers(user.username());
     // the group is in the project.config
-    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    Project.NameKey parentNameKey = Project.nameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       cfg.getPluginConfig(PLUGIN_NAME)
@@ -371,7 +379,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
 
     dGroup.addGroups(nestedGroup);
     // the group is in the project.config
-    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    Project.NameKey parentNameKey = Project.nameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
@@ -406,7 +414,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     gApi.groups().create(delegatingGroup);
     // The user is not added to the delegated group
     // the group is in the project.config
-    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    Project.NameKey parentNameKey = Project.nameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
@@ -439,7 +447,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     // The delegating group is not created
     String delegatingGroup = name("groupB");
     // the group is in the project.config
-    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    Project.NameKey parentNameKey = Project.nameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = "fake-gId";
@@ -474,7 +482,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     GroupApi dGroup = gApi.groups().create(delegatingGroup);
     dGroup.addMembers(user.username());
     // the group is in the project.config
-    Project.NameKey parentNameKey = new Project.NameKey(parent);
+    Project.NameKey parentNameKey = Project.nameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
 
