@@ -66,7 +66,9 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       "Project name cannot contains spaces." + SEE_DOCUMENTATION_MSG;
 
   private static final String ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG =
-      "Since the \"Rights Inherit From\" field is empty, \"%s\" is considered a root project whose parent is \"%s\". Root project names cannot contain slashes."
+      "Since the \"Rights Inherit From\" field is empty, "
+          + "\"%s\" is considered a root project whose parent is \"%s\". "
+          + "Root project names cannot contain slashes."
           + SEE_DOCUMENTATION_MSG;
 
   private static final String REGULAR_PROJECT_NOT_ALLOWED_AS_ROOT_MSG =
