@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54d5ba16_f7f7e282",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-12-20T16:56:53Z",
+      "side": 1,
+      "message": "The new message introduced below is similar to the above one, in terms of its purpose. The above one is the positive form of the added one below.",
+      "revId": "0ea8f667bf908dd6b7322ceff54607bcd2a7d7cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a443fecc_67579d75",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-12-20T16:56:53Z",
+      "side": 1,
+      "message": "MISSING_PARENT_PROJECT_NAME_MSG, to be consistent with above similar messages.",
+      "range": {
+        "startLine": 85,
+        "startChar": 30,
+        "endLine": 85,
+        "endChar": 57
+      },
+      "revId": "0ea8f667bf908dd6b7322ceff54607bcd2a7d7cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fcd748b_2244891c",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-12-20T16:56:53Z",
+      "side": 1,
+      "message": ".\"",
+      "range": {
+        "startLine": 86,
+        "startChar": 38,
+        "endLine": 86,
+        "endChar": 41
+      },
+      "revId": "0ea8f667bf908dd6b7322ceff54607bcd2a7d7cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a20531f4_213abec1",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-12-20T16:56:53Z",
+      "side": 1,
+      "message": "Should we behave differently if name contains more than just one \u0027/\u0027?",
+      "range": {
+        "startLine": 218,
+        "startChar": 61,
+        "endLine": 218,
+        "endChar": 72
+      },
+      "revId": "0ea8f667bf908dd6b7322ceff54607bcd2a7d7cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a0b0378_03ee4965",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-12-20T16:56:53Z",
+      "side": 1,
+      "message": "If we reach this, that\u0027s because the slash-suffixed name was not deemed as being a project through line 220. How does that relate to this specific message returned here?\n\nThis method (validateRootProject) is called in the case of treating All-Projects as the default parent of the project being considered for creation, making the latter a \"root\" one.\n\nThis case or message here would rather explain that the wanted parent must be conveyed through the related (proper) argument, as opposed to this name one.",
+      "range": {
+        "startLine": 226,
+        "startChar": 43,
+        "endLine": 227,
+        "endChar": 77
+      },
+      "revId": "0ea8f667bf908dd6b7322ceff54607bcd2a7d7cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
