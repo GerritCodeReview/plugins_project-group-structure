@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a806ced7_ba68d86c",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-12-20T21:05:25Z",
+      "side": 1,
+      "message": "Post-merge comment, sorry: this line may be too long, wrap-wise; content\u0027s fine. What does GJF say, either tool or web documentation?",
+      "revId": "75a09f7a7782ff1c87f59fc285c57bbf2597f5cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
