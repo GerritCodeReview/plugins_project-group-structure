@@ -82,6 +82,9 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   private static final String PROJECT_MUST_START_WITH_PARENT_NAME_MSG =
       "Project name must start with parent project name, e.g. %s." + SEE_DOCUMENTATION_MSG;
 
+  private static final String MISSING_PARENT_PROJECT_NAME =
+      "Parent project is not specified. " + SEE_DOCUMENTATION_MSG;
+
   static final String DELEGATE_PROJECT_CREATION_TO = "delegateProjectCreationTo";
 
   static final String DISABLE_GRANTING_PROJECT_OWNERSHIP = "disableGrantingProjectOwnership";
@@ -212,9 +215,16 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   private void validateRootProject(String name, boolean permissionOnly) throws ValidationException {
     log.debug("validating root project name {}", name);
     if (name.contains("/")) {
-      log.debug("rejecting creation of {}: name contains slashes", name);
-      throw new ValidationException(
-          String.format(ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG, documentationUrl));
+      String potentialParentProject = name.substring(0, name.lastIndexOf("/"));
+      try {
+        projectControlFactory.controlFor(new Project.NameKey(potentialParentProject), self.get());
+      } catch (NoSuchProjectException | IOException e) {
+        log.debug("rejecting creation of {}: name contains slashes", name);
+        throw new ValidationException(
+            String.format(ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG, documentationUrl));
+      }
+      log.debug("rejecting creation of {}: user did not provide parent project", name);
+      throw new ValidationException(String.format(MISSING_PARENT_PROJECT_NAME, documentationUrl));
     }
     if (!permissionOnly) {
       log.debug("rejecting creation of {}: missing permissions only option", name);
