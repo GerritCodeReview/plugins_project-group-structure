@@ -66,7 +66,8 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       "Project name cannot contains spaces." + SEE_DOCUMENTATION_MSG;
 
   private static final String ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG =
-      "Root project name cannot contains slashes." + SEE_DOCUMENTATION_MSG;
+      "Since \"Rights Inherit From\" field is empty, then \"%s\" is considered to be a root project who's parent is \"%s\". Root project name cannot contains slashes."
+          + SEE_DOCUMENTATION_MSG;
 
   private static final String REGULAR_PROJECT_NOT_ALLOWED_AS_ROOT_MSG =
       "Regular projects are not allowed as root.\n\n"
@@ -214,7 +215,11 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     if (name.contains("/")) {
       log.debug("rejecting creation of {}: name contains slashes", name);
       throw new ValidationException(
-          String.format(ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG, documentationUrl));
+          String.format(
+              ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG,
+              name,
+              allProjectsName.get(),
+              documentationUrl));
     }
     if (!permissionOnly) {
       log.debug("rejecting creation of {}: missing permissions only option", name);
