@@ -94,7 +94,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     // Creation is rejected when root project name contains slashes
     RestResponse r = userRestSession.put("/projects/" + Url.encode("a/parentProject"), in);
     r.assertConflict();
-    assertThat(r.getEntityContent()).contains("Root project name cannot contains slashes");
+    assertThat(r.getEntityContent()).contains("Root project names cannot contain slashes");
   }
 
   @Test
