@@ -82,9 +82,14 @@ execute:
 To execute the tests run:
 
 ```
-  bazel test --test_tag_filters=@PLUGIN@ //...
+  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
 ```
 
+or filtering using the comma separated tags:
+
+````
+  bazel test --test_tag_filters=@PLUGIN@ //...
+````
 
 [Back to @PLUGIN@ documentation index][index]
 
