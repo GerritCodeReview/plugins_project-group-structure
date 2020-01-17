@@ -79,12 +79,13 @@ execute:
   ./tools/eclipse/project.py
 ```
 
-To execute the tests run:
+To execute the tests run either one of:
 
 ```
   bazel test --test_tag_filters=@PLUGIN@ //...
+  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
 ```
-
+Note that there could be tests with them same tags.
 
 [Back to @PLUGIN@ documentation index][index]
 
