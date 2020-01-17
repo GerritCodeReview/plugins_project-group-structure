@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3cdf21c0_037cd5e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-01-17T17:00:31Z",
+      "side": 1,
+      "message": "Documentation: Add missing alternative for plugin in-tree testing",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 58
+      },
+      "revId": "d835de810bece1ecb9c25e3875e80b9e114b9623",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c96d97a4_374bca48",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
