@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "91477c7d_a641c3b6",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-01-22T23:00:58Z",
+      "side": 1,
+      "message": "This is no longer an issue, I used latest bazel to build it in tree and stand alone. So far I saw no issue. I will remove it as a follow up.",
+      "parentUuid": "d5c04279_272463ce",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 0
+      },
+      "revId": "2d5f84de8473afcfb4e7eb98c4e3906f69660fd3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e63a799f_55425c6a",
         "filename": "src/main/resources/Documentation/build.md",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2020-01-21T22:02:31Z",
       "side": 1,
       "message": "Unrelated, too: some other plugins\u0027 doc files are missing this footer, or the latter is not consistent across plugins.",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 19
+      },
+      "revId": "2d5f84de8473afcfb4e7eb98c4e3906f69660fd3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f79df46_fa6f943c",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-01-22T23:00:58Z",
+      "side": 1,
+      "message": "It is not consistent across many plugins, I will include it consistently across plugins that we work with.",
+      "parentUuid": "e63a799f_55425c6a",
       "range": {
         "startLine": 89,
         "startChar": 0,
@@ -68,6 +116,30 @@
       "revId": "2d5f84de8473afcfb4e7eb98c4e3906f69660fd3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcb39391_93944a03",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-01-22T23:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac025e47_d81eaaab",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "2d5f84de8473afcfb4e7eb98c4e3906f69660fd3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
