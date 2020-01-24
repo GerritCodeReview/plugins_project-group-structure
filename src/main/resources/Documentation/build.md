@@ -65,6 +65,13 @@ the workspace before building in-tree:
   bazel clean --expunge
 ```
 
+To execute the tests run either one of:
+
+```
+  bazel test --test_tag_filters=@PLUGIN@ //...
+  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
+```
+
 The output is created in
 
 ```
@@ -77,13 +84,6 @@ execute:
 
 ```
   ./tools/eclipse/project.py
-```
-
-To execute the tests run either one of:
-
-```
-  bazel test --test_tag_filters=@PLUGIN@ //...
-  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
 ```
 
 [Back to @PLUGIN@ documentation index][index]
