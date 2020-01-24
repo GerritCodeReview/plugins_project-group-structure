@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e61c252_48d51ff7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-01-24T17:43:16Z",
+      "side": 1,
+      "message": "This change is mixing too many changes at once. Also, the text above has multiple (3) typos, and the last sentence needs rewrite. Please pay better attention to writing next time.",
+      "revId": "45c534db41eef8992d03f74d01a3af8bc3900e68",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
