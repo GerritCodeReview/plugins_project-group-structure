@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "280f6a43_2206b117",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-01-24T20:01:38Z",
+      "side": 1,
+      "message": "Moved one section too high, I think.",
+      "revId": "193677f5f91d4be548c5b91a346cf115e12e7720",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
