@@ -71,19 +71,19 @@ The output is created in
   bazel-bin/plugins/@PLUGIN@/@PLUGIN@.jar
 ```
 
+To execute the tests run either one of:
+
+```
+  bazel test --test_tag_filters=@PLUGIN@ //...
+  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
+```
+
 This project can be imported into the Eclipse IDE:
 Add the plugin name to the `CUSTOM_PLUGINS` in `tools/bzl/plugins.bzl`, and
 execute:
 
 ```
   ./tools/eclipse/project.py
-```
-
-To execute the tests run either one of:
-
-```
-  bazel test --test_tag_filters=@PLUGIN@ //...
-  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
 ```
 
 [Back to @PLUGIN@ documentation index][index]
