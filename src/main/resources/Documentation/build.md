@@ -56,19 +56,17 @@ source tree. From Gerrit source tree issue the command:
   bazel build plugins/@PLUGIN@
 ```
 
-Note that due to a [known issue in Bazel][bazelissue], if the plugin
-has previously been built in standalone mode, it is necessary to clean
-the workspace before building in-tree:
-
-```
-  cd plugins/@PLUGIN@
-  bazel clean --expunge
-```
-
 The output is created in
 
 ```
   bazel-bin/plugins/@PLUGIN@/@PLUGIN@.jar
+```
+
+To execute the tests run either one of:
+
+```
+  bazel test --test_tag_filters=@PLUGIN@ //...
+  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
 ```
 
 This project can be imported into the Eclipse IDE:
@@ -79,14 +77,6 @@ execute:
   ./tools/eclipse/project.py
 ```
 
-To execute the tests run either one of:
-
-```
-  bazel test --test_tag_filters=@PLUGIN@ //...
-  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
-```
-
 [Back to @PLUGIN@ documentation index][index]
 
 [index]: index.html
-[bazelissue]: https://github.com/bazelbuild/bazel/issues/2797
