@@ -97,15 +97,16 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
       return;
     }
 
-    ProjectState project = projectCache.get(Project.NameKey.parse(projectName));
-    if (project == null) {
+    Optional<ProjectState> project = projectCache.get(Project.NameKey.parse(projectName));
+    if (!project.isPresent()) {
       log.error("Could not retrieve projet {} from cache", projectName);
       return;
     }
 
-    try (MetaDataUpdate md = metaDataUpdateFactory.create(project.getProject().getNameKey())) {
+    try (MetaDataUpdate md =
+        metaDataUpdateFactory.create(project.get().getProject().getNameKey())) {
       ProjectConfig config = projectConfigFactory.read(md);
-      setAccessRights(config, project);
+      setAccessRights(config, project.get());
       md.setMessage("Set default access rights\n");
       config.commit(md);
     } catch (Exception e) {

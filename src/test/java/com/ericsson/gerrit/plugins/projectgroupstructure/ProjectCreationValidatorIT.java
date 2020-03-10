@@ -35,6 +35,7 @@ import com.google.gerrit.extensions.restapi.Url;
 import com.google.gerrit.server.project.ProjectConfig;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.inject.Inject;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -172,9 +173,9 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
     userRestSession.put("/projects/" + rootProject, in).assertCreated();
-    ProjectState projectState = projectCache.get(Project.nameKey(rootProject));
-    assertThat(projectState.getOwners().size()).isEqualTo(1);
-    assertThat(projectState.getOwners())
+    Optional<ProjectState> projectState = projectCache.get(Project.nameKey(rootProject));
+    assertThat(projectState.get().getOwners().size()).isEqualTo(1);
+    assertThat(projectState.get().getOwners())
         .contains(
             groupCache.get(AccountGroup.nameKey(rootProject + "-admins")).get().getGroupUUID());
 
@@ -184,7 +185,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     gApi.groups().create(existingGroupName);
     userRestSession.put("/projects/" + rootProject, in).assertCreated();
     projectState = projectCache.get(Project.nameKey(rootProject));
-    assertThat(projectState.getOwners().size()).isEqualTo(1);
+    assertThat(projectState.get().getOwners().size()).isEqualTo(1);
     String expectedOwnerGroup =
         existingGroupName
             + "-"
@@ -192,7 +193,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
                 .hashString(existingGroupName, Charsets.UTF_8)
                 .toString()
                 .substring(0, 7);
-    assertThat(projectState.getOwners())
+    assertThat(projectState.get().getOwners())
         .contains(groupCache.get(AccountGroup.nameKey(expectedOwnerGroup)).get().getGroupUUID());
   }
 
@@ -264,9 +265,9 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     in.parent = parent;
     String childProject = parent + "/childProject";
     userRestSession.put("/projects/" + Url.encode(childProject), in).assertCreated();
-    ProjectState projectState = projectCache.get(Project.nameKey(childProject));
-    assertThat(projectState.getOwners().size()).isEqualTo(1);
-    assertThat(projectState.getOwners())
+    Optional<ProjectState> projectState = projectCache.get(Project.nameKey(childProject));
+    assertThat(projectState.get().getOwners().size()).isEqualTo(1);
+    assertThat(projectState.get().getOwners())
         .contains(
             groupCache.get(AccountGroup.nameKey(childProject + "-admins")).get().getGroupUUID());
 
@@ -276,7 +277,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     gApi.groups().create(existingGroupName);
     userRestSession.put("/projects/" + Url.encode(childProject2), in).assertCreated();
     projectState = projectCache.get(Project.nameKey(childProject2));
-    assertThat(projectState.getOwners().size()).isEqualTo(1);
+    assertThat(projectState.get().getOwners().size()).isEqualTo(1);
     String expectedOwnerGroup =
         existingGroupName
             + "-"
@@ -284,7 +285,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
                 .hashString(existingGroupName, Charsets.UTF_8)
                 .toString()
                 .substring(0, 7);
-    assertThat(projectState.getOwners())
+    assertThat(projectState.get().getOwners())
         .contains(groupCache.get(AccountGroup.nameKey(expectedOwnerGroup)).get().getGroupUUID());
   }
 
@@ -316,8 +317,8 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     in.parent = parent;
     String childProject = parent + "/childProject";
     userRestSession.put("/projects/" + Url.encode(childProject), in).assertCreated();
-    ProjectState projectState = projectCache.get(Project.nameKey(childProject));
-    assertThat(projectState.getOwners().size()).isEqualTo(0);
+    Optional<ProjectState> projectState = projectCache.get(Project.nameKey(childProject));
+    assertThat(projectState.get().getOwners().size()).isEqualTo(0);
   }
 
   @Test
