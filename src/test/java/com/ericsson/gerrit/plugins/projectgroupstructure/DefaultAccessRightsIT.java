@@ -32,6 +32,7 @@ import com.google.gerrit.server.project.ProjectConfig;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.inject.Inject;
 import java.nio.file.Files;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -84,9 +85,9 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
     String projectName = name("someProject");
     userRestSession.put("/projects/" + projectName, in).assertCreated();
 
-    ProjectState projectState = projectCache.get(Project.nameKey(projectName));
-    AccountGroup.UUID ownerUUID = projectState.getOwners().iterator().next();
-    ProjectConfig projectConfig = projectState.getConfig();
+    Optional<ProjectState> projectState = projectCache.get(Project.nameKey(projectName));
+    AccountGroup.UUID ownerUUID = projectState.get().getOwners().iterator().next();
+    ProjectConfig projectConfig = projectState.get().getConfig();
 
     assertThat(projectConfig.getAccessSections().size()).isEqualTo(2);
 
@@ -139,7 +140,12 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
     adminRestSession.put("/projects/" + Url.encode(projectName), in).assertCreated();
 
     assertThat(
-            projectCache.get(Project.nameKey(projectName)).getConfig().getAccessSections().size())
+            projectCache
+                .get(Project.nameKey(projectName))
+                .get()
+                .getConfig()
+                .getAccessSections()
+                .size())
         .isEqualTo(0);
   }
 }
