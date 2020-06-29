@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "649710dc_df8e8254",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-29T21:41:06Z",
+      "side": 1,
+      "message": "You may score the Verified, based on if this amended doc still renders well locally.",
+      "revId": "8db8a77b075fda6726fdc60deb97242204f59609",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
