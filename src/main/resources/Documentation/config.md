@@ -1,4 +1,5 @@
 # Config
+
 The only configuration required is to grant `Create-group` and `Create-project`
 global permissions to `Registered Users` group.
 
@@ -22,5 +23,6 @@ Example of default access rights config file:
   push = group ${owner}
   label-Code-Review = -2..+2 group ${owner}
   submit = group ${owner}
-
 ```
+
+Note: default access rights configuration is bypassed for projects created by admins.

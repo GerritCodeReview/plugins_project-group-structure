@@ -3,6 +3,10 @@ within this structure to project group owners only. Besides the rules the plugin
 enforce for the project group structure, it also enforce other naming
 rules like project name cannot contain spaces.
 
+Below description of plugins functionality is not applicable if user is an
+administrator. Administrators continue creating projects like this plugin does
+not exist.
+
 To start creating a project group structure, simply create a root project, i.e.
 a project which inherits rights from `All-Projects`. The root project name
 cannot contains slashes, e.g. `some-organization` and must be created with
