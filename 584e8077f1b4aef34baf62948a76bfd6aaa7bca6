@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d632a2fd_2ee8b353",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1106308
+      },
+      "writtenOn": "2020-06-29T06:03:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8e9fe45_c1e100b7",
+      "revId": "584e8077f1b4aef34baf62948a76bfd6aaa7bca6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "848c2041_ffc9a450",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-06-29T03:09:38Z",
       "side": 1,
       "message": "Can you rebase this series on the latest head of master?\n",
+      "revId": "584e8077f1b4aef34baf62948a76bfd6aaa7bca6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf4dccec_47761e38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1106308
+      },
+      "writtenOn": "2020-06-29T06:03:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "848c2041_ffc9a450",
       "revId": "584e8077f1b4aef34baf62948a76bfd6aaa7bca6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
