@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdf2becc_d6abb374",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-29T21:47:21Z",
+      "side": 1,
+      "message": "Subject should not exceed the max line length of \u003c\u003d 72 chars.",
+      "range": {
+        "startLine": 7,
+        "startChar": 71,
+        "endLine": 7,
+        "endChar": 79
+      },
+      "revId": "c0dc7d15354014c48bdabafe4a9ddf015fcf49e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50dfa867_aeab35a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-29T21:47:21Z",
+      "side": 1,
+      "message": "@Vasyl: nit below.\n\n@Khang: could you please review this change? -As you were the one working on this plugin for us the last time. Thanks.",
+      "revId": "c0dc7d15354014c48bdabafe4a9ddf015fcf49e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
