@@ -114,12 +114,6 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   public void validateNewProject(CreateProjectArgs args) throws ValidationException {
     String name = args.getProjectName();
     log.debug("validating creation of {}", name);
-    if (name.contains(" ")) {
-      throw new ValidationException(
-          String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
-    }
-
-    Project.NameKey newParent = args.newParent;
 
     try {
       permissionBackend.user(self.get()).check(GlobalPermission.ADMINISTRATE_SERVER);
@@ -133,6 +127,13 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     } catch (AuthException | PermissionBackendException e) {
       // continuing
     }
+
+    if (name.contains(" ")) {
+      throw new ValidationException(
+          String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
+    }
+
+    Project.NameKey newParent = args.newParent;
 
     if (allProjectsName.get().equals(newParent)) {
       validateRootProject(name, args.permissionsOnly);
