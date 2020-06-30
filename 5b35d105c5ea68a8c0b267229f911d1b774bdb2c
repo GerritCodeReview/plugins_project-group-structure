@@ -34,6 +34,23 @@
       "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b40485_a624ab9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-30T04:46:25Z",
+      "side": 1,
+      "message": "Once [1] is submitted we can let Zuul take care of setting the verified score.\n\n[1] https://gerrit-review.googlesource.com/c/zuul/config/+/273733\n",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
