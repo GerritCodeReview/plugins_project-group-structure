@@ -1,9 +1,11 @@
 {
   "checks": {
     "zuul-check:plugins_project-group-structure": {
-      "state": "NOT_STARTED",
+      "state": "SCHEDULED",
+      "message": "Change has been enqueued in check",
+      "started": "2020-06-30T05:53:08Z",
       "created": "2020-06-30T03:12:57Z",
-      "updated": "2020-06-30T05:49:57Z"
+      "updated": "2020-06-30T05:53:08Z"
     }
   }
 }
