@@ -68,6 +68,24 @@
       "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d7fa9a1_66d1f2dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-30T21:16:53Z",
+      "side": 1,
+      "message": "\u003e Looks like one of the integration tests is failing.\n\n@Khang, would you mind checking this failure out? -Looks like an unrelated api issue, maybe caused by some recent lack of adaptation to moving master. If you could push a fix for it and rebase these here on it, that should help pass the Zuul checks. Thanks! -Note: your fix may be needed downstream first; didn\u0027t check that myself.",
+      "parentUuid": "982a4c68_17cd9255",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
