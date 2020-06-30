@@ -16,6 +16,24 @@
       "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3198a5ce_4ff67939",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1106308
+      },
+      "writtenOn": "2020-06-30T03:41:59Z",
+      "side": 1,
+      "message": "I am getting\n\n  $ bazel test //...\n  INFO: Analyzed target //:project-group-structure_tests (29 packages loaded, 467 targets configured).\n  INFO: Found 1 test target...\n  Target //:project-group-structure_tests up-to-date:\n    bazel-bin/project-group-structure_tests.jar\n    bazel-bin/project-group-structure_tests\n  INFO: Elapsed time: 36.277s, Critical Path: 22.00s\n  INFO: 11 processes: 9 linux-sandbox, 2 worker.\n  INFO: Build completed successfully, 16 total actions\n  //:project-group-structure_tests                                         PASSED in 14.9s\n\n  Executed 1 out of 1 test: 1 test passes.\n  INFO: Build completed successfully, 16 total actions\n\nI am not sure if this all tests.",
+      "parentUuid": "147f563c_2ca65154",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
