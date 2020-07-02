@@ -157,6 +157,24 @@
       "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af67c9f6_bf740264",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1106308
+      },
+      "writtenOn": "2020-07-02T19:42:28Z",
+      "side": 1,
+      "message": "Getting: Could not perform action: Change is already up to date.",
+      "parentUuid": "e1a0dfd6_c51b2c84",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
