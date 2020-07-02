@@ -104,6 +104,59 @@
       "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e04975b7_2908d87d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-02T19:07:36Z",
+      "side": 1,
+      "message": "I checked in-tree build and it started to fail since Ibc188bf663. Some cache eviction needed to be added during the IT test after that change got merged.",
+      "parentUuid": "2aa74cce_d0672fd9",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afbba47c_075fa18a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-02T19:07:36Z",
+      "side": 1,
+      "message": "Prior to gerrit update standalone was using gerrit version that didn\u0027t have  Ibc188bf663 change. Now it fails for the same reason as in-tree.",
+      "parentUuid": "2aa74cce_d0672fd9",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1a0dfd6_c51b2c84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-02T19:07:36Z",
+      "side": 1,
+      "message": "@Vasyl, can you rebase it please.",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
