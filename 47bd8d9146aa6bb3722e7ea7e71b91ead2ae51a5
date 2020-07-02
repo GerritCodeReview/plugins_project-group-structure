@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84193335_565e4dba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-07-02T18:13:16Z",
+      "side": 1,
+      "message": "This failure relates to the thread previously shared through I343c9ad26 (@Khang).",
+      "revId": "47bd8d9146aa6bb3722e7ea7e71b91ead2ae51a5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
