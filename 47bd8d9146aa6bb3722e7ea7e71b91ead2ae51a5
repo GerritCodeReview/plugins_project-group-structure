@@ -33,6 +33,24 @@
       "revId": "47bd8d9146aa6bb3722e7ea7e71b91ead2ae51a5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd367cb6_edb31314",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-03T19:02:40Z",
+      "side": 1,
+      "message": "The issue should be fixed once I243499ea4 change is merged along with gerrit I0545d7786d change.",
+      "parentUuid": "84193335_565e4dba",
+      "revId": "47bd8d9146aa6bb3722e7ea7e71b91ead2ae51a5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
