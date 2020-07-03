@@ -175,6 +175,42 @@
       "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04a82cd4_f2f0af42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-03T17:03:36Z",
+      "side": 1,
+      "message": "@Vasyl, you can rebase on top of this I243499ea4 change. Right now it is still failing, but once I0545d7786d is merged, it will work.",
+      "parentUuid": "af67c9f6_bf740264",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54ab37b4_0d3ba7cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-03T17:03:36Z",
+      "side": 1,
+      "message": "By chance did you run this as standalone? can you call bazel test //... again but in gerrit tree.",
+      "parentUuid": "3198a5ce_4ff67939",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
