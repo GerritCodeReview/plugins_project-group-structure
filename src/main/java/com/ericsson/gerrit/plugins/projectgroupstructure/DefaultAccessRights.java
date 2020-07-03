@@ -15,6 +15,8 @@
 package com.ericsson.gerrit.plugins.projectgroupstructure;
 
 import com.google.gerrit.common.data.AccessSection;
+import com.google.gerrit.common.data.GroupDescription.Basic;
+import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.common.data.Permission;
 import com.google.gerrit.common.data.PermissionRule;
 import com.google.gerrit.entities.AccountGroup;
@@ -198,7 +200,9 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
           log.error("Group {} not found", rule.getGroup().getName());
           continue;
         }
-        rule.getGroup().setUUID(group.get().getGroupUUID());
+
+        rule.setGroup(GroupReference.create(group.get().getGroupUUID(), rule.getGroup().getName()));
+
       }
       perm.add(rule);
     }

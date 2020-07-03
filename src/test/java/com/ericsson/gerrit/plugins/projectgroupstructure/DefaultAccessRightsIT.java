@@ -84,6 +84,7 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
     in.permissionsOnly = true;
     String projectName = name("someProject");
     userRestSession.put("/projects/" + projectName, in).assertCreated();
+    projectCache.evict(Project.nameKey(projectName));
 
     Optional<ProjectState> projectState = projectCache.get(Project.nameKey(projectName));
     AccountGroup.UUID ownerUUID = projectState.get().getOwners().iterator().next();
