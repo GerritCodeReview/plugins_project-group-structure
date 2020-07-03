@@ -16,6 +16,23 @@
       "revId": "47bd8d9146aa6bb3722e7ea7e71b91ead2ae51a5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd3ec274_7d7aa7e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-07-03T05:31:29Z",
+      "side": 1,
+      "message": "CI failure seems to be justified:\n\n  ERROR: /home/zuul/src/gerrit.googlesource.com/gerrit/plugins/project-group-structure/BUILD:10:1: Building plugins/project-group-structure/libproject-group-structure__plugin-class.jar (3 source files) and running annotation processors (AutoAnnotationProcessor, AutoValueProcessor) failed (Exit 1)\nplugins/project-group-structure/src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java:201: error: cannot find symbol\n        rule.getGroup().setUUID(group.get().getGroupUUID());\n                       ^\n  symbol:   method setUUID(UUID)\n  location: class GroupReference\n",
+      "revId": "47bd8d9146aa6bb3722e7ea7e71b91ead2ae51a5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
