@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "779dc4c0_752755e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-07-04T00:10:58Z",
+      "side": 1,
+      "message": "According to @Khang, depends on I0545d7786 to build.",
+      "revId": "ecb7ff36ef25bdf529e5d65c5be5e3a14a0c2540",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
