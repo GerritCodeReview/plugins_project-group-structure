@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "2a83fa20_b7abeb63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-07-04T05:26:02Z",
+      "side": 1,
+      "message": "Still tests are failing according to CI:\n\n  6) shouldBlockCreationIfUserIsNotInDelegatingGroup(com.ericsson.gerrit.plugins.projectgroupstructure.ProjectCreationValidatorIT)\nExpected status code 409\nvalue of: getStatusCode()\nexpected: 409\nbut was : 500\n",
+      "revId": "3a19a6c1ccabc1d0b555c58bed3b2b1d39fe0aab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b52ee7a7_f70c7a6e",
         "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
         "patchSetId": 1
