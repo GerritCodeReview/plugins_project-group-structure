@@ -211,6 +211,23 @@
       "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24e8ac0e_cabd66c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-06T13:38:21Z",
+      "side": 1,
+      "message": "@Vasyl, changes that fixes IT tests are merged, can you rebase please?",
+      "revId": "5b35d105c5ea68a8c0b267229f911d1b774bdb2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
