@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "e0e40d05_5c542ec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-06T13:05:01Z",
+      "side": 1,
+      "message": "Tests will pass once I0545d7786d is merged. There is a null pointer there which causes this test to fail.",
+      "parentUuid": "2a83fa20_b7abeb63",
+      "revId": "3a19a6c1ccabc1d0b555c58bed3b2b1d39fe0aab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b52ee7a7_f70c7a6e",
         "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
         "patchSetId": 1
@@ -85,6 +103,24 @@
       "revId": "3a19a6c1ccabc1d0b555c58bed3b2b1d39fe0aab",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f730f288_58963caa",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-06T13:05:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b52ee7a7_f70c7a6e",
+      "revId": "3a19a6c1ccabc1d0b555c58bed3b2b1d39fe0aab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "ed793a35_3ca4132c",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-06T13:05:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15bc7f39_c56cccd7",
+      "revId": "3a19a6c1ccabc1d0b555c58bed3b2b1d39fe0aab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29861165_b3943872",
         "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
         "patchSetId": 1
@@ -119,6 +173,24 @@
       "revId": "3a19a6c1ccabc1d0b555c58bed3b2b1d39fe0aab",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36bc0bf7_24a1694c",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-06T13:05:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29861165_b3943872",
+      "revId": "3a19a6c1ccabc1d0b555c58bed3b2b1d39fe0aab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
