@@ -88,7 +88,7 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
 
     Optional<ProjectState> projectState = projectCache.get(Project.nameKey(projectName));
     AccountGroup.UUID ownerUUID = projectState.get().getOwners().iterator().next();
-    ProjectConfig projectConfig = projectState.get().getConfig();
+    ProjectConfig projectConfig = projectState.get().getBareConfig();
 
     assertThat(projectConfig.getAccessSections().size()).isEqualTo(2);
 

@@ -118,7 +118,7 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
   private void setAccessRights(ProjectConfig config, ProjectState project) {
     for (String refName : defaultAccessRightsConfig.getSubsections(ProjectConfig.ACCESS)) {
       if (AccessSection.isValidRefSectionName(refName) && isValidRegex(refName)) {
-        AccessSection as = config.getAccessSection(refName, true);
+        AccessSection as = config.getAccessSection(refName);
         getPermissions(refName, as);
         setPermissions(refName, as, getOwnerGroupName(project));
       }
@@ -131,14 +131,14 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
             ProjectConfig.ACCESS, refName, "exclusiveGroupPermissions")) {
       Arrays.stream(varName.split("[, \t]{1,}"))
           .filter(Permission::isPermission)
-          .forEach(n -> as.getPermission(n, true).setExclusiveGroup(true));
+          .forEach(n -> as.toBuilder().upsertPermission(n).setExclusiveGroup(true));
     }
   }
 
   private void setPermissions(String refName, AccessSection as, String ownerGroupName) {
     for (String value : defaultAccessRightsConfig.getNames(ProjectConfig.ACCESS, refName)) {
       if (Permission.isPermission(value)) {
-        Permission perm = as.getPermission(value, true);
+        Permission perm = as.toBuilder().upsertPermission(value).build();
         setPermissionRules(ownerGroupName, perm, refName, value);
       } else {
         log.error("Invalid permission {}", value);
@@ -199,9 +199,9 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
           log.error("Group {} not found", rule.getGroup().getName());
           continue;
         }
-        rule.setGroup(GroupReference.create(group.get().getGroupUUID(), rule.getGroup().getName()));
+        rule.create(GroupReference.create(group.get().getGroupUUID(), rule.getGroup().getName()));
       }
-      perm.add(rule);
+      perm.toBuilder().add(rule.toBuilder());
     }
   }
 }
