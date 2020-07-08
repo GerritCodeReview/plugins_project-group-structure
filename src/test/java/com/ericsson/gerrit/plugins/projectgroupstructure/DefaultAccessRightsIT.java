@@ -28,6 +28,7 @@ import com.google.gerrit.entities.AccountGroup;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.ProjectInput;
 import com.google.gerrit.extensions.restapi.Url;
+import com.google.gerrit.server.project.CachedProjectConfig;
 import com.google.gerrit.server.project.ProjectConfig;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.inject.Inject;
@@ -88,11 +89,11 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
 
     Optional<ProjectState> projectState = projectCache.get(Project.nameKey(projectName));
     AccountGroup.UUID ownerUUID = projectState.get().getOwners().iterator().next();
-    ProjectConfig projectConfig = projectState.get().getConfig();
+    CachedProjectConfig projectConfig = projectState.get().getConfig();
 
     assertThat(projectConfig.getAccessSections().size()).isEqualTo(2);
 
-    AccessSection refsSection = projectConfig.getAccessSection("refs/*");
+    AccessSection refsSection = projectConfig.getAccessSection("refs/*").get();
     assertThat(refsSection.getPermissions().size()).isEqualTo(3);
     assertThat(refsSection.getPermission(Permission.OWNER).getRules().get(0).getGroup().getUUID())
         .isEqualTo(ownerUUID);
@@ -102,7 +103,7 @@ public class DefaultAccessRightsIT extends LightweightPluginDaemonTest {
     assertThat(refsSection.getPermission(Permission.PUSH).getRules().get(0).getGroup().getName())
         .isEqualTo("Administrators");
 
-    AccessSection refsHeadsSection = projectConfig.getAccessSection("refs/heads/*");
+    AccessSection refsHeadsSection = projectConfig.getAccessSection("refs/heads/*").get();
     assertThat(refsHeadsSection.getPermissions().size()).isEqualTo(4);
     assertThat(
             refsHeadsSection
