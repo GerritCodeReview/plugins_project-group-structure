@@ -118,27 +118,30 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
   private void setAccessRights(ProjectConfig config, ProjectState project) {
     for (String refName : defaultAccessRightsConfig.getSubsections(ProjectConfig.ACCESS)) {
       if (AccessSection.isValidRefSectionName(refName) && isValidRegex(refName)) {
-        AccessSection as = config.getAccessSection(refName, true);
-        getPermissions(refName, as);
-        setPermissions(refName, as, getOwnerGroupName(project));
+        config.upsertAccessSection(
+            refName,
+            as -> {
+              getPermissions(refName, as);
+              setPermissions(refName, as, getOwnerGroupName(project));
+            });
       }
     }
   }
 
-  private void getPermissions(String refName, AccessSection as) {
+  private void getPermissions(String refName, AccessSection.Builder as) {
     for (String varName :
         defaultAccessRightsConfig.getStringList(
             ProjectConfig.ACCESS, refName, "exclusiveGroupPermissions")) {
       Arrays.stream(varName.split("[, \t]{1,}"))
           .filter(Permission::isPermission)
-          .forEach(n -> as.getPermission(n, true).setExclusiveGroup(true));
+          .forEach(n -> as.upsertPermission(n).setExclusiveGroup(true));
     }
   }
 
-  private void setPermissions(String refName, AccessSection as, String ownerGroupName) {
+  private void setPermissions(String refName, AccessSection.Builder as, String ownerGroupName) {
     for (String value : defaultAccessRightsConfig.getNames(ProjectConfig.ACCESS, refName)) {
       if (Permission.isPermission(value)) {
-        Permission perm = as.getPermission(value, true);
+        Permission.Builder perm = as.upsertPermission(value);
         setPermissionRules(ownerGroupName, perm, refName, value);
       } else {
         log.error("Invalid permission {}", value);
@@ -168,19 +171,20 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
   }
 
   private void setPermissionRules(
-      String ownerGroupName, Permission perm, String refName, String value) {
+      String ownerGroupName, Permission.Builder perm, String refName, String value) {
     for (String ruleString :
         defaultAccessRightsConfig.getStringList(ProjectConfig.ACCESS, refName, value)) {
-      PermissionRule rule;
+      PermissionRule.Builder rule;
       try {
         rule =
             PermissionRule.fromString(
-                ruleString.replaceAll(Pattern.quote(OWNER_TOKEN), ownerGroupName),
-                Permission.hasRange(value));
+                    ruleString.replaceAll(Pattern.quote(OWNER_TOKEN), ownerGroupName),
+                    Permission.hasRange(value))
+                .toBuilder();
 
       } catch (IllegalArgumentException notRule) {
         log.error(
-            "Invalid rule in {}{}.{}: {}",
+            "There is an Invalid rule in {}{}.{}: {} \nFINISHED HERE",
             ProjectConfig.ACCESS,
             refName != null ? "." + refName : "",
             value,
@@ -201,7 +205,7 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
         }
         rule.setGroup(GroupReference.create(group.get().getGroupUUID(), rule.getGroup().getName()));
       }
-      perm.add(rule);
+      perm = perm.add(rule);
     }
   }
 }
