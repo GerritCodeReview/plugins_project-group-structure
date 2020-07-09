@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb5cf1ba_ece708ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-07-09T16:44:01Z",
+      "side": 1,
+      "message": "For such adaptation changes, we usually list the items that required adaptations in the commit message. If simple enough, the subject can contain it all, within line length limits of course.\n\nHere, the current subject above is too simple and should be slightly detailed I think.",
+      "revId": "475b81f6f543b95bb655174773850e87d32ee322",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f6c54a8_b8f46abb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-07-09T16:44:01Z",
+      "side": 1,
+      "message": "Nits below.",
+      "revId": "475b81f6f543b95bb655174773850e87d32ee322",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
