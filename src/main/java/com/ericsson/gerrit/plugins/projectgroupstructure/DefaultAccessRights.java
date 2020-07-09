@@ -199,7 +199,7 @@ public class DefaultAccessRights implements NewProjectCreatedListener {
           log.error("Group {} not found", rule.getGroup().getName());
           continue;
         }
-        rule.setGroup(GroupReference.create(group.get().getGroupUUID(), rule.getGroup().getName()));
+        rule.setGroup(new GroupReference(group.get().getGroupUUID(), rule.getGroup().getName()));
       }
       perm.add(rule);
     }
