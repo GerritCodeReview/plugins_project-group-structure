@@ -69,6 +69,24 @@
       "revId": "bf2bc832acf6ce39d9d85a496be02f776f141c72",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60a0dfab_60e48800",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-10T19:03:20Z",
+      "side": 1,
+      "message": "I think it is above 😊",
+      "parentUuid": "94334b85_ff4199c8",
+      "revId": "bf2bc832acf6ce39d9d85a496be02f776f141c72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
