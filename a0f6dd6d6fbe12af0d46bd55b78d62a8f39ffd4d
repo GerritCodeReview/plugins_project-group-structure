@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e32e01dc_3bc7e098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-10T18:58:05Z",
+      "side": 1,
+      "message": "@Vasyl, I rebased your base change on top of I33b4c5453. You can do it through git or you can also do it in GerritUI, there is a rebase button top left, you just need to provide correct SHA1 or change-Id to rebase your changes on top.",
+      "revId": "a0f6dd6d6fbe12af0d46bd55b78d62a8f39ffd4d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
