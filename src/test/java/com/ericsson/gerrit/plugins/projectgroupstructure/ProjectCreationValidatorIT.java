@@ -497,7 +497,7 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
       cfgUpdate.save();
 
       String newDelegatingGroup = name("groupC");
-      cfg.renameGroup(cfg.getGroup(delegatingGroup).getUUID(), newDelegatingGroup);
+      gApi.groups().id(delegatingGroup).name(newDelegatingGroup);
     }
 
     userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertCreated();
