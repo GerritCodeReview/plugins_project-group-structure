@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "99d3f6bd_383d2059",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-12T23:07:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "409b8fe1_8cddbd7e",
+      "range": {
+        "startLine": 187,
+        "startChar": 25,
+        "endLine": 187,
+        "endChar": 52
+      },
+      "revId": "e0008eb382cc22bc98b6cd43721e95b0e6f3dc39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7101b951_75230602",
         "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "e0008eb382cc22bc98b6cd43721e95b0e6f3dc39",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15dff18b_b5aa6ce4",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-07-12T23:07:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7101b951_75230602",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 13
+      },
+      "revId": "e0008eb382cc22bc98b6cd43721e95b0e6f3dc39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
