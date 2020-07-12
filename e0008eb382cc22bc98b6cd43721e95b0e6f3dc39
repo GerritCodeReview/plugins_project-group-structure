@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "409b8fe1_8cddbd7e",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-07-12T14:02:14Z",
+      "side": 1,
+      "message": "This was the original message string. Why adding a prefix to it on the left, and a (space-separated?) suffix on the right? Is this to pass some related test assertion? (Which one?)\n\nBased on if this diff is necessarily related or not, an explanatory comment in the commit message may help.",
+      "range": {
+        "startLine": 187,
+        "startChar": 25,
+        "endLine": 187,
+        "endChar": 52
+      },
+      "revId": "e0008eb382cc22bc98b6cd43721e95b0e6f3dc39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7101b951_75230602",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/DefaultAccessRights.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-07-12T14:02:14Z",
+      "side": 1,
+      "message": "Why adding the setting of this (method) parameter, and at this stage?",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 13
+      },
+      "revId": "e0008eb382cc22bc98b6cd43721e95b0e6f3dc39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
