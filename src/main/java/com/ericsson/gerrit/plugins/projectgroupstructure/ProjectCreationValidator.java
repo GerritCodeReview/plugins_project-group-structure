@@ -16,8 +16,8 @@ package com.ericsson.gerrit.plugins.projectgroupstructure;
 
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
-import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.entities.AccountGroup;
+import com.google.gerrit.entities.GroupReference;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.annotations.PluginCanonicalWebUrl;
 import com.google.gerrit.extensions.annotations.PluginName;
