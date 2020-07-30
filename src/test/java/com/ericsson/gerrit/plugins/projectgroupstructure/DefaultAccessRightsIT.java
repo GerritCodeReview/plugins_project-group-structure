@@ -21,14 +21,14 @@ import static com.google.gerrit.server.group.SystemGroupBackend.REGISTERED_USERS
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
-import com.google.gerrit.common.data.AccessSection;
 import com.google.gerrit.common.data.GlobalCapability;
-import com.google.gerrit.common.data.Permission;
+import com.google.gerrit.entities.AccessSection;
 import com.google.gerrit.entities.AccountGroup;
+import com.google.gerrit.entities.CachedProjectConfig;
+import com.google.gerrit.entities.Permission;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.ProjectInput;
 import com.google.gerrit.extensions.restapi.Url;
-import com.google.gerrit.server.project.CachedProjectConfig;
 import com.google.gerrit.server.project.ProjectConfig;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.inject.Inject;
