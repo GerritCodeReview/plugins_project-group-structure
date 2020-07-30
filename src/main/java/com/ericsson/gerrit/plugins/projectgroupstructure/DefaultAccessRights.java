@@ -14,11 +14,11 @@
 
 package com.ericsson.gerrit.plugins.projectgroupstructure;
 
-import com.google.gerrit.common.data.AccessSection;
-import com.google.gerrit.common.data.Permission;
-import com.google.gerrit.common.data.PermissionRule;
+import com.google.gerrit.entities.AccessSection;
 import com.google.gerrit.entities.AccountGroup;
 import com.google.gerrit.entities.GroupReference;
+import com.google.gerrit.entities.Permission;
+import com.google.gerrit.entities.PermissionRule;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.exceptions.InvalidNameException;
 import com.google.gerrit.extensions.annotations.PluginData;
