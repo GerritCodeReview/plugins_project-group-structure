@@ -41,6 +41,9 @@ import com.google.gerrit.server.validators.ValidationException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -235,18 +238,18 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
   private boolean isInDelegatingGroup(Project.NameKey parentCtrl) {
     try {
-      GroupReference delegateProjectCreationTo =
+      Optional<GroupReference> groupReference =
           cfg.getFromProjectConfigWithInheritance(parentCtrl, pluginName)
               .getGroupReference(DELEGATE_PROJECT_CREATION_TO);
-      if (delegateProjectCreationTo == null) {
-        return false;
+      if (groupReference.isPresent()) {
+        GroupReference delegateProjectCreationTo = groupReference.get();
+        log.debug("delegateProjectCreationTo: {}", delegateProjectCreationTo);
+        GroupMembership effectiveGroups = self.get().getEffectiveGroups();
+        return effectiveGroups.contains(delegateProjectCreationTo.getUUID());
       }
-      log.debug("delegateProjectCreationTo: {}", delegateProjectCreationTo);
-      GroupMembership effectiveGroups = self.get().getEffectiveGroups();
-      return effectiveGroups.contains(delegateProjectCreationTo.getUUID());
     } catch (NoSuchProjectException e) {
       log.error("isInDelegatingGroup with error ({}): {}", e.getClass().getName(), e.getMessage());
-      return false;
     }
+    return false;
   }
 }
