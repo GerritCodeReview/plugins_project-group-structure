@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ea10616_8b5a32ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-09-11T18:11:25Z",
+      "side": 1,
+      "message": "Hashtag points to the core change I6280cb1c9 on which this one depends. Both changes are required in order to pass plugin\u0027s tests. The latter pass locally using both bazel standalone and in-tree modes.",
+      "revId": "365dab2d6768e9759d5a97a354547909d586c73a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
