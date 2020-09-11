@@ -230,10 +230,12 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
-      cfg.getPluginConfig(PLUGIN_NAME)
-          .setGroupReference(
-              ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-              GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup));
+      cfg.updatePluginConfig(
+          PLUGIN_NAME,
+          pluginCfg ->
+              pluginCfg.setGroupReference(
+                  ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+                  GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup)));
       cfgUpdate.save();
     }
     userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertCreated();
@@ -253,10 +255,12 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
-      cfg.getPluginConfig(PLUGIN_NAME)
-          .setGroupReference(
-              ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-              GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup));
+      cfg.updatePluginConfig(
+          PLUGIN_NAME,
+          pluginCfg ->
+              pluginCfg.setGroupReference(
+                  ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+                  GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup)));
       cfgUpdate.save();
     }
 
@@ -304,12 +308,17 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
-      cfg.getPluginConfig(PLUGIN_NAME)
-          .setGroupReference(
-              ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-              GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup));
-      cfg.getPluginConfig(PLUGIN_NAME)
-          .setBoolean(ProjectCreationValidator.DISABLE_GRANTING_PROJECT_OWNERSHIP, true);
+      cfg.updatePluginConfig(
+          PLUGIN_NAME,
+          pluginCfg ->
+              pluginCfg.setGroupReference(
+                  ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+                  GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup)));
+      cfg.updatePluginConfig(
+          PLUGIN_NAME,
+          pluginCfg ->
+              pluginCfg.setBoolean(
+                  ProjectCreationValidator.DISABLE_GRANTING_PROJECT_OWNERSHIP, true));
       cfgUpdate.save();
     }
 
@@ -346,8 +355,11 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     Project.NameKey parentNameKey = Project.nameKey(parent);
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
-      cfg.getPluginConfig(PLUGIN_NAME)
-          .setString(ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO, delegatingGroup);
+      cfg.updatePluginConfig(
+          PLUGIN_NAME,
+          pluginCfg ->
+              pluginCfg.setString(
+                  ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO, delegatingGroup));
       cfgUpdate.save();
     }
     userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertConflict();
@@ -384,10 +396,12 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
-      cfg.getPluginConfig(PLUGIN_NAME)
-          .setGroupReference(
-              ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-              GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup));
+      cfg.updatePluginConfig(
+          PLUGIN_NAME,
+          pluginCfg ->
+              pluginCfg.setGroupReference(
+                  ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+                  GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup)));
       cfgUpdate.save();
     }
     userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertCreated();
@@ -419,10 +433,12 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = gApi.groups().id(delegatingGroup).get().id;
-      cfg.getPluginConfig(PLUGIN_NAME)
-          .setGroupReference(
-              ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-              GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup));
+      cfg.updatePluginConfig(
+          PLUGIN_NAME,
+          pluginCfg ->
+              pluginCfg.setGroupReference(
+                  ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+                  GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup)));
       cfgUpdate.save();
     }
     userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertConflict();
@@ -452,10 +468,12 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     try (ProjectConfigUpdate cfgUpdate = updateProject(parentNameKey)) {
       ProjectConfig cfg = cfgUpdate.getConfig();
       String gId = "fake-gId";
-      cfg.getPluginConfig(PLUGIN_NAME)
-          .setGroupReference(
-              ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-              GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup));
+      cfg.updatePluginConfig(
+          PLUGIN_NAME,
+          pluginCfg ->
+              pluginCfg.setGroupReference(
+                  ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+                  GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup)));
       cfgUpdate.save();
     }
     userRestSession.put("/projects/" + Url.encode(parent + "/childProject"), in).assertConflict();
@@ -490,10 +508,12 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
       ProjectConfig cfg = cfgUpdate.getConfig();
 
       String gId = gApi.groups().id(delegatingGroup).get().id;
-      cfg.getPluginConfig("project-group-structure")
-          .setGroupReference(
-              ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
-              GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup));
+      cfg.updatePluginConfig(
+          PLUGIN_NAME,
+          pluginCfg ->
+              pluginCfg.setGroupReference(
+                  ProjectCreationValidator.DELEGATE_PROJECT_CREATION_TO,
+                  GroupReference.create(AccountGroup.UUID.parse(gId), delegatingGroup)));
       cfgUpdate.save();
 
       String newDelegatingGroup = name("groupC");
