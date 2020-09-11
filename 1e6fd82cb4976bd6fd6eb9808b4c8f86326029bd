@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b7f606c_24193930",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-09-11T18:29:04Z",
+      "side": 1,
+      "message": "Depends on the base change\u0027s own dependency in core (I6280cb1c9). -Plugin tests pass locally in both bazel modes, with that core fix applied.",
+      "revId": "1e6fd82cb4976bd6fd6eb9808b4c8f86326029bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
