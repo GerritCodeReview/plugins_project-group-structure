@@ -24,3 +24,16 @@ Example of default access rights config file:
   submit = group ${owner}
 
 ```
+Also, this plugin offers a way to restrict the new names of the projects to match an optionally
+configured regex in the @PLUGIN@.config. For example:
+
+```
+[project-group-structure]
+  regex = [a-z0-9/]+
+
+```
+
+In this example, the regex will limit the project created to non-capital letters, numbers
+and a slash. The regex must accept slash (/) to not disturb the functionality of the plugin.
+If the regex doesn't accept / or accepts spaces, it will be ignored and replaced with a default
+non-empty wildcard regex.
