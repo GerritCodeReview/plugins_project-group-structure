@@ -24,3 +24,17 @@ Example of default access rights config file:
   submit = group ${owner}
 
 ```
+An optional configuration can be defined in the @PLUGIN@.config to enforce a naming rule
+to follow a defined regex.
+
+Example of @PLUGIN@.config file:
+
+```
+[project-group-structure]
+  regex = [A-Z*-/]*
+
+```
+
+This regex will limit the project created to only use all caps letters. Regex must accept
+slash (/) to not disturb the functionality of the plugin. If the regex doesn't accept /,
+it will be neglected.
