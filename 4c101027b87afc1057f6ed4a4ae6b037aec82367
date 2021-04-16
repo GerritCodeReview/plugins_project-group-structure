@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c39878_fbeb364f",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-16T20:29:01Z",
+      "side": 1,
+      "message": "how about do a preliminary check if the \"/\" is allowed with regex. without / you can\u0027t use the plugin.",
+      "revId": "4c101027b87afc1057f6ed4a4ae6b037aec82367",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f64164_5d92f631",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-16T20:29:01Z",
+      "side": 1,
+      "message": "maybe not follow but match, sounds better",
+      "revId": "4c101027b87afc1057f6ed4a4ae6b037aec82367",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
