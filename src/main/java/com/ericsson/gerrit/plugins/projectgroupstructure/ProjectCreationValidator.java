@@ -48,17 +48,21 @@ import org.slf4j.LoggerFactory;
 public class ProjectCreationValidator implements ProjectCreationValidationListener {
   private static final Logger log = LoggerFactory.getLogger(ProjectCreationValidator.class);
 
+  static final String SEE_DOCUMENTATION_MSG = "\n\nSee documentation for more info: %s";
+
+  static final String DELEGATE_PROJECT_CREATION_TO = "delegateProjectCreationTo";
+
+  static final String DISABLE_GRANTING_PROJECT_OWNERSHIP = "disableGrantingProjectOwnership";
+
   private static final String AN_ERROR_OCCURRED_MSG =
       "An error occurred while creating project, please contact Gerrit support";
-
-  private static final String SEE_DOCUMENTATION_MSG = "\n\nSee documentation for more info: %s";
 
   private static final String MUST_BE_OWNER_TO_CREATE_PROJECT_MSG =
       "You must be owner of the parent project \"%s\" to create a nested project."
           + SEE_DOCUMENTATION_MSG;
 
   private static final String PROJECT_CANNOT_CONTAINS_SPACES_MSG =
-      "Project name cannot contains spaces." + SEE_DOCUMENTATION_MSG;
+      "Project name cannot contain spaces." + SEE_DOCUMENTATION_MSG;
 
   private static final String ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG =
       "Since the \"Rights Inherit From\" field is empty, "
@@ -80,9 +84,8 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   private static final String PROJECT_MUST_START_WITH_PARENT_NAME_MSG =
       "Project name must start with parent project name, e.g. %s." + SEE_DOCUMENTATION_MSG;
 
-  static final String DELEGATE_PROJECT_CREATION_TO = "delegateProjectCreationTo";
-
-  static final String DISABLE_GRANTING_PROJECT_OWNERSHIP = "disableGrantingProjectOwnership";
+  private static final String PROJECT_SHOULD_MATCH_REGEX_MSG =
+      "Project name should match the regex: %s." + SEE_DOCUMENTATION_MSG;
 
   private final Groups groups;
   private final String documentationUrl;
@@ -91,6 +94,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   private final PermissionBackend permissionBackend;
   private final PluginConfigFactory cfg;
   private final String pluginName;
+  private final Configuration config;
 
   @Inject
   public ProjectCreationValidator(
@@ -100,6 +104,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       Provider<CurrentUser> self,
       PermissionBackend permissionBackend,
       PluginConfigFactory cfg,
+      Configuration config,
       @PluginName String pluginName) {
     this.groups = groups;
     this.documentationUrl = url + "Documentation/index.html";
@@ -108,12 +113,18 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     this.permissionBackend = permissionBackend;
     this.cfg = cfg;
     this.pluginName = pluginName;
+    this.config = config;
   }
 
   @Override
   public void validateNewProject(CreateProjectArgs args) throws ValidationException {
     String name = args.getProjectName();
     log.debug("validating creation of {}", name);
+    String regex = config.getRegexNameFilter();
+    if (!(name.matches(regex))) {
+      throw new ValidationException(
+          String.format(PROJECT_SHOULD_MATCH_REGEX_MSG, regex, documentationUrl));
+    }
     if (name.contains(" ")) {
       throw new ValidationException(
           String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
