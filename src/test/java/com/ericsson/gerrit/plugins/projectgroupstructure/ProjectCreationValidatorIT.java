@@ -21,9 +21,7 @@ import static com.google.gerrit.server.group.SystemGroupBackend.REGISTERED_USERS
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
-import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
-import com.google.gerrit.acceptance.RestResponse;
-import com.google.gerrit.acceptance.TestPlugin;
+import com.google.gerrit.acceptance.*;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.common.data.GroupReference;
@@ -72,6 +70,20 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
     RestResponse r = userRestSession.put("/projects/" + Url.encode("project with space"), in);
     r.assertConflict();
     assertThat(r.getEntityContent()).contains("Project name cannot contains spaces");
+  }
+
+  @Test
+  @UseLocalDisk
+  @GlobalPluginConfig(
+      pluginName = "project-group-structure",
+      name = "project-group-structure.regex",
+      value = "[A-Z]")
+  public void shouldProjectNotFollowRegexInTheirName() throws Exception {
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    RestResponse r = userRestSession.put("/projects/" + Url.encode("PROJECT1"), in);
+    r.assertConflict();
+    assertThat(r.getEntityContent()).contains("Project name should follow the regex");
   }
 
   @Test

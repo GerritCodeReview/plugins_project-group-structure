@@ -24,3 +24,13 @@ Example of default access rights config file:
   submit = group ${owner}
 
 ```
+An optional configuration can be defined in the @PLUGIN@.config to enforce a naming rule
+to follow a defined regex.
+
+Example of @PLUGIN@.config file:
+
+```
+[project-group-structure]
+  regex = [A-Z]
+
+```
