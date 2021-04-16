@@ -14,6 +14,7 @@
 
 package com.ericsson.gerrit.plugins.projectgroupstructure;
 
+import static com.ericsson.gerrit.plugins.projectgroupstructure.ProjectCreationValidator.PROJECT_SHOULD_MATCH_REGEX;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.acceptance.testsuite.project.TestProjectUpdate.allowCapability;
 import static com.google.gerrit.server.group.SystemGroupBackend.REGISTERED_USERS;
@@ -21,9 +22,7 @@ import static com.google.gerrit.server.group.SystemGroupBackend.REGISTERED_USERS
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
-import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
-import com.google.gerrit.acceptance.RestResponse;
-import com.google.gerrit.acceptance.TestPlugin;
+import com.google.gerrit.acceptance.*;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.common.data.GroupReference;
@@ -46,6 +45,10 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
   @Inject private ProjectOperations projectOperations;
 
   private static final String PLUGIN_NAME = "project-group-structure";
+  private static final String REGEX_INCLUDING_SLASH = "[a-zA-Z_*-/]*";
+  private static final String REGEX_NOT_INCLUDING_SLASH = "[a-zA-Z_]*";
+  private static final String REGEX_INCLUDING_SPACE = "[a-zA-Z_*-/ ]*";
+  private static final String PROJECT_WITH_SPACE = "project with space";
 
   @Override
   @Before
@@ -69,9 +72,50 @@ public class ProjectCreationValidatorIT extends LightweightPluginDaemonTest {
   public void shouldProjectWithASpaceInTheirName() throws Exception {
     ProjectInput in = new ProjectInput();
     in.permissionsOnly = true;
-    RestResponse r = userRestSession.put("/projects/" + Url.encode("project with space"), in);
+    RestResponse r = userRestSession.put("/projects/" + Url.encode(PROJECT_WITH_SPACE), in);
     r.assertConflict();
     assertThat(r.getEntityContent()).contains("Project name cannot contains spaces");
+  }
+
+  @Test
+  @UseLocalDisk
+  @GlobalPluginConfig(
+      pluginName = "project-group-structure",
+      name = "project-group-structure.regex",
+      value = REGEX_INCLUDING_SPACE)
+  public void shouldProjectNotMatchRegexInTheirNameIfRegexContainsSpace() throws Exception {
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    RestResponse r = userRestSession.put("/projects/" + Url.encode(PROJECT_WITH_SPACE), in);
+    r.assertConflict();
+    assertThat(r.getEntityContent()).contains("Project name cannot contains spaces");
+  }
+
+  @Test
+  @UseLocalDisk
+  @GlobalPluginConfig(
+      pluginName = "project-group-structure",
+      name = "project-group-structure.regex",
+      value = REGEX_INCLUDING_SLASH)
+  public void shouldProjectMatchRegexInTheirNameIfRegexContainsSlash() throws Exception {
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    RestResponse r = userRestSession.put("/projects/" + Url.encode("PROJECT1"), in);
+    r.assertConflict();
+    assertThat(r.getEntityContent())
+        .isEqualTo(String.format(PROJECT_SHOULD_MATCH_REGEX, REGEX_INCLUDING_SLASH));
+  }
+
+  @Test
+  @UseLocalDisk
+  @GlobalPluginConfig(
+      pluginName = "project-group-structure",
+      name = "project-group-structure.regex",
+      value = REGEX_NOT_INCLUDING_SLASH)
+  public void shouldProjectNotMatchRegexInTheirNameIfRegexNotContainSlash() throws Exception {
+    ProjectInput in = new ProjectInput();
+    in.permissionsOnly = true;
+    userRestSession.put("/projects/" + Url.encode("PROJECT1"), in).assertCreated();
   }
 
   @Test
