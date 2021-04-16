@@ -60,6 +60,8 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   private static final String PROJECT_CANNOT_CONTAINS_SPACES_MSG =
       "Project name cannot contains spaces." + SEE_DOCUMENTATION_MSG;
 
+  public static final String PROJECT_SHOULD_MATCH_REGEX = "Project name should match the regex: %s";
+
   private static final String ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG =
       "Since the \"Rights Inherit From\" field is empty, "
           + "\"%s\" is considered a root project whose parent is \"%s\". "
@@ -91,6 +93,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   private final PermissionBackend permissionBackend;
   private final PluginConfigFactory cfg;
   private final String pluginName;
+  private final Configuration config;
 
   @Inject
   public ProjectCreationValidator(
@@ -100,6 +103,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       Provider<CurrentUser> self,
       PermissionBackend permissionBackend,
       PluginConfigFactory cfg,
+      Configuration config,
       @PluginName String pluginName) {
     this.groups = groups;
     this.documentationUrl = url + "Documentation/index.html";
@@ -108,15 +112,23 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     this.permissionBackend = permissionBackend;
     this.cfg = cfg;
     this.pluginName = pluginName;
+    this.config = config;
   }
 
   @Override
   public void validateNewProject(CreateProjectArgs args) throws ValidationException {
     String name = args.getProjectName();
     log.debug("validating creation of {}", name);
-    if (name.contains(" ")) {
-      throw new ValidationException(
-          String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
+    String regex = this.config.regex();
+    if (regex != null) {
+      if (!name.matches(regex)) {
+        throw new ValidationException(String.format(PROJECT_SHOULD_MATCH_REGEX, regex));
+      }
+    } else {
+      if (name.contains(" ")) {
+        throw new ValidationException(
+            String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
+      }
     }
 
     Project.NameKey newParent = args.newParent;
