@@ -58,7 +58,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
           + SEE_DOCUMENTATION_MSG;
 
   private static final String PROJECT_CANNOT_CONTAINS_SPACES_MSG =
-      "Project name cannot contains spaces." + SEE_DOCUMENTATION_MSG;
+      "Project name cannot contain spaces." + SEE_DOCUMENTATION_MSG;
 
   private static final String ROOT_PROJECT_CANNOT_CONTAINS_SLASHES_MSG =
       "Since the \"Rights Inherit From\" field is empty, "
@@ -84,6 +84,8 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
   static final String DISABLE_GRANTING_PROJECT_OWNERSHIP = "disableGrantingProjectOwnership";
 
+  static final String PROJECT_SHOULD_MATCH_REGEX_MSG = "Project name should match the regex: %s";
+
   private final Groups groups;
   private final String documentationUrl;
   private final AllProjectsNameProvider allProjectsName;
@@ -91,6 +93,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
   private final PermissionBackend permissionBackend;
   private final PluginConfigFactory cfg;
   private final String pluginName;
+  private final Configuration config;
 
   @Inject
   public ProjectCreationValidator(
@@ -100,6 +103,7 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
       Provider<CurrentUser> self,
       PermissionBackend permissionBackend,
       PluginConfigFactory cfg,
+      Configuration config,
       @PluginName String pluginName) {
     this.groups = groups;
     this.documentationUrl = url + "Documentation/index.html";
@@ -108,12 +112,17 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
     this.permissionBackend = permissionBackend;
     this.cfg = cfg;
     this.pluginName = pluginName;
+    this.config = config;
   }
 
   @Override
   public void validateNewProject(CreateProjectArgs args) throws ValidationException {
     String name = args.getProjectName();
     log.debug("validating creation of {}", name);
+    String regex = config.getRegexNameFilter();
+    if (!(name.matches(regex))) {
+      throw new ValidationException(String.format(PROJECT_SHOULD_MATCH_REGEX_MSG, regex));
+    }
     if (name.contains(" ")) {
       throw new ValidationException(
           String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl));
