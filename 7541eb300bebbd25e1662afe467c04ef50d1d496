@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "141a94b9_b6efdf0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-19T18:31:33Z",
+      "side": 1,
+      "message": "functionality",
+      "range": {
+        "startLine": 21,
+        "startChar": 45,
+        "endLine": 21,
+        "endChar": 60
+      },
+      "revId": "7541eb300bebbd25e1662afe467c04ef50d1d496",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2db5ff8_d226df7e",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-19T18:31:33Z",
+      "side": 1,
+      "message": "can this be covered somehow?",
+      "revId": "7541eb300bebbd25e1662afe467c04ef50d1d496",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f770a2ec_e8c2e606",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-19T18:31:33Z",
+      "side": 1,
+      "message": "since originally we don\u0027t want to include space, should configuration also check if the regex complies with no space requirement?",
+      "revId": "7541eb300bebbd25e1662afe467c04ef50d1d496",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e1ac868_c577f7f7",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-19T18:31:33Z",
+      "side": 1,
+      "message": "would make it private and move it up",
+      "revId": "7541eb300bebbd25e1662afe467c04ef50d1d496",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
