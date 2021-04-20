@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c0c455_25a364c0",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-20T15:45:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6768a9a4_9ef7bbe1",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 3
+      },
+      "revId": "d36ee1a1f4f0a59f398e2ae9f98cd2e16768e182",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "072d1e83_d4f39963",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-04-20T15:00:25Z",
       "side": 1,
       "message": "replace\nif (isRegexNameFilter \u0026\u0026 (!name.matches(this.config.regex())){\nthrow new ValidationException(String.format(PROJECT_SHOULD_MATCH_REGEX, regex));}\nif (name.contains(\" \")) {\n        throw new ValidationException(\n            String.format(PROJECT_CANNOT_CONTAINS_SPACES_MSG, documentationUrl))\n}\n\nless cyclomatic complexity",
+      "range": {
+        "startLine": 122,
+        "startChar": 3,
+        "endLine": 132,
+        "endChar": 5
+      },
+      "revId": "d36ee1a1f4f0a59f398e2ae9f98cd2e16768e182",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e244169_269b57d0",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-20T15:45:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "072d1e83_d4f39963",
       "range": {
         "startLine": 122,
         "startChar": 3,
