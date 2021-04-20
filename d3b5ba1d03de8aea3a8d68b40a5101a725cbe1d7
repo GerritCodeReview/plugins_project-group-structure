@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58021cb6_1b75df95",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-20T17:47:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e99777b2_eedd7066",
+      "range": {
+        "startLine": 34,
+        "startChar": 3,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "d3b5ba1d03de8aea3a8d68b40a5101a725cbe1d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "677b5cbf_6bbeb01e",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-04-20T16:52:00Z",
       "side": 1,
       "message": "there is no sense to check this all the time. better to use boolean flag or use different aproach",
+      "range": {
+        "startLine": 39,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 3
+      },
+      "revId": "d3b5ba1d03de8aea3a8d68b40a5101a725cbe1d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a36e7c5b_6989120e",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-20T17:47:30Z",
+      "side": 1,
+      "message": "As we discussed, the / check is necessary to ensure the functionnality of the plugin. For the null pointer, you are right, I replaced it with emplty string.",
+      "parentUuid": "677b5cbf_6bbeb01e",
       "range": {
         "startLine": 39,
         "startChar": 1,
@@ -70,6 +118,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d386f8f1_3cf4dd87",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-20T17:47:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34e09746_68b52dc8",
+      "range": {
+        "startLine": 43,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "d3b5ba1d03de8aea3a8d68b40a5101a725cbe1d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da1c7226_66de8e22",
@@ -87,6 +159,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1294ba7_7b40d879",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-20T17:47:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da1c7226_66de8e22",
+      "revId": "d3b5ba1d03de8aea3a8d68b40a5101a725cbe1d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccfddf99_4138442a",
@@ -100,6 +190,30 @@
       "writtenOn": "2021-04-20T16:52:00Z",
       "side": 1,
       "message": "isRegexNameFilter()",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 21
+      },
+      "revId": "d3b5ba1d03de8aea3a8d68b40a5101a725cbe1d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feda3d72_872eefb5",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-20T17:47:30Z",
+      "side": 1,
+      "message": "Done. checking if the string is empty as suggested.",
+      "parentUuid": "ccfddf99_4138442a",
       "range": {
         "startLine": 123,
         "startChar": 8,
