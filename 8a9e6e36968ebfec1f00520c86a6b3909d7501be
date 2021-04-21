@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1f73eac_785671e6",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-21T18:58:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f91bb16_ef5dd9c8",
+      "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e04552b6_859eaf5e",
@@ -41,6 +59,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "720e1ef5_172f2f77",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-21T18:58:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e04552b6_859eaf5e",
+      "range": {
+        "startLine": 88,
+        "startChar": 68,
+        "endLine": 88,
+        "endChar": 88
+      },
+      "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "396e885b_6441dd4a",
@@ -54,6 +96,30 @@
       "writtenOn": "2021-04-21T17:50:03Z",
       "side": 1,
       "message": "why not just PROJECT? Or you wanted to show that numbers in the project name is also ok?",
+      "range": {
+        "startLine": 102,
+        "startChar": 68,
+        "endLine": 102,
+        "endChar": 76
+      },
+      "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5286df67_05053e27",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-21T18:58:13Z",
+      "side": 1,
+      "message": "The result of this test is a failure because the name doesn\u0027t respect the regex. The given regex doesn\u0027t include numbers. I wanted to do the negative case to test the regex is working properly and it blocks the creation if it is not respected.",
+      "parentUuid": "396e885b_6441dd4a",
       "range": {
         "startLine": 102,
         "startChar": 68,
