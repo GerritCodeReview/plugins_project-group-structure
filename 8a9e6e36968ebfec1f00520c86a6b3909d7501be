@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f91bb16_ef5dd9c8",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-21T17:50:03Z",
+      "side": 1,
+      "message": "Add a log telling that default would be used.",
+      "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04552b6_859eaf5e",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-21T17:50:03Z",
+      "side": 1,
+      "message": "can be a constant",
+      "range": {
+        "startLine": 88,
+        "startChar": 68,
+        "endLine": 88,
+        "endChar": 88
+      },
+      "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "396e885b_6441dd4a",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-21T17:50:03Z",
+      "side": 1,
+      "message": "why not just PROJECT? Or you wanted to show that numbers in the project name is also ok?",
+      "range": {
+        "startLine": 102,
+        "startChar": 68,
+        "endLine": 102,
+        "endChar": 76
+      },
+      "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
