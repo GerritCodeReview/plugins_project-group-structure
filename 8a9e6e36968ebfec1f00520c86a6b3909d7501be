@@ -128,6 +128,30 @@
       },
       "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afda1f29_134cba33",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-21T19:40:00Z",
+      "side": 1,
+      "message": "Then shouldn\u0027t you use REGEX with number and without? Rather than make use regex that doesn\u0027t contain a slash in order to get default option?",
+      "parentUuid": "5286df67_05053e27",
+      "range": {
+        "startLine": 102,
+        "startChar": 68,
+        "endLine": 102,
+        "endChar": 76
+      },
+      "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
