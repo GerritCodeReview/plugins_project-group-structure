@@ -176,6 +176,30 @@
       },
       "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c06e2dec_92c70daa",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-22T19:29:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5cf2ea3d_a5d74775",
+      "range": {
+        "startLine": 102,
+        "startChar": 68,
+        "endLine": 102,
+        "endChar": 76
+      },
+      "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
