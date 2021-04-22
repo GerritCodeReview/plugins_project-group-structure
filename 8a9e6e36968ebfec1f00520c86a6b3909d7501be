@@ -152,6 +152,30 @@
       },
       "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf2ea3d_a5d74775",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-22T15:05:03Z",
+      "side": 1,
+      "message": "I think it is a different case to be added. Else, it will not cover all of this condition \n`regexNameFilter \u003d\u003d null || (regexNameFilter !\u003d null \u0026\u0026 !\"/\".matches(regexNameFilter`.\nThe test names will be changed to more accurate description.",
+      "parentUuid": "afda1f29_134cba33",
+      "range": {
+        "startLine": 102,
+        "startChar": 68,
+        "endLine": 102,
+        "endChar": 76
+      },
+      "revId": "8a9e6e36968ebfec1f00520c86a6b3909d7501be",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
