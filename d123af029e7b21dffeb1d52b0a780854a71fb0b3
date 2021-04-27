@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db887b0a_52ada969",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4e5b5fd_dd78ca79",
+      "range": {
+        "startLine": 9,
+        "startChar": 25,
+        "endLine": 9,
+        "endChar": 32
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2e4a01c_29a80751",
@@ -70,6 +94,54 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ddc412_cc05d1ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2e4a01c_29a80751",
+      "range": {
+        "startLine": 10,
+        "startChar": 47,
+        "endLine": 10,
+        "endChar": 50
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f76c6a0b_c7177dc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8edc80ef_ff59a701",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 13
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a54fa36_06ddeb13",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "not including",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 42
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba05166e_d9e17572",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a54fa36_06ddeb13",
       "range": {
         "startLine": 11,
         "startChar": 24,
@@ -116,6 +212,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e3349dc_ab52eebc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed2a98a_d0237c0d",
+      "range": {
+        "startLine": 16,
+        "startChar": 20,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cae5de4_76a5a987",
@@ -129,6 +249,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "don\u0027t contain spaces",
+      "range": {
+        "startLine": 18,
+        "startChar": 14,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0767fdfc_7a7f601f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cae5de4_76a5a987",
       "range": {
         "startLine": 18,
         "startChar": 14,
@@ -162,6 +306,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2519d5a5_bf750386",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5555657f_c1ad32b1",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff2b16cb_74928be7",
@@ -175,6 +343,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "Meaning, from an end-user perspective?",
+      "range": {
+        "startLine": 22,
+        "startChar": 26,
+        "endLine": 22,
+        "endChar": 34
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f986c8c9_34eab15d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff2b16cb_74928be7",
       "range": {
         "startLine": 22,
         "startChar": 26,
@@ -204,6 +396,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09cc619e_6cd7fa1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "I am not sure to understand this comment. I added the bug issue in the other change as suggested there. Do you suggest to add the link to the rename project change in this commit message?",
+      "parentUuid": "1238de01_430bafc8",
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a540024a_8ed10c47",
         "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
         "patchSetId": 8
@@ -215,6 +425,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "Would rename both, in a more explicit manner.",
+      "range": {
+        "startLine": 28,
+        "startChar": 30,
+        "endLine": 28,
+        "endChar": 44
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a35cfd_81a809ef",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a540024a_8ed10c47",
       "range": {
         "startLine": 28,
         "startChar": 30,
@@ -238,6 +472,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "This name is misleading, as it should denote an actual default value, not a message.",
+      "range": {
+        "startLine": 29,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 49
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92112ab2_28adef43",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed2dfd6_316d2c17",
       "range": {
         "startLine": 29,
         "startChar": 30,
@@ -294,6 +552,54 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1ab8ca9_aa4ba6a9",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7b89a2d_fdee6241",
+      "range": {
+        "startLine": 30,
+        "startChar": 84,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "898db41f_c84fccee",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3399627_4f0ddec4",
+      "range": {
+        "startLine": 31,
+        "startChar": 27,
+        "endLine": 31,
+        "endChar": 32
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6be31d26_d7395a66",
@@ -307,6 +613,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "Such lines usually directly follow the class declaration.",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 81
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13375d67_2655bbbf",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6be31d26_d7395a66",
       "range": {
         "startLine": 34,
         "startChar": 2,
@@ -340,6 +670,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d817f2_7f6048e2",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Actually this null is the subsection not the actual value. This method from jgit returns null if the property is not found. Therefore, this comment will apply in the if statement in the next line.",
+      "parentUuid": "168dc44d_aff1708d",
+      "range": {
+        "startLine": 39,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e227b8e6_b38a1639",
@@ -353,6 +707,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "getRegexNameFilter",
+      "range": {
+        "startLine": 46,
+        "startChar": 16,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26a9f987_8c691c47",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e227b8e6_b38a1639",
       "range": {
         "startLine": 46,
         "startChar": 16,
@@ -409,6 +787,54 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45c863bc_631572c3",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11eab783_feb694a4",
+      "range": {
+        "startLine": 63,
+        "startChar": 29,
+        "endLine": 63,
+        "endChar": 55
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d0c973a_797a7c84",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "078426ba_8778d85e",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 8
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d00dbcd_84f9de9a",
@@ -422,6 +848,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "config",
+      "range": {
+        "startLine": 122,
+        "startChar": 19,
+        "endLine": 122,
+        "endChar": 30
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aab8040_62ada225",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d00dbcd_84f9de9a",
       "range": {
         "startLine": 122,
         "startChar": 19,
@@ -455,6 +905,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "033b3585_f4ccdb1e",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fba54e21_1f20c090",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 28
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d00a3145_d36bc11b",
@@ -472,6 +946,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74420d2b_df1748be",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a3145_d36bc11b",
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "964c5328_fa707e3c",
@@ -485,6 +977,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "To refactor back or so.",
+      "range": {
+        "startLine": 25,
+        "startChar": 36,
+        "endLine": 25,
+        "endChar": 37
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8910fb6e_1b62e65e",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "964c5328_fa707e3c",
       "range": {
         "startLine": 25,
         "startChar": 36,
@@ -518,6 +1034,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa3d063_a2effa4f",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e42b0765_6a040741",
+      "range": {
+        "startLine": 49,
+        "startChar": 30,
+        "endLine": 49,
+        "endChar": 55
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "647b9485_2b1f725c",
@@ -531,6 +1071,24 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "Above, maybe the empty-included wildcards could be replaced with non-empty ones (see related /earlier comments).",
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "601385cb_e118a674",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done, replaced * by + to guarantee that at least project name has 1 character",
+      "parentUuid": "647b9485_2b1f725c",
       "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -558,6 +1116,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dfa5f04_d46cc055",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3186e15f_9f47c6be",
+      "range": {
+        "startLine": 86,
+        "startChar": 14,
+        "endLine": 86,
+        "endChar": 71
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4842f69_35f89725",
@@ -571,6 +1153,30 @@
       "writtenOn": "2021-04-26T20:22:05Z",
       "side": 1,
       "message": "This is an unrelated typo to potentially fix through another change.",
+      "range": {
+        "startLine": 91,
+        "startChar": 67,
+        "endLine": 91,
+        "endChar": 75
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7cc674_0d3d3d12",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-27T17:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4842f69_35f89725",
       "range": {
         "startLine": 91,
         "startChar": 67,
