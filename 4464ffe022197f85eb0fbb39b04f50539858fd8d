@@ -106,6 +106,24 @@
       "parentUuid": "c20972eb_e8b531ba",
       "revId": "4464ffe022197f85eb0fbb39b04f50539858fd8d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d7a1054_6d6a9f1a",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-28T16:31:27Z",
+      "side": 0,
+      "message": "I do see that rename-project has more than 7 in the RenameProject class. For you to look into",
+      "parentUuid": "4f32a860_cb8f2d11",
+      "revId": "4464ffe022197f85eb0fbb39b04f50539858fd8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
