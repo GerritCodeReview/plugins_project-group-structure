@@ -70,6 +70,24 @@
       "parentUuid": "9a921b14_6715678b",
       "revId": "4464ffe022197f85eb0fbb39b04f50539858fd8d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c20972eb_e8b531ba",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-28T15:22:23Z",
+      "side": 0,
+      "message": "I don\u0027t see this warning in other plugins.",
+      "parentUuid": "436f419c_8e4a8aea",
+      "revId": "4464ffe022197f85eb0fbb39b04f50539858fd8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
