@@ -142,6 +142,24 @@
       "parentUuid": "6d7a1054_6d6a9f1a",
       "revId": "4464ffe022197f85eb0fbb39b04f50539858fd8d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d315564_0112448a",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-04-28T18:21:00Z",
+      "side": 0,
+      "message": "Then I propose to keep it. I see that rename-project does the same way while still having the config class",
+      "parentUuid": "8528641e_6d3f9d7f",
+      "revId": "4464ffe022197f85eb0fbb39b04f50539858fd8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
