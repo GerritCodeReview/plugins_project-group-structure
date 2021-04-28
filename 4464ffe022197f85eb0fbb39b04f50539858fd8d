@@ -52,6 +52,24 @@
       "parentUuid": "6f37eb6d_5d926694",
       "revId": "4464ffe022197f85eb0fbb39b04f50539858fd8d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "436f419c_8e4a8aea",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-28T13:55:55Z",
+      "side": 0,
+      "message": "Ack. I will see other plugins.",
+      "parentUuid": "9a921b14_6715678b",
+      "revId": "4464ffe022197f85eb0fbb39b04f50539858fd8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
