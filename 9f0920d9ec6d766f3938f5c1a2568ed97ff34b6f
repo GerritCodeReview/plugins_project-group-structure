@@ -16,6 +16,24 @@
       "message": "Maybe you should start with \"Update plugin to latest master\" Then describe what you did.",
       "revId": "9f0920d9ec6d766f3938f5c1a2568ed97ff34b6f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e4e0624_2b62b329",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1127770
+      },
+      "writtenOn": "2021-04-30T18:41:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c86c587_26f33dff",
+      "revId": "9f0920d9ec6d766f3938f5c1a2568ed97ff34b6f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
