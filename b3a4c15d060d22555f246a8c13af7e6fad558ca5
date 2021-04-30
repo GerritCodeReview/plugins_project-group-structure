@@ -1,0 +1,412 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54926052_4a6d52ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Plugin should likely ignore (with a warning) both cases of regexes. So flag a regex not accepting / as well as a regex accepting space(s).",
+      "range": {
+        "startLine": 20,
+        "startChar": 39,
+        "endLine": 23,
+        "endChar": 18
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b52b465_27e0b22e",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Blank line above to separate \u0027log\u0027 from these true constants.",
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66fe41ba_91f27a5e",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "This case should not trigger a warning.",
+      "range": {
+        "startLine": 30,
+        "startChar": 33,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f97cb013_1f159db6",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Would replace with showing the actual default regex value.",
+      "range": {
+        "startLine": 31,
+        "startChar": 28,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58bde32c_73dbc9dc",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "DEFAULT_NAME_REGEX_VALUE",
+      "range": {
+        "startLine": 32,
+        "startChar": 30,
+        "endLine": 32,
+        "endChar": 49
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597b0ebd_6571880d",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Superfluous, as the next condition should not be evaluated if the previous null check lends true. You can test this all to confirm. Also, maybe the .matches call is robust against passed null values.",
+      "range": {
+        "startLine": 40,
+        "startChar": 35,
+        "endLine": 40,
+        "endChar": 62
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb269f2_e305509d",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Move closer to other _MSG members? Also maybe this one will also require a SEE_DOCUMENTATION_MSG suffix.",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 52
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17a7afcc_85c20c4a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Missing something.",
+      "range": {
+        "startLine": 27,
+        "startChar": 64,
+        "endLine": 27,
+        "endChar": 78
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49714b2f_42bd1ae1",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Capitals and empty-wildcard may make this example odd. Related rename-project comment, as well. Related comment below about the math use.",
+      "range": {
+        "startLine": 32,
+        "startChar": 11,
+        "endLine": 32,
+        "endChar": 15
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45d5a23f_4addbd37",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Could be a strange-looking example though.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 30
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f2887fd_98d612a9",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "The regex",
+      "range": {
+        "startLine": 37,
+        "startChar": 32,
+        "endLine": 37,
+        "endChar": 41
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d54115d_92855860",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Rephrase?",
+      "range": {
+        "startLine": 38,
+        "startChar": 71,
+        "endLine": 38,
+        "endChar": 80
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b86883c_862c0f1a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "with",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 39,
+        "endChar": 11
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6be29366_8c1171c4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "Could mean also empty-wildcard; potentially misleading.",
+      "range": {
+        "startLine": 39,
+        "startChar": 22,
+        "endLine": 39,
+        "endChar": 30
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0e4bc4d_e1e77247",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "(Usage of caps included to revisit.)",
+      "range": {
+        "startLine": 52,
+        "startChar": 59,
+        "endLine": 53,
+        "endChar": 66
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "485b7ecc_41296c13",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "shouldRejectProjectWithSpaceInItsNameEvenWithRegex",
+      "range": {
+        "startLine": 90,
+        "startChar": 14,
+        "endLine": 90,
+        "endChar": 67
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4047d59b_cf54491f",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "shouldMatchProjectNameIfRegexContainsSlash (or similar).",
+      "range": {
+        "startLine": 104,
+        "startChar": 14,
+        "endLine": 104,
+        "endChar": 61
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9650c0fa_2be49198",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-04-30T16:30:57Z",
+      "side": 1,
+      "message": "shouldNotMatchProjectNameIfRegexMissesSlash (or similar).",
+      "range": {
+        "startLine": 120,
+        "startChar": 14,
+        "endLine": 120,
+        "endChar": 66
+      },
+      "revId": "b3a4c15d060d22555f246a8c13af7e6fad558ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
