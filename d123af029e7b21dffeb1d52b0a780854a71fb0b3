@@ -738,6 +738,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "918c2a46_60c7cf12",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-30T18:56:14Z",
+      "side": 1,
+      "message": "No, there isn\u0027t one provided by gerrit packages. However, there is one class that offers such method in jgit.storage package but I am not sure if it will read the data from the etc folder or the bin folder.",
+      "parentUuid": "2c5cc321_494f2e85",
+      "range": {
+        "startLine": 39,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e227b8e6_b38a1639",
         "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
         "patchSetId": 8
@@ -1114,6 +1138,30 @@
       "side": 1,
       "message": "You could also use only one constant, with the slash, and trim it out for the no-slash test case.",
       "parentUuid": "afa3d063_a2effa4f",
+      "range": {
+        "startLine": 49,
+        "startChar": 30,
+        "endLine": 49,
+        "endChar": 55
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09d4d80d_bf8d35c6",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidatorIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-04-30T18:56:14Z",
+      "side": 1,
+      "message": "I tried but it raised an error when using the value because it is interpreted as not constant at this stage.",
+      "parentUuid": "1d5b55f1_ff2515ad",
       "range": {
         "startLine": 49,
         "startChar": 30,
