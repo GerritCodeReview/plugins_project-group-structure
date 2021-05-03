@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f110b04a_47262258",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-05-03T21:38:22Z",
+      "side": 1,
+      "message": "This change should only change what it aims at changing (including additions). It shouldn\u0027t move or refactor unrelated code parts (unless related). Rather, if willing to move or refactor anything, this should be another change or focused scope for later or as follow-up(s).",
+      "revId": "e590eb7df5dac931e16e6bb688541c0164e86684",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
