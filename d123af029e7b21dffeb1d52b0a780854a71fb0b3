@@ -760,6 +760,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97abc47b_05a6eb8a",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-05-03T12:17:55Z",
+      "side": 1,
+      "message": "Done. You can discard my previous comment on this thread. In fact, there is a method but it has to be configured in gerrit.config file. The documentation will be updated accordingly",
+      "parentUuid": "918c2a46_60c7cf12",
+      "range": {
+        "startLine": 39,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "d123af029e7b21dffeb1d52b0a780854a71fb0b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e227b8e6_b38a1639",
