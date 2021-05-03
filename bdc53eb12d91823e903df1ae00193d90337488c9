@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf11c920_c557a150",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-05-03T18:28:44Z",
+      "side": 1,
+      "message": "Reuse the aforementioned message suffix constant instead (of creating a new string)?",
+      "parentUuid": "127380e0_117bffd6",
+      "revId": "bdc53eb12d91823e903df1ae00193d90337488c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a24a4fde_fcd20e3b",
         "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
         "patchSetId": 14
