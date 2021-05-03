@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f9ab89_431aa2a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-05-03T21:38:22Z",
+      "side": 1,
+      "message": "Some left-overs and should be good once adjusted.",
+      "revId": "796239102fa299bdab9f19e680cb5529881857e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc0ff8b_b490f870",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-05-03T21:38:22Z",
+      "side": 1,
+      "message": "Not sure if this new class should show the doc url while ProjectCreationValidator doesn\u0027t.",
+      "revId": "796239102fa299bdab9f19e680cb5529881857e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
