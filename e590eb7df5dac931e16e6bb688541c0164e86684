@@ -16,6 +16,24 @@
       "message": "This change should only change what it aims at changing (including additions). It shouldn\u0027t move or refactor unrelated code parts (unless related). Rather, if willing to move or refactor anything, this should be another change or focused scope for later or as follow-up(s).",
       "revId": "e590eb7df5dac931e16e6bb688541c0164e86684",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f680a7a4_44679086",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-05-04T11:58:42Z",
+      "side": 1,
+      "message": "ACk. I will create a follow up change to refactor/ replace these constants to be close to their sibling SEE_DOCUMENTATION_MSG. The exception for this change is SEE_DOCUMENTATION_MSG which has to be static without the private modifier. It has to be placed at the beginning of the class after the logger.",
+      "parentUuid": "f110b04a_47262258",
+      "revId": "e590eb7df5dac931e16e6bb688541c0164e86684",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
