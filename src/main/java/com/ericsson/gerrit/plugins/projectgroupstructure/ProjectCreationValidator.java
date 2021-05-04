@@ -50,6 +50,10 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
   static final String SEE_DOCUMENTATION_MSG = "\n\nSee documentation for more info: %s";
 
+  static final String DELEGATE_PROJECT_CREATION_TO = "delegateProjectCreationTo";
+
+  static final String DISABLE_GRANTING_PROJECT_OWNERSHIP = "disableGrantingProjectOwnership";
+
   private static final String AN_ERROR_OCCURRED_MSG =
       "An error occurred while creating project, please contact Gerrit support";
 
@@ -82,10 +86,6 @@ public class ProjectCreationValidator implements ProjectCreationValidationListen
 
   private static final String PROJECT_SHOULD_MATCH_REGEX_MSG =
       "Project name should match the regex: %s." + SEE_DOCUMENTATION_MSG;
-
-  static final String DELEGATE_PROJECT_CREATION_TO = "delegateProjectCreationTo";
-
-  static final String DISABLE_GRANTING_PROJECT_OWNERSHIP = "disableGrantingProjectOwnership";
 
   private final Groups groups;
   private final String documentationUrl;
