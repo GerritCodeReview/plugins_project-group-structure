@@ -33,6 +33,24 @@
       "message": "Unrelated and not so useful move; still surrounded by private-statics. Moving this to above line 86 may help further. -Ok to do it in this change if done so.",
       "revId": "f97184b7a52ba37aae22db0d59ef975aa6c7a3cf",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf0b1d9_493768c7",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-05-05T12:04:04Z",
+      "side": 1,
+      "message": "I think it is better to move it to Configuration instead and update all the other calls of this constant accordingly. I can\u0027t move it before line 86 because it raises an error that is forward calling. Then the other change can be abandoned.",
+      "parentUuid": "5f2ee746_699afa12",
+      "revId": "f97184b7a52ba37aae22db0d59ef975aa6c7a3cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
