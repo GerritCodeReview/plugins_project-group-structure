@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7249b55e_826c1972",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/Configuration.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-05-05T15:56:10Z",
+      "side": 1,
+      "message": "Nit: this blank line can be removed.",
+      "revId": "949e4fa317592042acef6e9023bcf3994ce18cdc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed100f06_1abb8ba1",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2021-05-05T15:56:10Z",
+      "side": 1,
+      "message": "This prefix can be removed throughout this file if adding a static import of that constant. (Usually cleaner.) -This applies out of the multiple uses, so we usually don\u0027t use static imports if only used once.",
+      "range": {
+        "startLine": 56,
+        "startChar": 12,
+        "endLine": 56,
+        "endChar": 26
+      },
+      "revId": "949e4fa317592042acef6e9023bcf3994ce18cdc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
