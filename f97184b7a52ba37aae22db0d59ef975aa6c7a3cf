@@ -51,6 +51,24 @@
       "parentUuid": "5f2ee746_699afa12",
       "revId": "f97184b7a52ba37aae22db0d59ef975aa6c7a3cf",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bc44a4d_e6ac3e56",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/projectgroupstructure/ProjectCreationValidator.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1122032
+      },
+      "writtenOn": "2021-05-05T16:16:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbf0b1d9_493768c7",
+      "revId": "f97184b7a52ba37aae22db0d59ef975aa6c7a3cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
