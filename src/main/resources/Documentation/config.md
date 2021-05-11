@@ -26,3 +26,17 @@ Example of default access rights config file:
 ```
 
 Note: default access rights configuration is bypassed for projects created by admins.
+
+Also, this plugin offers a way to restrict the new names of the projects to match an optionally
+configured regex in the gerrit.config. For example:
+
+```
+[plugin "@PLUGIN@"]
+  nameRegex = [a-z0-9/]+
+
+```
+
+In this example, the regex will limit the project created to non-capital letters, numbers
+and slashes. The regex must accept slash (/) to not disturb the functionality of the plugin.
+If the regex doesn't accept / or accepts spaces, it will be ignored and replaced with a default
+non-empty wildcard (.+) regex.
